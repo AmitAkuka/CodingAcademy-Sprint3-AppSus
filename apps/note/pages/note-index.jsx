@@ -52,7 +52,6 @@ export class NoteApp extends React.Component {
   }
 
   onSearch = (filter) => {
-    console.log(filter)
     notesService
       .getFilteredNotes(filter)
       .then((notes) => this.setState({ notes }))

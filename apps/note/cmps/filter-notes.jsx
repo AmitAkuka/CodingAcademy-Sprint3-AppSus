@@ -9,13 +9,16 @@ export class FilterNotes extends React.Component {
   handleChange = ({ target }) => {
     const field = target.name
     let value = target.type === 'number' ? +target.value : target.value
-    this.setState((prevState) => ({
-      filterBy: { ...prevState.filterBy, [field]: value },
-    }))
+    this.setState(
+      (prevState) => ({
+        filterBy: { ...prevState.filterBy, [field]: value },
+      }),
+      this.onSearch
+    )
   }
 
   onSearch = (ev) => {
-    ev.preventDefault()
+    if (ev) ev.preventDefault()
     const { filterBy } = this.state
     this.props.onSearch(filterBy)
   }
@@ -40,7 +43,6 @@ export class FilterNotes extends React.Component {
             <option value="note-video">Video</option>
             <option value="note-todo">Todos</option>
           </select>
-          <button className="btn btn-filter">Filter</button>
         </form>
       </div>
     )

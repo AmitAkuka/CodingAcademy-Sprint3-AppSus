@@ -1,0 +1,29 @@
+.filter-notes {
+    margin-bottom: 1rem;
+    box-shadow: 0 0 5px gray;
+    border-radius: 50px;
+}
+
+.filter-notes form {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+}
+
+.filter-notes input,
+.filter-notes select {
+    height: 50px;
+    border: 0;
+    outline: 0;
+}
+
+.filter-notes select {
+    color: gray;
+    border-inline-start: 1px solid lightgray;
+    padding-inline-start: 1.5rem;
+
+}
+
+.filter-notes input {
+    flex-basis: 80%;
+}
