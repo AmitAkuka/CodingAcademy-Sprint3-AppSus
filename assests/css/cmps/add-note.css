@@ -1,0 +1,29 @@
+.add-note {
+    display: flex;
+    box-shadow: 0 0 5px gray;
+    margin-bottom: 1rem;
+    min-width: 500px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    border-radius: 5rem;
+    align-self: center;
+    padding: 0 1rem;
+}
+
+.add-note input {
+    border: 0;
+    outline: 0;
+    height: 50px;
+    background: none;
+    font-size: 1.3rem;
+}
+
+.add-note .note-type-container {
+    display: flex;
+    gap: 10px;
+}
+
+.add-note .note-type-container > * {
+    cursor: pointer;
+}

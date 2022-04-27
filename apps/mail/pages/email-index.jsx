@@ -1,5 +1,7 @@
 import { emailService } from '../services/email.service.js'
 
+import { EmailList } from '../cmps/email-list.jsx'
+
 export class EmailApp extends React.Component{
 
   state = {
@@ -14,15 +16,13 @@ export class EmailApp extends React.Component{
 
   loadEmails = () => {
   emailService.query()
-       .then(emails => {
-         console.log(emails)
-       })
+       .then(emails => {this.setState({emails})})
   }
 
   render(){
-
+    const {emails} = this.state
     return <section className="email-app-container">
-      <h1>Hello from Email App!!</h1>
+      <EmailList emails={emails}/>
     </section>
   }
 }

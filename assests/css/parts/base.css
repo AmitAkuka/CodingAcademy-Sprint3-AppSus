@@ -1,3 +1,4 @@
+<<<<<<< HEAD
   * {
       box-sizing: border-box;
   }
@@ -7,3 +8,14 @@
       padding: 0;
       font-family: poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
+=======
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    font-family: system-ui;
+}
+>>>>>>> 518905eb9925e120955d56af5914fb3e99b5a3da

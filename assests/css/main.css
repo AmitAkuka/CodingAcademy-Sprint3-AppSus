@@ -6,5 +6,7 @@
 
 @import '../css/cmps/notes-list.css';
 @import '../css/cmps/note-preview.css';
+@import '../css/cmps/add-note.css';
+@import '../css/cmps/notes.css';
 
 @import './parts/fonts.css';
