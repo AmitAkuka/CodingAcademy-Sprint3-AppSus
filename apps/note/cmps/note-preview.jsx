@@ -6,6 +6,8 @@ export class NotePreview extends React.Component {
     isPainting: false,
   }
 
+  noteRef = React.createRef()
+
   togglePainting = () => {
     this.setState({ isPainting: !this.state.isPainting })
   }
@@ -22,20 +24,31 @@ export class NotePreview extends React.Component {
     this.props.onCloneNote(this.props.note)
   }
 
+  onDeleteNote = (id) => {
+    this.noteRef.current.classList.add('swing-out-top-bck')
+    this.props.onDeleteNote(id)
+  }
+
+  onInlineEdit = (mashu) => {
+    this.props.onInlineEdit(this.props.note.id, mashu.target.innerText)
+  }
+
   render() {
     const { isPainting } = this.state
-    const { note, onDeleteNote, onPinNote, onCloneNote } = this.props
+    const { note, onPinNote, onCloneNote } = this.props
     const { id, info } = note
     return (
-      <div className="note" style={note.style}>
-        {note.isPinned && (
-          <img className="pin-img" src="../../assets/img/pin-ico.png"></img>
-        )}
-        <div className="note-content">
-          {getNoteContent(info, this.onAddTodo)}
+      <div className="note" style={note.style} ref={this.noteRef}>
+        <div>
+          <span className="created-at">{note.createdAt}</span>
+          {note.isPinned && (
+            <img className="pin-img" src="../../assets/img/pin-ico.png"></img>
+          )}
+          <div className="note-content">
+            {getNoteContent(info, this.onAddTodo, this.onInlineEdit)}
+          </div>
         </div>
         <div className="note-footer">
-          <span className="created-at">{note.createdAt}</span>
           <div className="tools-container fa-md">
             <i
               onClick={() => onPinNote(id)}
@@ -51,9 +64,7 @@ export class NotePreview extends React.Component {
               className="fa fa-paint-brush fa-md"
             ></i>
             <i
-              onClick={() => {
-                onDeleteNote(id)
-              }}
+              onClick={() => this.onDeleteNote(id)}
               className="fa fa-trash fa-lg"
             ></i>
           </div>
@@ -66,8 +77,8 @@ export class NotePreview extends React.Component {
   }
 }
 
-function getNoteContent(info, onAddTodo) {
-  if (info.txt) return <span contentEditable>{info.txt}</span>
+function getNoteContent(info, onAddTodo, onInlineEdit) {
+  if (info.txt) return <span onInput={onInlineEdit}>{info.txt}</span>
   if (info.imgUrl) return <img src={info.imgUrl}></img>
   if (info.videoUrl)
     return (
@@ -76,6 +87,13 @@ function getNoteContent(info, onAddTodo) {
       ></iframe>
     )
   if (info.todos) return <Todos info={info} onAddTodo={onAddTodo} />
+  if (info.canvasHeading)
+    return (
+      <div className="canvas-container">
+        <h3>{info.canvasHeading}</h3>
+        <canvas width="100%" height="100%"></canvas>
+      </div>
+    )
 }
 
 function getVideoId(videoUrl) {

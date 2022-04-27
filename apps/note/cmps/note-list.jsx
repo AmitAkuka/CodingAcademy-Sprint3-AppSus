@@ -7,6 +7,7 @@ export function NoteList({
   onChangeNoteColor,
   onAddTodo,
   onCloneNote,
+  onInlineEdit,
 }) {
   return (
     <section className="notes-list">
@@ -19,6 +20,7 @@ export function NoteList({
           key={note.id}
           note={note}
           onCloneNote={onCloneNote}
+          onInlineEdit={onInlineEdit}
         />
       ))}
     </section>

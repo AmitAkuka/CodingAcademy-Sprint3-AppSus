@@ -10,6 +10,8 @@ export const notesService = {
   pinNote,
   addTodo,
   cloneNote,
+  onInlineEdit,
+  getFilteredNotes,
 }
 
 const gNotes = [
@@ -91,6 +93,12 @@ function addNote({ type, content }) {
         todoHeading: content,
         todos: [],
       }
+      break
+    case 'note-canvas':
+      newNote.info = {
+        canvasHeading: content,
+      }
+      break
   }
 
   const notes = _loadNotesFromStorage()
@@ -142,6 +150,29 @@ function cloneNote(note) {
   notes.push(note)
   _saveNotesToStorage(notes)
   const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
+}
+
+function onInlineEdit(noteId, txt) {
+  const notes = _loadNotesFromStorage()
+  const note = getNoteById(notes, noteId)
+  note.info.txt = txt
+  _saveNotesToStorage(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
+}
+
+function getFilteredNotes({ txt, type }) {
+  const notes = _loadNotesFromStorage()
+  const filteredNotes = notes.filter((note) => {
+    if (type === 'note-pinned') return note.isPinned
+    if (type !== 'note-txt' && type !== 'all') return note.type === type
+    if (type === 'note-txt')
+      return note.type === type && note.info.txt.includes(txt)
+    if (type === 'all') return true
+  })
+
+  const notesToDisplay = getNotesToDisplay(filteredNotes)
   return Promise.resolve(notesToDisplay)
 }
 

@@ -9,6 +9,12 @@
     border-radius: 5rem;
     align-self: center;
     padding: 0 1rem;
+    position: relative;
+}
+
+.add-note form {
+    flex-basis: 80%;
+
 }
 
 .add-note input {
@@ -17,6 +23,7 @@
     height: 50px;
     background: none;
     font-size: 1.3rem;
+    width: 100%;
 }
 
 .add-note .note-type-container {

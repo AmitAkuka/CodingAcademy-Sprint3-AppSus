@@ -1,5 +1,5 @@
 .fade-in {
-	animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	animation: fade-in 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 @keyframes fade-in {
@@ -20,6 +20,23 @@
       opacity: 1;
     }
     100% {
+      opacity: 0;
+    }
+  }
+  
+  .swing-out-top-bck {
+    animation: swing-out-top-bck 0.45s cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
+  }
+
+  @keyframes swing-out-top-bck {
+    0% {
+      transform: rotateX(0deg);
+      transform-origin: top;
+      opacity: 1;
+    }
+    100% {
+      transform: rotateX(-100deg);
+      transform-origin: top;
       opacity: 0;
     }
   }

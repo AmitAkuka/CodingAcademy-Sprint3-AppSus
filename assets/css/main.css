@@ -15,14 +15,18 @@
 
 /* BASE IMPORTS */
 
-@import './parts/base.css';
-@import './parts/fonts.css';
-@import './parts/helpers.css';
 @import '../css/cmps/notes-list.css';
 @import '../css/cmps/note-preview.css';
 @import '../css/cmps/add-note.css';
 @import '../css/cmps/notes.css';
 @import '../css/cmps/color-picker.css';
 @import '../css/cmps/todo-note.css';
+@import '../css/cmps/filter-notes.css';
+@import '../css/cmps/more-note-types.css';
+
+/* BASE IMPORTS */
+
+@import './parts/base.css';
 @import './parts/fonts.css';
+@import './parts/helpers.css';
 @import './parts/animations.css';
