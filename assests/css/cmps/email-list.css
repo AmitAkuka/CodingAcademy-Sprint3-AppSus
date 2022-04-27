@@ -1,3 +1,39 @@
-.blabla {
-    background-color: green;
+.email-container {
+    display: flex;
+}
+
+.email-container .nav-container {
+    min-width: 15vw;
+    margin-inline-end: 20px;
+}
+
+.email-container .nav-container:first-child {
+    margin-top: 25px;
+}
+
+.email-container .nav-container>* {
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 0 15px 15px 0;
+}
+
+.email-container .nav-container>*:hover {
+    background-color: lightcyan;
+}
+
+.email-container .nav-container div>* {
+    margin-inline-start: 20px;
+    margin-inline-end: 20px;
+}
+
+.fa.fa-paper-plane {
+    font-size: 19px;
+}
+
+.fa.fa-inbox {
+    font-size: 23px;
+}
+
+.active {
+    background-color: lightcyan;
 }

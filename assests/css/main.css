@@ -1,5 +1,16 @@
 /* IMPORTS */
 
+
+/* NOTE CMPS IMPORTS */
+
+
+/* EMAIL CMPS IMPORTS */
+
+@import './cmps/email-list.css';
+@import './cmps/email-preview.css';
+
+/* BASE IMPORTS */
+
 @import './parts/base.css';
 @import './parts/fonts.css';
 @import './parts/helpers.css';

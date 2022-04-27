@@ -1,0 +1,33 @@
+.email-app-container .email-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+}
+
+.email-list-container .email-preview {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    cursor: pointer;
+}
+
+.email-list-container .email-preview:hover {
+    background-color: lightcyan;
+}
+
+.email-preview .fa.fa-star {
+    color: gold;
+}
+
+.email-preview .fa.fa-star,
+.email-preview .fa.fa-star-o {
+    margin-inline-start: 40px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.email-preview .fa.fa-star:hover,
+.email-preview .fa.fa-star-o:hover {
+    background-color: lightcyan;
+    border-radius: 15px;
+}

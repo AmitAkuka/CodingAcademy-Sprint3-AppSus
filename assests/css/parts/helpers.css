@@ -39,3 +39,11 @@
     margin: 0;
     padding: 0;
 }
+
+
+/* link */
+
+.clean-link {
+    text-decoration: none;
+    color: inherit;
+}

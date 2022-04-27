@@ -4,6 +4,7 @@ import { utilService } from '../../../services/util.service.js'
 
 export const emailService = {
     query,
+    setEmailFavorite
 }
 const EMAILS_KEY = 'emailsDB'
 const loggedinUser = {
@@ -31,7 +32,9 @@ function _createEmails() {
             isRead: false,
             sentAt: 1551133930594,
             to: loggedinUser.email,
-            from: 'Yaron@CodingAcademy.com'
+            from: 'Yaron@CodingAcademy.com',
+            userName: 'Yaron Biton',
+            isFavorite: false
         },
         {
             id: utilService.makeId(),
@@ -40,7 +43,9 @@ function _createEmails() {
             isRead: false,
             sentAt: 1551133930594,
             to: loggedinUser.email,
-            from: 'RichardHeart@gmail.com'
+            from: 'RichardHeart@gmail.com',
+            userName: 'Richard Heart',
+            isFavorite: false
         },
         {
             id: utilService.makeId(),
@@ -49,7 +54,9 @@ function _createEmails() {
             isRead: false,
             sentAt: 1551133930594,
             to: loggedinUser.email,
-            from: 'KimKardashian@gmail.com'
+            from: 'KimKardashian@gmail.com',
+            userName: 'Kim Kardashian',
+            isFavorite: false
         },
         {
             id: utilService.makeId(),
@@ -58,7 +65,9 @@ function _createEmails() {
             isRead: false,
             sentAt: 1551133930594,
             to: loggedinUser.email,
-            from: 'ElonMusk@gmail.com'
+            from: 'ElonMusk@gmail.com',
+            userName: 'Elon Musk',
+            isFavorite: false
         },
         {
             id: utilService.makeId(),
@@ -67,10 +76,37 @@ function _createEmails() {
             isRead: false,
             sentAt: 1551133930594,
             to: loggedinUser.email,
-            from: 'JoeBiden@gmail.com'
+            from: 'JoeBiden@gmail.com',
+            userName: 'Joe Biden',
+            isFavorite: false
         }
     ]
     return emails
+}
+
+function setEmailFavorite(emailId) {
+    let emails = _loadFromStorage()
+    getEmailIndexById(emailId)
+        .then(emailIdx => {
+            console.log('emailidx', emailIdx)
+            console.log('after:', emails[emailIdx].isFavorite)
+            emails[emailIdx].isFavorite = !emails[emailIdx].isFavorite
+            console.log('before:', emails[emailIdx].isFavorite)
+            _saveToLocalStorage(emails)
+        })
+    return Promise.resolve()
+}
+
+function getEmailIndexById(emailId) {
+    let emails = _loadFromStorage()
+    let emailIdx = emails.findIndex(email => email.id === emailId)
+    return Promise.resolve(emailIdx)
+}
+
+function getEmailById(emailId) {
+    let emails = _loadFromStorage()
+    let email = emails.find(email => email.id === emailId)
+    return Promise.resolve(email)
 }
 
 // function _createEmails() {
