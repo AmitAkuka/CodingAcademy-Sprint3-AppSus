@@ -20,12 +20,20 @@ export class AddNote extends React.Component {
     })
   }
 
+  onAddNote = (ev) => {
+    ev.preventDefault()
+    const { onAddNote } = this.props
+    onAddNote(this.state.newNote)
+    this.setState((prevState) => {
+      return { newNote: { ...prevState.newNote, content: '' } }
+    })
+  }
+
   render() {
     const { newNote } = this.state
-    const { onAddNote } = this.props
     return (
       <section className="add-note">
-        <form onSubmit={(event) => onAddNote(event, this.state.newNote)}>
+        <form onSubmit={this.onAddNote}>
           <input
             name="content"
             type="text"

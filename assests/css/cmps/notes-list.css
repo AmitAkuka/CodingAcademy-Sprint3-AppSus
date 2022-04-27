@@ -1,5 +1,7 @@
 .notes-list {
     display: grid;
-    grid-auto-flow: column dense;
+    grid-template-columns: repeat(auto-fill, 200px);
+    /* grid-auto-flow: column dense; */
     gap: 10px;
+    justify-content: center;
 }

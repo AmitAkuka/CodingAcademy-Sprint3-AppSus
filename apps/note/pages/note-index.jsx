@@ -13,12 +13,14 @@ export class NoteApp extends React.Component {
 
   loadNotes = () => {
     notesService.query().then((notes) => this.setState({ notes }))
-    console.log(this.state.notes)
   }
 
-  onAddNote = (ev, note) => {
-    ev.preventDefault()
+  onAddNote = (note) => {
     notesService.addNote(note).then((notes) => this.setState({ notes }))
+  }
+
+  onDeleteNote = (noteId) => {
+    notesService.deleteNote(noteId).then((notes) => this.setState({ notes }))
   }
 
   render() {
@@ -27,7 +29,11 @@ export class NoteApp extends React.Component {
       <section className="note-app-container">
         <h1>Hello from Note App</h1>
         <AddNote onAddNote={this.onAddNote} />
-        {notes.length ? <NoteList notes={notes} /> : 'No notes Yet'}
+        {notes.length ? (
+          <NoteList onDeleteNote={this.onDeleteNote} notes={notes} />
+        ) : (
+          'No notes Yet'
+        )}
       </section>
     )
   }

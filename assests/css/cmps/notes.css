@@ -1,4 +1,5 @@
 .note-app-container {
-    display: flex;
-    flex-direction: column;
+    max-width: 980px;
+    margin: auto;
+    padding: 0 1rem;
 }

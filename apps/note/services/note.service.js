@@ -5,6 +5,7 @@ import { utilService } from '../../../services/util.service.js'
 export const notesService = {
   query,
   addNote,
+  deleteNote,
 }
 
 const gNotes = [
@@ -44,7 +45,7 @@ function query() {
     notes = gNotes
     _saveNotesToStorage(notes)
   }
-  return Promise.resolve()
+  return Promise.resolve(notes)
 }
 
 function addNote({ type, content }) {
@@ -52,6 +53,7 @@ function addNote({ type, content }) {
     id: utilService.makeId(),
     type,
     isPinned: false,
+    createdAt: new Date().toLocaleDateString(),
   }
 
   switch (type) {
@@ -72,8 +74,15 @@ function addNote({ type, content }) {
   return Promise.resolve(notes)
 }
 
+function deleteNote(noteId) {
+  const notes = _loadNotesFromStorage()
+  const updatedNotes = notes.filter((note) => note.id !== noteId)
+  _saveNotesToStorage(updatedNotes)
+  return Promise.resolve(updatedNotes)
+}
+
 function _loadNotesFromStorage() {
-  storageService.loadFromStorage(STORAGE_KEY)
+  return storageService.loadFromStorage(STORAGE_KEY)
 }
 
 function _saveNotesToStorage(notes) {
