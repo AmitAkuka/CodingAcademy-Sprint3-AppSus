@@ -13,11 +13,21 @@
     justify-content: space-between;
 }
 
+.note .note-footer .created-at {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.note img,
+.note iframe {
+    width: 100%;
+}
+
 
 .note .note-footer .tools-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 }
 
 .note .note-footer .tools-container >* {
