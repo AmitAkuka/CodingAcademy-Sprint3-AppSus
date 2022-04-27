@@ -20,7 +20,9 @@ export class NoteApp extends React.Component {
   }
 
   onDeleteNote = (noteId) => {
-    notesService.deleteNote(noteId).then((notes) => this.setState({ notes }))
+    setTimeout(() => {
+      notesService.deleteNote(noteId).then((notes) => this.setState({ notes }))
+    }, 1000)
   }
 
   onChangeNoteColor = (noteId, color) => {

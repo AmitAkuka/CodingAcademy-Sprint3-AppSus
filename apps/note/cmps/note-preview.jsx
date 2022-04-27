@@ -6,6 +6,8 @@ export class NotePreview extends React.Component {
     isPainting: false,
   }
 
+  noteRef = React.createRef()
+
   togglePainting = () => {
     this.setState({ isPainting: !this.state.isPainting })
   }
@@ -22,12 +24,17 @@ export class NotePreview extends React.Component {
     this.props.onCloneNote(this.props.note)
   }
 
+  onDeleteNote = (id) => {
+    this.noteRef.current.classList.add('swing-out-top-bck')
+    this.props.onDeleteNote(id)
+  }
+
   render() {
     const { isPainting } = this.state
     const { note, onDeleteNote, onPinNote, onCloneNote } = this.props
     const { id, info } = note
     return (
-      <div className="note" style={note.style}>
+      <div className="note" style={note.style} ref={this.noteRef}>
         {note.isPinned && (
           <img className="pin-img" src="../../assets/img/pin-ico.png"></img>
         )}
@@ -51,9 +58,7 @@ export class NotePreview extends React.Component {
               className="fa fa-paint-brush fa-md"
             ></i>
             <i
-              onClick={() => {
-                onDeleteNote(id)
-              }}
+              onClick={() => this.onDeleteNote(id)}
               className="fa fa-trash fa-lg"
             ></i>
           </div>
