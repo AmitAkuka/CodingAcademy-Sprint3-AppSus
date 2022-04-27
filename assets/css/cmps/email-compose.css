@@ -23,6 +23,7 @@
 .compose-buttons-container {
     display: flex;
     justify-content: space-between;
+    margin-top: 8px;
 }
 
 .compose-header button {
@@ -65,7 +66,7 @@
 
 .email-compose-container .compose-text {
     padding: 1rem;
-    width: 92.8%;
+    width: 100%;
     outline: none;
     border: none;
     resize: none;

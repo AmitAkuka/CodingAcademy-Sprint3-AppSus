@@ -64,7 +64,7 @@ export class EmailCompose extends React.Component {
             <input id="compose-subject-input" type="text" name="subject"
               value={subject} onChange={this.handleChange} required />
           </div>
-          <textarea className="compose-text" rows="8" name="body"
+          <textarea className="compose-text" rows="6" name="body"
             value={body} onChange={this.handleChange} required></textarea>
           <div className="compose-buttons-container">
             <button onClick={this.onSendMail}><i className="fa fa-reply"></i></button>

@@ -42,6 +42,7 @@ export class EmailApp extends React.Component {
     console.log(filterBy)
     this.setState({filterBy}, () => {
       this.loadEmails()
+      this.setState({selectedEmail: null})
     })
   }
 
