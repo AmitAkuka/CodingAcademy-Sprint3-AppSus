@@ -8,6 +8,8 @@ export const notesService = {
   deleteNote,
   changeNoteColor,
   pinNote,
+  addTodo,
+  cloneNote,
 }
 
 const gNotes = [
@@ -48,8 +50,8 @@ function query() {
     _saveNotesToStorage(notes)
   }
 
-  getNotesToDisplay(notes)
-  return Promise.resolve(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function getNotesToDisplay(notes) {
@@ -84,19 +86,26 @@ function addNote({ type, content }) {
     case 'note-video':
       newNote.info = { videoUrl: content }
       break
+    case 'note-todo':
+      newNote.info = {
+        todoHeading: content,
+        todos: [],
+      }
   }
 
   const notes = _loadNotesFromStorage()
   notes.push(newNote)
   _saveNotesToStorage(notes)
-  return Promise.resolve(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function deleteNote(noteId) {
   const notes = _loadNotesFromStorage()
   const updatedNotes = notes.filter((note) => note.id !== noteId)
   _saveNotesToStorage(updatedNotes)
-  return Promise.resolve(updatedNotes)
+  const notesToDisplay = getNotesToDisplay(updatedNotes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function changeNoteColor(noteId, color) {
@@ -104,7 +113,8 @@ function changeNoteColor(noteId, color) {
   const note = getNoteById(notes, noteId)
   note.style = { ...note.style, backgroundColor: color }
   _saveNotesToStorage(notes)
-  return Promise.resolve(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function pinNote(noteId) {
@@ -112,7 +122,27 @@ function pinNote(noteId) {
   const note = getNoteById(notes, noteId)
   note.isPinned = !note.isPinned
   _saveNotesToStorage(notes)
-  return Promise.resolve(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
+}
+
+function addTodo(noteId, todo) {
+  const notes = _loadNotesFromStorage()
+  const note = getNoteById(notes, noteId)
+  note.info.todos.push(todo)
+  _saveNotesToStorage(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
+}
+
+function cloneNote(note) {
+  const notes = _loadNotesFromStorage()
+  note.isPinned = false
+  note.id = utilService.makeId()
+  notes.push(note)
+  _saveNotesToStorage(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function _loadNotesFromStorage() {

@@ -55,6 +55,10 @@ export class AddNote extends React.Component {
             onClick={() => this.onChangeNoteType('note-video')}
             className="fa fa-youtube-play fa-lg"
           ></i>
+          <i
+            onClick={() => this.onChangeNoteType('note-todo')}
+            className="fa fa-list fa-lg"
+          ></i>
           <i className="fa fa-bars fa-lg"></i>
         </div>
       </section>

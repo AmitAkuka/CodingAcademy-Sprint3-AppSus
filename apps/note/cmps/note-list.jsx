@@ -5,16 +5,20 @@ export function NoteList({
   onDeleteNote,
   onPinNote,
   onChangeNoteColor,
+  onAddTodo,
+  onCloneNote,
 }) {
   return (
     <section className="notes-list">
       {notes.map((note) => (
         <NotePreview
           onPinNote={onPinNote}
+          onAddTodo={onAddTodo}
           onChangeNoteColor={onChangeNoteColor}
           onDeleteNote={onDeleteNote}
           key={note.id}
           note={note}
+          onCloneNote={onCloneNote}
         />
       ))}
     </section>

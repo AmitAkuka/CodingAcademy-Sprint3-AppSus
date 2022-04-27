@@ -9,6 +9,13 @@
     position: relative;
 }
 
+.note .pin-img {
+    width: 24px;
+    position:absolute;
+    right: -12px;
+    top: -12px;
+}
+
 .note .note-footer {
     display: flex;
     justify-content: space-between;
