@@ -8,7 +8,7 @@ export function EmailPreview({ email, onFavoriteAdd, onSelectEmail }) {
       <div className="email-info-container">
         <h2 className="subject-preview">{email.subject}</h2>
         <h3 className="body-preview">{email.body}</h3>
-        <h3 className="time-preview">{sentTime}</h3>
+        <h3 className="time-preview">{(typeof sentAt === 'number')? sentTime : email.sentAt}</h3>
       </div>
     </div>
   </Link>

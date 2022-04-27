@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    border: 1px solid lightgrey;
 }
 
 .email-list-container .email-preview:hover {
@@ -37,20 +38,24 @@
     display: flex;
     width: 100%;
     align-items: center;
+    max-height: 75px;
 }
 
 .subject-preview {
-    width: 35%;
+    width: 30%;
+    font-size: 1.2rem;
 }
 
 .body-preview {
     width: 55%;
+    font-size: 1rem;
 }
 
 .time-preview {
-    width: 10%;
+    width: 13%;
     text-align: end;
     margin-inline-end: 20px;
+    font-size: 1rem;
 }
 
 .readed {

@@ -1,5 +1,6 @@
 .email-container .email-details-container {
     width: 80%;
+    border: 1px solid lightgrey;
 }
 
 .email-details-container .sender-info-container {

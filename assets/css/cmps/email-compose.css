@@ -1,0 +1,100 @@
+.email-compose-container {
+    position: fixed;
+    bottom: 0;
+    height: 420px;
+    width: 450px;
+    right: 75px;
+    border-radius: 17px 17px 0 0;
+    border: 1px solid dimgray;
+}
+
+.email-compose-container .compose-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: dimgrey;
+    border-radius: 17px 17px 0 0;
+    color: white;
+}
+
+.compose-header h1 {
+    margin-inline-start: 15px;
+}
+
+.compose-buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.compose-header button {
+    font-size: 1.5rem;
+    margin-inline-end: 10px;
+    margin-top: 5px;
+}
+
+.compose-header button:hover {
+    background-color: rgb(61, 61, 61);
+    border-radius: 5px;
+}
+
+.compose-header button,
+.compose-content-container button {
+    height: 25px;
+    background: transparent;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.compose-header button:hover,
+.compose-content-container button:hover {
+    background-color: lightblue;
+}
+
+.compose-content-container button {
+    font-size: 2rem;
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+    height: 45px;
+    border-radius: 25px;
+}
+
+.compose-buttons-container button i {
+    height: 32px;
+    width: 32px;
+}
+
+.email-compose-container .compose-text {
+    padding: 1rem;
+    width: 92.8%;
+    outline: none;
+    border: none;
+    resize: none;
+    font-family: system-ui;
+    font-size: 1rem;
+}
+
+.email-input-container,
+.subject-input-container {
+    margin-top: 15px;
+    background-color: rgb(246, 246, 246);
+}
+
+.email-input-container label,
+.subject-input-container label {
+    margin-inline-start: 15px;
+    font-size: 1.2rem;
+}
+
+#compose-email-input,
+#compose-subject-input {
+    background-color: rgb(246, 246, 246);
+    margin-inline-start: 1rem;
+    border: none;
+    outline: none;
+    width: 85%;
+    height: 30px;
+}
+
+#compose-subject-input {
+    width: 77%;
+}

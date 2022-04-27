@@ -2,8 +2,9 @@ import { emailService } from '../services/email.service.js'
 
 import { EmailList } from '../cmps/email-list.jsx'
 import { EmailDetails } from '../cmps/email-details.jsx'
+import { EmailNavBar } from '../cmps/email-nav-bar.jsx'
 
-export class EmailApp extends React.Component{
+export class EmailApp extends React.Component {
 
   state = {
     emails: [],
@@ -12,44 +13,44 @@ export class EmailApp extends React.Component{
     unreadedAmout: 0
   }
 
-  componentDidMount(){
+  componentDidMount() {
     console.log('Component Mounted! , loading emails')
     this.loadEmails()
     emailService.getUnreadAmout()
-      .then((unreadedAmout) => this.setState({unreadedAmout}))
+      .then((unreadedAmout) => this.setState({ unreadedAmout }))
   }
-  
+
   loadEmails = () => {
-    emailService.query()
-      .then(emails => {this.setState({emails})})
+    emailService.query(this.state.filterBy)
+      .then(emails => { this.setState({ emails }) })
   }
-  
-  onFavoriteAdd = (ev,email) => {
+
+  onFavoriteAdd = (ev, email) => {
     ev.stopPropagation();
     emailService.setEmailFavorite(email.id)
       .then(this.loadEmails)
   }
 
   onSelectEmail = (selectedEmail) => {
-    if(selectedEmail.isReaded) return
+    // if(selectedEmail.isReaded) return
     emailService.setReadedEmail(selectedEmail)
-       .then(() => emailService.getUnreadAmout())
-       .then((unreadedAmout) => this.setState({selectedEmail,unreadedAmout}))
+      .then(() => emailService.getUnreadAmout())
+      .then((unreadedAmout) => this.setState({ selectedEmail, unreadedAmout }))
   }
-  
-  render(){
-    const {emails,selectedEmail,unreadedAmout} = this.state
+
+  onFilterEmails = (filterBy) => {
+    console.log(filterBy)
+    this.setState({filterBy}, () => {
+      this.loadEmails()
+    })
+  }
+
+  render() {
+    const { emails, selectedEmail, unreadedAmout } = this.state
     return <section className="email-container">
-      <nav className="nav-container">
-        <div><img src="../../assests/img/google-compose.png"></img>Compose</div>
-        <div className="active"><i className="fa fa-inbox fa-lg"></i>Inbox <span className="unreaded-amout">{unreadedAmout}</span></div>
-        <div><i className="fa fa-star fa-lg"></i>Starred</div>
-        <div><i className="fa fa-paper-plane fa-med"></i>Sent Mail</div>
-        <div><i className="fa fa-file-text fa-lg"></i>Drafts</div>
-      </nav>
-      
-      {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onSelectEmail={this.onSelectEmail}/>}
-      {selectedEmail && <EmailDetails email={selectedEmail}/>}
+      <EmailNavBar unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />
+      {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onSelectEmail={this.onSelectEmail} />}
+      {selectedEmail && <EmailDetails email={selectedEmail} />}
     </section>
   }
 }

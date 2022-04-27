@@ -1,8 +1,9 @@
 // IMPORT COMPONENTS HERE
 import { AppHome } from './pages/app-home.jsx'
-import { AppHeader } from './cmps/app-header.jsx'
 import { EmailApp } from './apps/mail/pages/email-index.jsx'
 import { NoteApp } from './apps/note/pages/note-index.jsx'
+import { EmailCompose } from './apps/mail/cmps/email-compose.jsx'
+import { AppHeader } from './cmps/app-header.jsx'
 // import { AppHome } from './pages/app-home.jsx' Dont forget to import books
 
 
@@ -23,6 +24,7 @@ export function App() {
         <Route path="/" component={AppHome} />
       </Switch>
     </section>
+    <EmailCompose />
     {/* <AppFooter /> */}
     {/* <UserMsg /> */}
   </Router>

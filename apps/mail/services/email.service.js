@@ -1,3 +1,4 @@
+import { func } from 'prop-types'
 import { storageService } from '../../../services/storage.service.js'
 import { utilService } from '../../../services/util.service.js'
 
@@ -6,7 +7,8 @@ export const emailService = {
     query,
     setEmailFavorite,
     setReadedEmail,
-    getUnreadAmout
+    getUnreadAmout,
+    addEmail
 }
 const EMAILS_KEY = 'emailsDB'
 const loggedinUser = {
@@ -14,14 +16,42 @@ const loggedinUser = {
     fullname: 'Sprint3 Appsus'
 }
 
-function query() {
+function query(filter) {
     let emails = _loadFromStorage()
     if (!emails) {
         emails = _createEmails()
         _saveToLocalStorage(emails)
     }
+    if (filter) {
+        emails = emails.filter(email => {
+            if (filter === 'Inbox') {
+                return (email.from !== loggedinUser.email)
+            } else if (filter === 'Starred') {
+                return (email.isFavorite)
+            } else if (filter === 'Sent') {
+                return (email.from === loggedinUser.email)
+            }
+        })
+    }
     console.log('Loaded Emails')
     return Promise.resolve(emails)
+}
+
+function addEmail({ to, subject, body }) {
+    let emails = _loadFromStorage()
+    emails.push({
+        id: utilService.makeId(),
+        subject,
+        body,
+        sentAt: 'few secounds ago..',
+        to,
+        from: loggedinUser.email,
+        userName: loggedinUser.fullname,
+        isFavorite: false,
+        isReaded: true
+    })
+    _saveToLocalStorage(emails)
+    return Promise.resolve()
 }
 
 function _createEmails() {
@@ -29,8 +59,7 @@ function _createEmails() {
             id: utilService.makeId(),
             subject: 'Whats going on with sprint3??',
             body: 'Its so easy! finish with it, and dont forget to use deep refresh when needed!',
-            isRead: false,
-            sentAt: 1551133930594,
+            sentAt: 'Apr 7',
             to: loggedinUser.email,
             from: 'Yaron@CodingAcademy.com',
             userName: 'Yaron Biton',
@@ -41,8 +70,7 @@ function _createEmails() {
             id: utilService.makeId(),
             subject: 'Pulse Hex progress',
             body: 'Dont worry, prec-20 will be ready soon!',
-            isRead: false,
-            sentAt: 1551133930594,
+            sentAt: 'Aug 28',
             to: loggedinUser.email,
             from: 'RichardHeart@gmail.com',
             userName: 'Richard Heart',
@@ -53,8 +81,7 @@ function _createEmails() {
             id: utilService.makeId(),
             subject: 'Miss you baby!',
             body: 'Would love to catch up sometimes',
-            isRead: false,
-            sentAt: 1551133930594,
+            sentAt: 'Mar 10',
             to: loggedinUser.email,
             from: 'KimKardashian@gmail.com',
             userName: 'Kim Kardashian',
@@ -65,8 +92,7 @@ function _createEmails() {
             id: utilService.makeId(),
             subject: 'SpaceX',
             body: 'Would you like to join?',
-            isRead: false,
-            sentAt: 1551133930594,
+            sentAt: 'Aug 28',
             to: loggedinUser.email,
             from: 'ElonMusk@gmail.com',
             userName: 'Elon Musk',
@@ -77,8 +103,7 @@ function _createEmails() {
             id: utilService.makeId(),
             subject: 'Wake me up',
             body: 'Please dont forget to wake me up, so i wont fall asleep',
-            isRead: false,
-            sentAt: 1551133930594,
+            sentAt: 'Feb 2',
             to: loggedinUser.email,
             from: 'JoeBiden@gmail.com',
             userName: 'Joe Biden',
