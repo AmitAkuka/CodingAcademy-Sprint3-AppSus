@@ -3,3 +3,8 @@
 @import './parts/base.css';
 @import './parts/fonts.css';
 @import './parts/helpers.css';
+
+@import '../css/cmps/notes-list.css';
+@import '../css/cmps/note-preview.css';
+
+@import './parts/fonts.css';

@@ -14,6 +14,7 @@ const gNotes = [
     info: {
       txt: 'I am a note!',
     },
+    createdAt: new Date().toLocaleDateString(),
   },
   {
     id: utilService.makeId(),
@@ -22,6 +23,7 @@ const gNotes = [
     info: {
       txt: 'I am a note!',
     },
+    createdAt: new Date().toLocaleDateString(),
   },
   {
     id: utilService.makeId(),
@@ -30,6 +32,7 @@ const gNotes = [
     info: {
       txt: 'I am a note!',
     },
+    createdAt: new Date().toLocaleDateString(),
   },
 ]
 const STORAGE_KEY = 'notesDB'
