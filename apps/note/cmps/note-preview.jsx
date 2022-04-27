@@ -76,12 +76,7 @@ export class NotePreview extends React.Component {
 }
 
 function getNoteContent(info, onAddTodo, onInlineEdit) {
-  if (info.txt)
-    return (
-      <span contentEditable onInput={onInlineEdit}>
-        {info.txt}
-      </span>
-    )
+  if (info.txt) return <span onInput={onInlineEdit}>{info.txt}</span>
   if (info.imgUrl) return <img src={info.imgUrl}></img>
   if (info.videoUrl)
     return (

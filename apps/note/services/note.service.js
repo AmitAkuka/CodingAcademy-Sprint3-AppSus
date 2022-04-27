@@ -11,6 +11,7 @@ export const notesService = {
   addTodo,
   cloneNote,
   onInlineEdit,
+  getFilteredNotes,
 }
 
 const gNotes = [
@@ -152,6 +153,19 @@ function onInlineEdit(noteId, txt) {
   note.info.txt = txt
   _saveNotesToStorage(notes)
   const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
+}
+
+function getFilteredNotes({ txt, type }) {
+  const notes = _loadNotesFromStorage()
+  const filteredNotes = notes.filter((note) => {
+    if (type !== 'note-txt' && type !== 'all') return note.type === type
+    if (type === 'note-txt')
+      return note.type === type && note.info.txt.includes(txt)
+    if (type === 'all') return true
+  })
+
+  const notesToDisplay = getNotesToDisplay(filteredNotes)
   return Promise.resolve(notesToDisplay)
 }
 

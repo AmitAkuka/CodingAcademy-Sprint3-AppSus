@@ -1,6 +1,7 @@
 import { notesService } from '../services/note.service.js'
 import { NoteList } from '../cmps/note-list.jsx'
 import { AddNote } from '../cmps/add-note.jsx'
+import { FilterNotes } from '../cmps/filter-notes.jsx'
 
 export class NoteApp extends React.Component {
   state = {
@@ -50,11 +51,18 @@ export class NoteApp extends React.Component {
       .then((notes) => this.setState({ notes }))
   }
 
+  onSearch = (filter) => {
+    console.log(filter)
+    notesService
+      .getFilteredNotes(filter)
+      .then((notes) => this.setState({ notes }))
+  }
+
   render() {
     const { notes } = this.state
     return (
       <section className="note-app-container">
-        <h1>Hello from Note App</h1>
+        <FilterNotes onSearch={this.onSearch} />
         <AddNote onAddNote={this.onAddNote} />
         {notes.length ? (
           <NoteList
