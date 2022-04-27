@@ -1,0 +1,36 @@
+.note {
+    min-height: 150px;
+    background-color: lightgray;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.note .note-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.note .note-footer .created-at {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.note img,
+.note iframe {
+    width: 100%;
+}
+
+
+.note .note-footer .tools-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.note .note-footer .tools-container >* {
+    cursor: pointer;
+}

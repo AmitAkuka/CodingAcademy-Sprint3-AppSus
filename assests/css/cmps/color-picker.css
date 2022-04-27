@@ -1,0 +1,38 @@
+.color-picker {
+    background-color: gray;
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    bottom: -30px;
+    right: -30%;
+    z-index: 9999;
+}
+
+.color-picker .color {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.color-picker .color.red {
+    background-color: tomato;
+}
+.color-picker .color.green {
+    background-color: rgb(98, 167, 98);
+}
+.color-picker .color.blue {
+    background-color: dodgerblue;
+}
+.color-picker .color.yellow {
+    background-color: yellow;
+}
+.color-picker .color.purple {
+    background-color: rgb(197, 79, 197);
+}
+
+.color-picker .color.brown {
+    background-color: brown;
+}
