@@ -7,7 +7,6 @@
 .email-list-container .email-preview {
     display: flex;
     align-items: center;
-    gap: 50px;
     cursor: pointer;
 }
 
@@ -24,10 +23,36 @@
     margin-inline-start: 40px;
     padding: 5px;
     cursor: pointer;
+    text-align: center;
+    margin-inline-end: 40px;
 }
 
 .email-preview .fa.fa-star:hover,
 .email-preview .fa.fa-star-o:hover {
     background-color: lightcyan;
     border-radius: 15px;
+}
+
+.email-info-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.subject-preview {
+    width: 35%;
+}
+
+.body-preview {
+    width: 55%;
+}
+
+.time-preview {
+    width: 10%;
+    text-align: end;
+    margin-inline-end: 20px;
+}
+
+.readed {
+    background-color: #eaf5ff;
 }

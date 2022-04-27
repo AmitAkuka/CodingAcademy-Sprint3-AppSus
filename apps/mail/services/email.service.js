@@ -4,7 +4,9 @@ import { utilService } from '../../../services/util.service.js'
 
 export const emailService = {
     query,
-    setEmailFavorite
+    setEmailFavorite,
+    setReadedEmail,
+    getUnreadAmout
 }
 const EMAILS_KEY = 'emailsDB'
 const loggedinUser = {
@@ -18,8 +20,6 @@ function query() {
         emails = _createEmails()
         _saveToLocalStorage(emails)
     }
-
-
     console.log('Loaded Emails')
     return Promise.resolve(emails)
 }
@@ -34,7 +34,8 @@ function _createEmails() {
             to: loggedinUser.email,
             from: 'Yaron@CodingAcademy.com',
             userName: 'Yaron Biton',
-            isFavorite: false
+            isFavorite: false,
+            isReaded: false
         },
         {
             id: utilService.makeId(),
@@ -45,7 +46,8 @@ function _createEmails() {
             to: loggedinUser.email,
             from: 'RichardHeart@gmail.com',
             userName: 'Richard Heart',
-            isFavorite: false
+            isFavorite: false,
+            isReaded: false
         },
         {
             id: utilService.makeId(),
@@ -56,7 +58,8 @@ function _createEmails() {
             to: loggedinUser.email,
             from: 'KimKardashian@gmail.com',
             userName: 'Kim Kardashian',
-            isFavorite: false
+            isFavorite: false,
+            isReaded: false
         },
         {
             id: utilService.makeId(),
@@ -67,7 +70,8 @@ function _createEmails() {
             to: loggedinUser.email,
             from: 'ElonMusk@gmail.com',
             userName: 'Elon Musk',
-            isFavorite: false
+            isFavorite: false,
+            isReaded: false
         },
         {
             id: utilService.makeId(),
@@ -78,7 +82,8 @@ function _createEmails() {
             to: loggedinUser.email,
             from: 'JoeBiden@gmail.com',
             userName: 'Joe Biden',
-            isFavorite: false
+            isFavorite: false,
+            isReaded: false
         }
     ]
     return emails
@@ -88,13 +93,28 @@ function setEmailFavorite(emailId) {
     let emails = _loadFromStorage()
     getEmailIndexById(emailId)
         .then(emailIdx => {
-            console.log('emailidx', emailIdx)
-            console.log('after:', emails[emailIdx].isFavorite)
             emails[emailIdx].isFavorite = !emails[emailIdx].isFavorite
-            console.log('before:', emails[emailIdx].isFavorite)
             _saveToLocalStorage(emails)
         })
     return Promise.resolve()
+}
+
+function setReadedEmail(email) {
+    let emails = _loadFromStorage()
+    getEmailIndexById(email.id)
+        .then(emailIdx => {
+            emails[emailIdx].isReaded = true
+            _saveToLocalStorage(emails)
+        })
+    return Promise.resolve()
+}
+
+function getUnreadAmout() {
+    let emails = _loadFromStorage()
+    let unreadCounter = 0
+    emails.forEach(email => { if (!email.isReaded) unreadCounter++ })
+    console.log(unreadCounter)
+    return Promise.resolve(unreadCounter)
 }
 
 function getEmailIndexById(emailId) {

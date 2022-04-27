@@ -8,12 +8,15 @@ export class EmailApp extends React.Component{
   state = {
     emails: [],
     filterBy: null,
-    selectedEmail: null
+    selectedEmail: null,
+    unreadedAmout: 0
   }
 
   componentDidMount(){
     console.log('Component Mounted! , loading emails')
     this.loadEmails()
+    emailService.getUnreadAmout()
+      .then((unreadedAmout) => this.setState({unreadedAmout}))
   }
   
   loadEmails = () => {
@@ -28,14 +31,18 @@ export class EmailApp extends React.Component{
   }
 
   onSelectEmail = (selectedEmail) => {
-    this.setState({selectedEmail})
+    if(selectedEmail.isReaded) return
+    emailService.setReadedEmail(selectedEmail)
+       .then(() => emailService.getUnreadAmout())
+       .then((unreadedAmout) => this.setState({selectedEmail,unreadedAmout}))
   }
   
   render(){
-    const {emails,selectedEmail} = this.state
+    const {emails,selectedEmail,unreadedAmout} = this.state
     return <section className="email-container">
       <nav className="nav-container">
-        <div className="active"><i className="fa fa-inbox fa-lg"></i>Inbox</div>
+        <div><img src="../../assests/img/google-compose.png"></img>Compose</div>
+        <div className="active"><i className="fa fa-inbox fa-lg"></i>Inbox <span className="unreaded-amout">{unreadedAmout}</span></div>
         <div><i className="fa fa-star fa-lg"></i>Starred</div>
         <div><i className="fa fa-paper-plane fa-med"></i>Sent Mail</div>
         <div><i className="fa fa-file-text fa-lg"></i>Drafts</div>
