@@ -8,5 +8,6 @@
 @import '../css/cmps/note-preview.css';
 @import '../css/cmps/add-note.css';
 @import '../css/cmps/notes.css';
+@import '../css/cmps/color-picker.css';
 
 @import './parts/fonts.css';

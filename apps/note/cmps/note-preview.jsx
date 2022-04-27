@@ -1,27 +1,44 @@
-export function NotePreview({ note, onDeleteNote }) {
-  const { id, info } = note
-  return (
-    <div className="note">
-      <div className="note-content">
-        <span>{getNoteContent(info)}</span>
-      </div>
-      <div className="note-footer">
-        <span className="created-at">{note.createdAt}</span>
-        <div className="tools-container fa-md">
-          <i className="fa fa-thumb-tack fa-md"></i>
-          <i className="fa fa-pencil-square-o fa-md"></i>
-          <i className="fa fa-envelope fa-md"></i>
-          <i className="fa fa-paint-brush fa-md"></i>
-          <i
-            onClick={() => {
-              onDeleteNote(id)
-            }}
-            className="fa fa-trash fa-lg"
-          ></i>
+import { ColorPicker } from './color-picker.jsx'
+
+export class NotePreview extends React.Component {
+  state = {
+    isPainting: false,
+  }
+
+  onStartPainting() {
+    this.setState({ isPainting: true })
+  }
+
+  render() {
+    const { note, onDeleteNote } = this.props
+    const { id, info } = note
+    return (
+      <div className="note">
+        <div className="note-content">
+          <span>{getNoteContent(info)}</span>
         </div>
+        <div className="note-footer">
+          <span className="created-at">{note.createdAt}</span>
+          <div className="tools-container fa-md">
+            <i className="fa fa-thumb-tack fa-md"></i>
+            <i className="fa fa-pencil-square-o fa-md"></i>
+            <i className="fa fa-envelope fa-md"></i>
+            <i
+              onClick={this.onStartPainting}
+              className="fa fa-paint-brush fa-md"
+            ></i>
+            <i
+              onClick={() => {
+                onDeleteNote(id)
+              }}
+              className="fa fa-trash fa-lg"
+            ></i>
+          </div>
+        </div>
+        <ColorPicker />
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 function getNoteContent(info) {
