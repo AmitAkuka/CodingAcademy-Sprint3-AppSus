@@ -1,9 +1,12 @@
+import { MoreNotesTypes } from '../cmps/more-notes-type.jsx'
+
 export class AddNote extends React.Component {
   state = {
     newNote: {
       type: 'note-txt',
       content: '',
     },
+    isMoreTypes: false,
   }
 
   handleChange = ({ target }) => {
@@ -30,7 +33,7 @@ export class AddNote extends React.Component {
   }
 
   render() {
-    const { newNote } = this.state
+    const { newNote, isMoreTypes } = this.state
     return (
       <section className="add-note">
         <form onSubmit={this.onAddNote}>
@@ -59,8 +62,14 @@ export class AddNote extends React.Component {
             onClick={() => this.onChangeNoteType('note-todo')}
             className="fa fa-list fa-lg"
           ></i>
-          <i className="fa fa-bars fa-lg"></i>
+          <i
+            className="fa fa-bars fa-lg"
+            onClick={() => this.setState({ isMoreTypes: !isMoreTypes })}
+          ></i>
         </div>
+        {isMoreTypes && (
+          <MoreNotesTypes onChangeNoteType={this.onChangeNoteType} />
+        )}
       </section>
     )
   }

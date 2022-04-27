@@ -9,6 +9,7 @@
     border-radius: 5rem;
     align-self: center;
     padding: 0 1rem;
+    position: relative;
 }
 
 .add-note input {
