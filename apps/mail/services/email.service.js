@@ -16,7 +16,7 @@ const loggedinUser = {
     fullname: 'Sprint3 Appsus'
 }
 
-function query(filter) {
+function query(filter, readStateFilter = filter) {
     let emails = _loadFromStorage()
     if (!emails) {
         emails = _createEmails()
@@ -24,11 +24,11 @@ function query(filter) {
     }
     if (filter) {
         emails = emails.filter(email => {
-            if (filter === 'Inbox') {
+            if (filter === 'Inbox' && readStateFilter) {
                 return (email.from !== loggedinUser.email)
-            } else if (filter === 'Starred') {
+            } else if (filter === 'Starred' && readStateFilter) {
                 return (email.isFavorite)
-            } else if (filter === 'Sent') {
+            } else if (filter === 'Sent' && readStateFilter) {
                 return (email.from === loggedinUser.email)
             }
         })
@@ -124,11 +124,12 @@ function setEmailFavorite(emailId) {
     return Promise.resolve()
 }
 
-function setReadedEmail(email) {
+function setReadedEmail(email, isMarkAsUnreaded) {
+    console.log(isMarkAsUnreaded)
     let emails = _loadFromStorage()
     getEmailIndexById(email.id)
         .then(emailIdx => {
-            emails[emailIdx].isReaded = true
+            emails[emailIdx].isReaded = !emails[emailIdx].isReaded
             _saveToLocalStorage(emails)
         })
     return Promise.resolve()

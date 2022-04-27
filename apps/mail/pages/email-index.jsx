@@ -2,13 +2,14 @@ import { emailService } from '../services/email.service.js'
 
 import { EmailList } from '../cmps/email-list.jsx'
 import { EmailDetails } from '../cmps/email-details.jsx'
-import { EmailNavBar } from '../cmps/email-nav-bar.jsx'
+import { EmailFolderList } from '../cmps/email-folder-list.jsx'
+import { EmailFilter } from '../cmps/email-filter.jsx'
 
 export class EmailApp extends React.Component {
 
   state = {
     emails: [],
-    filterBy: null,
+    filterBy: 'Inbox',
     selectedEmail: null,
     unreadedAmout: 0
   }
@@ -31,27 +32,39 @@ export class EmailApp extends React.Component {
       .then(this.loadEmails)
   }
 
-  onSelectEmail = (selectedEmail) => {
-    // if(selectedEmail.isReaded) return
-    emailService.setReadedEmail(selectedEmail)
+  onSelectEmail = (selectedEmail, ev = false) => {
+    //if there is event sent - means user clicked preview button
+    let isMarkAsUnreaded = false
+    if (ev) {
+      ev.stopPropagation();
+      isMarkAsUnreaded = true
+    }
+    emailService.setReadedEmail(selectedEmail, isMarkAsUnreaded)
       .then(() => emailService.getUnreadAmout())
-      .then((unreadedAmout) => this.setState({ selectedEmail, unreadedAmout }))
+      .then((unreadedAmout) => {
+        if (ev) {
+          this.setState({ unreadedAmout })
+          this.loadEmails()
+        } else this.setState({ selectedEmail, unreadedAmout })
+      })
   }
 
   onFilterEmails = (filterBy) => {
-    console.log(filterBy)
-    this.setState({filterBy}, () => {
+    this.setState({ filterBy }, () => {
       this.loadEmails()
-      this.setState({selectedEmail: null})
+      this.setState({ selectedEmail: null })
     })
   }
 
   render() {
     const { emails, selectedEmail, unreadedAmout } = this.state
-    return <section className="email-container">
-      <EmailNavBar unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />
-      {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onSelectEmail={this.onSelectEmail} />}
-      {selectedEmail && <EmailDetails email={selectedEmail} />}
+    return <section className="main-email-container">
+      <EmailFilter onFilterEmails={this.onFilterEmails}/>
+      <section className="email-container">
+        <EmailFolderList unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />
+        {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onSelectEmail={this.onSelectEmail} />}
+        {selectedEmail && <EmailDetails email={selectedEmail} />}
+      </section>
     </section>
   }
 }

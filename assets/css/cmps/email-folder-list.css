@@ -1,0 +1,60 @@
+.email-container {
+    display: flex;
+}
+
+.email-container .nav-container {
+    min-width: 15vw;
+    padding-top: 15px;
+    padding-inline-end: 20px;
+    border-top: 1px solid lightgray;
+}
+
+.email-container .nav-container>* {
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 0 15px 15px 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.email-container .nav-container>*:hover {
+    background-color: lightcyan;
+}
+
+.email-container .nav-container div>* {
+    margin-inline-start: 20px;
+    margin-inline-end: 20px;
+}
+
+.email-list-container {
+    width: 80vw;
+}
+
+.fa.fa-paper-plane {
+    font-size: 19px;
+}
+
+.fa.fa-inbox {
+    font-size: 23px;
+}
+
+.nav-container div:first-child {
+    border: 2px solid black;
+    border-radius: 25px;
+    margin-inline-start: 10px;
+    font-weight: 500;
+    background-color: #f6f3e9;
+    max-width: 175px;
+    min-width: 175px;
+    height: 50px;
+}
+
+.nav-container .unreaded-amout {
+    text-align: end;
+    width: 100%;
+}
+
+.active {
+    background-color: lightcyan;
+}

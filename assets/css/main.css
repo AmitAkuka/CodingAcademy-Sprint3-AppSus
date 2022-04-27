@@ -11,7 +11,8 @@
 @import './cmps/email-details.css';
 @import './cmps/email-index.css';
 @import './cmps/email-compose.css';
-@import './cmps/email-nav-bar.css';
+@import './cmps/email-folder-list.css';
+@import './cmps/email-filter.css';
 
 /* BASE IMPORTS */
 

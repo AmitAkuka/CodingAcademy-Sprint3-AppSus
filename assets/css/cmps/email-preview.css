@@ -15,6 +15,14 @@
     background-color: lightcyan;
 }
 
+.email-list-container .email-preview:hover .email-preview-buttons button {
+    display: block;
+}
+
+.email-list-container .email-preview:hover .email-info-container .time-preview {
+    display: none;
+}
+
 .email-preview .fa.fa-star {
     color: gold;
 }
@@ -39,6 +47,34 @@
     width: 100%;
     align-items: center;
     max-height: 75px;
+    position: relative;
+}
+
+.email-preview-buttons {
+    margin-inline-end: 15px;
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+
+.email-preview-buttons button {
+    background: transparent;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    font-size: 1.3rem;
+    height: 36px;
+    width: 36px;
+    border-radius: 18px;
+    display: none;
+}
+
+.email-preview-buttons button:last-child {
+    font-size: 1.5rem;
+}
+
+.email-preview-buttons button:hover {
+    background-color: lightblue;
 }
 
 .subject-preview {
@@ -60,4 +96,10 @@
 
 .readed {
     background-color: #eaf5ff;
+}
+
+.readed h1,
+.readed h2,
+.readed h3 {
+    font-weight: 200;
 }

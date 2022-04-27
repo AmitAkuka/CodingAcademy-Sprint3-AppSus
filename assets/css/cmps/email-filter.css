@@ -1,0 +1,30 @@
+.email-filter-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.sub-filter-container {
+    border: 1px solid black;
+}
+
+.sub-filter-container button {
+    background: transparent;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    height: 50px;
+    width: 90px;
+    font-weight: 600;
+    background-color: #e2e2e2;
+}
+
+.sub-filter-container button:hover {
+    background-color: rgb(167, 167, 167);
+}
+
+.sub-filter-container button.selected {
+    background-color: #b4ffff;
+}

@@ -26,7 +26,6 @@ export class EmailCompose extends React.Component {
 
   handleChange = ({ target }) => {
     const value = target.value
-    console.log(value)
     const field = target.name
     this.setState((prevState) => ({ mailContent: { ...prevState.mailContent, [field]: value } }))
   }
@@ -41,6 +40,10 @@ export class EmailCompose extends React.Component {
 
   onCloseCompose() {
     this.setState({ isComposeOpen: false })
+  }
+
+  onDelete(){
+    console.log('delete')
   }
 
   render() {
@@ -64,12 +67,11 @@ export class EmailCompose extends React.Component {
             <input id="compose-subject-input" type="text" name="subject"
               value={subject} onChange={this.handleChange} required />
           </div>
-          <textarea className="compose-text" rows="6" name="body"
+          <textarea className="compose-text" rows="7" name="body"
             value={body} onChange={this.handleChange} required></textarea>
           <div className="compose-buttons-container">
             <button onClick={this.onSendMail}><i className="fa fa-reply"></i></button>
-            <button><i className="fa fa-trash"></i></button>
-
+            <button type="button" onClick={() => this.onCloseCompose()}><i className="fa fa-trash"></i></button>
           </div>
         </div>
       </form>

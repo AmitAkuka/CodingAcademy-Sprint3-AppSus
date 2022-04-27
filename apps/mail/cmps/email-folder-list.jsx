@@ -1,6 +1,6 @@
 import { eventBusService } from "../../../services/event-bus-service.js"
 
-export class EmailNavBar extends React.Component {
+export class EmailFolderList extends React.Component {
   
   state = {
     filterName: 'Inbox'
