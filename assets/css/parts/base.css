@@ -9,3 +9,6 @@
       min-height: 100vh;
   }
   
+iframe {
+    border: 0;
+}

@@ -9,6 +9,8 @@ export class AddNote extends React.Component {
     isMoreTypes: false,
   }
 
+  inputRef = React.createRef()
+
   handleChange = ({ target }) => {
     const field = target.name
     let value = target.type === 'number' ? +target.value : target.value
@@ -18,6 +20,28 @@ export class AddNote extends React.Component {
   }
 
   onChangeNoteType = (type) => {
+    // changing input placeholder according to note type
+    switch (type) {
+      case 'note-txt':
+        this.inputRef.current.placeholder = "what's on your mind..."
+        break
+      case 'note-img':
+        this.inputRef.current.placeholder = 'Give me a link to an image'
+        break
+      case 'note-video':
+        this.inputRef.current.placeholder = 'Give a nice youtube link'
+        break
+      case 'note-todo':
+        this.inputRef.current.placeholder = 'What are those todos about??'
+        break
+      case 'note-canvas':
+        this.inputRef.current.placeholder = 'Care to title your next drawing?'
+        break
+      case 'note-audio':
+        this.inputRef.current.placeholder = 'What are we listening to today?'
+        break
+    }
+
     this.setState((prevState) => {
       return { newNote: { ...prevState.newNote, type } }
     })
@@ -43,6 +67,7 @@ export class AddNote extends React.Component {
             placeholder="Whats's on your mind..."
             onChange={this.handleChange}
             value={newNote.content}
+            ref={this.inputRef}
           />
         </form>
         <div className="note-type-container">

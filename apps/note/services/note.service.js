@@ -165,6 +165,7 @@ function onInlineEdit(noteId, txt) {
 function getFilteredNotes({ txt, type }) {
   const notes = _loadNotesFromStorage()
   const filteredNotes = notes.filter((note) => {
+    if (type === 'note-pinned') return note.isPinned
     if (type !== 'note-txt' && type !== 'all') return note.type === type
     if (type === 'note-txt')
       return note.type === type && note.info.txt.includes(txt)
