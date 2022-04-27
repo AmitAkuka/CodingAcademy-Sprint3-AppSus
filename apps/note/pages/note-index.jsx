@@ -23,6 +23,13 @@ export class NoteApp extends React.Component {
     notesService.deleteNote(noteId).then((notes) => this.setState({ notes }))
   }
 
+  onChangeNoteColor = (noteId, color) => {
+    notesService
+      .changeNoteColor(noteId, color)
+      .then((notes) => this.setState({ notes }))
+      .then('color changed')
+  }
+
   render() {
     const { notes } = this.state
     return (
@@ -30,7 +37,11 @@ export class NoteApp extends React.Component {
         <h1>Hello from Note App</h1>
         <AddNote onAddNote={this.onAddNote} />
         {notes.length ? (
-          <NoteList onDeleteNote={this.onDeleteNote} notes={notes} />
+          <NoteList
+            onChangeNoteColor={this.onChangeNoteColor}
+            onDeleteNote={this.onDeleteNote}
+            notes={notes}
+          />
         ) : (
           'No notes Yet'
         )}

@@ -5,15 +5,20 @@ export class NotePreview extends React.Component {
     isPainting: false,
   }
 
-  onStartPainting() {
-    this.setState({ isPainting: true })
+  togglePainting = () => {
+    this.setState({ isPainting: !this.state.isPainting })
+  }
+
+  onChangeNoteColor = (color) => {
+    this.props.onChangeNoteColor(this.props.note.id, color)
   }
 
   render() {
+    const { isPainting } = this.state
     const { note, onDeleteNote } = this.props
     const { id, info } = note
     return (
-      <div className="note">
+      <div className="note" style={note.style}>
         <div className="note-content">
           <span>{getNoteContent(info)}</span>
         </div>
@@ -24,7 +29,7 @@ export class NotePreview extends React.Component {
             <i className="fa fa-pencil-square-o fa-md"></i>
             <i className="fa fa-envelope fa-md"></i>
             <i
-              onClick={this.onStartPainting}
+              onClick={this.togglePainting}
               className="fa fa-paint-brush fa-md"
             ></i>
             <i
@@ -35,7 +40,9 @@ export class NotePreview extends React.Component {
             ></i>
           </div>
         </div>
-        <ColorPicker />
+        {isPainting && (
+          <ColorPicker onChangeNoteColor={this.onChangeNoteColor} />
+        )}
       </div>
     )
   }
