@@ -1,0 +1,32 @@
+.note .todos .todo-input {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.note .todos .todo-input input {
+    border: 0;
+    outline: 0;
+    height: 30px;
+    border-radius: 20px;
+    padding-left: 0.5rem;
+    width: 100%;
+    /* padding-inline-start: 0.3rem; */
+}
+
+.note .todos .todo-input .plus {
+    position: absolute;
+    right: 5px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.note .todos .todo-list  {
+    padding-inline-start: 1rem;
+}
+
+.note .todos .todo-list .todo {
+    font-size: 0.9rem;
+}

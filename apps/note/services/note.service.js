@@ -8,6 +8,7 @@ export const notesService = {
   deleteNote,
   changeNoteColor,
   pinNote,
+  addTodo,
 }
 
 const gNotes = [
@@ -84,6 +85,11 @@ function addNote({ type, content }) {
     case 'note-video':
       newNote.info = { videoUrl: content }
       break
+    case 'note-todo':
+      newNote.info = {
+        todoHeading: content,
+        todos: [],
+      }
   }
 
   const notes = _loadNotesFromStorage()
@@ -114,6 +120,15 @@ function pinNote(noteId) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.isPinned = !note.isPinned
+  _saveNotesToStorage(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
+}
+
+function addTodo(noteId, todo) {
+  const notes = _loadNotesFromStorage()
+  const note = getNoteById(notes, noteId)
+  note.info.todos.push(todo)
   _saveNotesToStorage(notes)
   const notesToDisplay = getNotesToDisplay(notes)
   return Promise.resolve(notesToDisplay)

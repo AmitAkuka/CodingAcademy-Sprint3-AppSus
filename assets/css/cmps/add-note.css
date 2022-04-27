@@ -21,6 +21,7 @@
 
 .add-note .note-type-container {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 

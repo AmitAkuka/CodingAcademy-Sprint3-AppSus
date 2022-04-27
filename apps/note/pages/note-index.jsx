@@ -34,6 +34,10 @@ export class NoteApp extends React.Component {
     notesService.pinNote(noteId).then((notes) => this.setState({ notes }))
   }
 
+  onAddTodo = (noteId, todo) => {
+    notesService.addTodo(noteId, todo).then((notes) => this.setState({ notes }))
+  }
+
   render() {
     const { notes } = this.state
     return (
@@ -46,6 +50,7 @@ export class NoteApp extends React.Component {
             onChangeNoteColor={this.onChangeNoteColor}
             onDeleteNote={this.onDeleteNote}
             notes={notes}
+            onAddTodo={this.onAddTodo}
           />
         ) : (
           'No notes Yet'
