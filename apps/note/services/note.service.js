@@ -3,7 +3,7 @@ import { storageService } from '../../../services/storage.service.js'
 import { utilService } from '../../../services/util.service.js'
 
 export const notesService = {
-  loadNotes,
+  query,
 }
 
 const gNotes = [
@@ -34,7 +34,7 @@ const gNotes = [
 ]
 const STORAGE_KEY = 'notesDB'
 
-function loadNotes() {
+function query() {
   let notes = _loadNotesFromStorage()
   if (!notes) {
     notes = gNotes

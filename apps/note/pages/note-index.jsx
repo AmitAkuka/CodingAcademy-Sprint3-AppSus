@@ -11,7 +11,7 @@ export class NoteApp extends React.Component {
   }
 
   loadNotes = () => {
-    notesService.loadNotes().then((notes) => this.setState({ notes }))
+    notesService.query().then((notes) => this.setState({ notes }))
   }
 
   render() {
