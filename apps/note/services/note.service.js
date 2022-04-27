@@ -4,6 +4,7 @@ import { utilService } from '../../../services/util.service.js'
 
 export const notesService = {
   query,
+  addNote,
 }
 
 const gNotes = [
@@ -43,6 +44,31 @@ function query() {
     notes = gNotes
     _saveNotesToStorage(notes)
   }
+  return Promise.resolve()
+}
+
+function addNote({ type, content }) {
+  const newNote = {
+    id: utilService.makeId(),
+    type,
+    isPinned: false,
+  }
+
+  switch (type) {
+    case 'note-txt':
+      newNote.info = { txt: content }
+      break
+    case 'note-img':
+      newNote.info = { imgUrl: content }
+      break
+    case 'note-video':
+      newNote.info = { videoUrl: content }
+      break
+  }
+
+  const notes = _loadNotesFromStorage()
+  notes.push(newNote)
+  _saveNotesToStorage(notes)
   return Promise.resolve(notes)
 }
 

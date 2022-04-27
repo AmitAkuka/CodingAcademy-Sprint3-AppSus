@@ -2,7 +2,6 @@ export class AddNote extends React.Component {
   state = {
     newNote: {
       type: 'note-txt',
-      isPinned: false,
       content: '',
     },
   }
@@ -23,15 +22,18 @@ export class AddNote extends React.Component {
 
   render() {
     const { newNote } = this.state
+    const { onAddNote } = this.props
     return (
       <section className="add-note">
-        <input
-          name="content"
-          type="text"
-          placeholder="Whats's on your mind..."
-          onChange={this.handleChange}
-          value={newNote.content}
-        />
+        <form onSubmit={(event) => onAddNote(event, this.state.newNote)}>
+          <input
+            name="content"
+            type="text"
+            placeholder="Whats's on your mind..."
+            onChange={this.handleChange}
+            value={newNote.content}
+          />
+        </form>
         <div className="note-type-container">
           <i
             onClick={() => this.onChangeNoteType('note-txt')}
