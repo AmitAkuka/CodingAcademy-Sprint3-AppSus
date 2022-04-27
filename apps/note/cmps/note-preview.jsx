@@ -1,7 +1,7 @@
 export function NotePreview({ note }) {
   return (
     <div className="note">
-      <span>{note.txt}</span>
+      <span>{note.info.txt}</span>
     </div>
   )
 }

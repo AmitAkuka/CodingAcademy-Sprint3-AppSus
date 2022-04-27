@@ -1,1 +1,52 @@
-console.log('Email Service Working!')
+'use strict'
+import { storageService } from '../../../services/storage.service.js'
+import { utilService } from '../../../services/util.service.js'
+
+export const notesService = {
+  loadNotes,
+}
+
+const gNotes = [
+  {
+    id: utilService.makeId(),
+    type: 'note-txt',
+    isPinned: false,
+    info: {
+      txt: 'I am a note!',
+    },
+  },
+  {
+    id: utilService.makeId(),
+    type: 'note-txt',
+    isPinned: false,
+    info: {
+      txt: 'I am a note!',
+    },
+  },
+  {
+    id: utilService.makeId(),
+    type: 'note-txt',
+    isPinned: false,
+    info: {
+      txt: 'I am a note!',
+    },
+  },
+]
+const STORAGE_KEY = 'notesDB'
+
+function loadNotes() {
+  let notes = _loadNotesFromStorage()
+  if (!notes) {
+    notes = gNotes
+    _saveNotesToStorage(notes)
+  }
+  return Promise.resolve(notes)
+}
+
+function _loadNotesFromStorage() {
+  storageService.loadFromStorage(STORAGE_KEY)
+}
+
+function _saveNotesToStorage(notes) {
+  storageService.saveToStorage(STORAGE_KEY, notes)
+}
