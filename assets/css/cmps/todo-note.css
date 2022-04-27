@@ -25,8 +25,28 @@
 
 .note .todos .todo-list  {
     padding-inline-start: 1rem;
+    list-style-type: none;
+    padding: 0;
 }
 
 .note .todos .todo-list .todo {
     font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+    padding: 0 0.5rem;
+}
+.note .todos .todo-list .todo .todo-txt {
+    transition: color 0.3s;
+}
+
+.note .todos .todo-list .todo .todo-done {
+    color: lightgray;
+    text-decoration: line-through;
+}
+
+.note .todos .todo-list .todo .delete-todo {
+    cursor: pointer;
+    color: rgb(175, 33, 8);
 }

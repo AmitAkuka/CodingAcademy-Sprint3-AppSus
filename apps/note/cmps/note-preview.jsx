@@ -27,7 +27,7 @@ export class NotePreview extends React.Component {
   }
 
   onDeleteNote = (id) => {
-    this.noteRef.current.classList.add('swing-out-top-bck')
+    this.noteRef.current.classList.add('fall-down-fade')
     this.props.onDeleteNote(id)
   }
 
@@ -37,9 +37,16 @@ export class NotePreview extends React.Component {
       .then((notes) => this.setState({ notes }))
   }
 
+  onRemoveTodo = (todoId) => {
+    this.props.onRemoveTodo(this.props.note.id, todoId)
+  }
+
+  onFinishTodo = (todoId) => {
+    this.props.onFinishTodo(this.props.note.id, todoId)
+  }
+
   getNoteContent = () => {
     const { info } = this.props.note
-    const { onAddTodo } = this.props
     if (info.txt)
       return (
         <InlineEdit
@@ -54,7 +61,15 @@ export class NotePreview extends React.Component {
           src={`https://www.youtube.com/embed/${getVideoId(info.videoUrl)}`}
         ></iframe>
       )
-    if (info.todos) return <Todos info={info} onAddTodo={onAddTodo} />
+    if (info.todos)
+      return (
+        <Todos
+          onRemoveTodo={this.onRemoveTodo}
+          info={info}
+          onAddTodo={this.onAddTodo}
+          onFinishTodo={this.onFinishTodo}
+        />
+      )
     if (info.canvasHeading)
       return (
         <div className="canvas-container">

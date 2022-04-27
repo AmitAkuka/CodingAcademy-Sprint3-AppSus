@@ -24,7 +24,7 @@ export class InlineEdit extends React.Component {
       <div className="inline-txt-container">
         {!isEditing && <span onDoubleClick={this.onInlineEdit}>{txt}</span>}
         {isEditing && (
-          <form onSubmit={this.onInlineInputChange}>
+          <form onSubmit={this.onInlineInputChange} id="inline-form">
             <input
               className="inline-input"
               type="text"

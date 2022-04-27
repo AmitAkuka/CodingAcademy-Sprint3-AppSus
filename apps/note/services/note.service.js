@@ -12,6 +12,8 @@ export const notesService = {
   cloneNote,
   updateNoteTxt,
   getFilteredNotes,
+  removeTodo,
+  finishTodo,
 }
 
 const gNotes = [
@@ -184,44 +186,54 @@ function addNote({ type, content }) {
 
   const notes = _loadNotesFromStorage()
   notes.push(newNote)
-  _saveNotesToStorage(notes)
-  const notesToDisplay = getNotesToDisplay(notes)
-  return Promise.resolve(notesToDisplay)
+  return _finishUpdating(notes)
 }
 
 function deleteNote(noteId) {
   const notes = _loadNotesFromStorage()
   const updatedNotes = notes.filter((note) => note.id !== noteId)
-  _saveNotesToStorage(updatedNotes)
-  const notesToDisplay = getNotesToDisplay(updatedNotes)
-  return Promise.resolve(notesToDisplay)
+  return _finishUpdating(updatedNotes)
 }
 
 function changeNoteColor(noteId, color) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.style = { ...note.style, backgroundColor: color }
-  _saveNotesToStorage(notes)
-  const notesToDisplay = getNotesToDisplay(notes)
-  return Promise.resolve(notesToDisplay)
 }
 
 function pinNote(noteId) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.isPinned = !note.isPinned
-  _saveNotesToStorage(notes)
-  const notesToDisplay = getNotesToDisplay(notes)
-  return Promise.resolve(notesToDisplay)
+  return _finishUpdating(notes)
 }
 
-function addTodo(noteId, todo) {
+function addTodo(noteId, todoTxt) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
+  const todo = {
+    txt: todoTxt,
+    isDone: false,
+    id: utilService.makeId(),
+  }
   note.info.todos.push(todo)
-  _saveNotesToStorage(notes)
-  const notesToDisplay = getNotesToDisplay(notes)
-  return Promise.resolve(notesToDisplay)
+  return _finishUpdating(notes)
+}
+
+function removeTodo(noteId, todoId) {
+  const notes = _loadNotesFromStorage()
+  const note = getNoteById(notes, noteId)
+  const updatedTodos = note.info.todos.filter((todo) => todo.id !== todoId)
+  note.info.todos = updatedTodos
+  return _finishUpdating(notes)
+}
+
+function finishTodo(noteId, todoId) {
+  const notes = _loadNotesFromStorage()
+  const note = getNoteById(notes, noteId)
+  const todo = note.info.todos.find((todo) => todo.id === todoId)
+  todo.isDone = !todo.isDone
+  return _finishUpdating(notes)
 }
 
 function cloneNote(note) {
@@ -229,18 +241,14 @@ function cloneNote(note) {
   note.isPinned = false
   note.id = utilService.makeId()
   notes.push(note)
-  _saveNotesToStorage(notes)
-  const notesToDisplay = getNotesToDisplay(notes)
-  return Promise.resolve(notesToDisplay)
+  return _finishUpdating(notes)
 }
 
 function updateNoteTxt(noteId, txt) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.info.txt = txt
-  _saveNotesToStorage(notes)
-  const notesToDisplay = getNotesToDisplay(notes)
-  return Promise.resolve(notesToDisplay)
+  return _finishUpdating(notes)
 }
 
 function getFilteredNotes({ txt, type }) {
@@ -249,11 +257,17 @@ function getFilteredNotes({ txt, type }) {
     if (type === 'note-pinned') return note.isPinned
     if (type !== 'note-txt' && type !== 'all') return note.type === type
     if (type === 'note-txt')
-      return note.type === type && note.info.txt.includes(txt)
+      return note.type === type && note.info.txt.toLowerCase().includes(txt)
     if (type === 'all') return true
   })
 
   const notesToDisplay = getNotesToDisplay(filteredNotes)
+  return Promise.resolve(notesToDisplay)
+}
+
+function _finishUpdating(notes) {
+  _saveNotesToStorage(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
   return Promise.resolve(notesToDisplay)
 }
 

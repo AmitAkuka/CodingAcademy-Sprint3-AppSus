@@ -34,4 +34,17 @@
 
 .add-note .note-type-container > * {
     cursor: pointer;
+    background-color: transparent;
+}
+
+.add-note .note-type-container i {
+    transition: color 0.3s;
+}
+
+.add-note .note-type-container i:not(:last-child) {
+    color: lightgray;
+}
+
+.add-note .note-type-container i.active {
+    color: gray;
 }
