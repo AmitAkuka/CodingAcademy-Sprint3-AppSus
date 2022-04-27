@@ -7,6 +7,7 @@ export const notesService = {
   addNote,
   deleteNote,
   changeNoteColor,
+  pinNote,
 }
 
 const gNotes = [
@@ -46,7 +47,19 @@ function query() {
     notes = gNotes
     _saveNotesToStorage(notes)
   }
+
+  getNotesToDisplay(notes)
   return Promise.resolve(notes)
+}
+
+function getNotesToDisplay(notes) {
+  const notesToDisplay = []
+  notes.forEach((note) => {
+    if (note.isPinned) notesToDisplay.unshift(note)
+    else notesToDisplay.push(note)
+  })
+
+  return notesToDisplay
 }
 
 function getNoteById(notes, id) {
@@ -90,6 +103,14 @@ function changeNoteColor(noteId, color) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.style = { ...note.style, backgroundColor: color }
+  _saveNotesToStorage(notes)
+  return Promise.resolve(notes)
+}
+
+function pinNote(noteId) {
+  const notes = _loadNotesFromStorage()
+  const note = getNoteById(notes, noteId)
+  note.isPinned = !note.isPinned
   _saveNotesToStorage(notes)
   return Promise.resolve(notes)
 }

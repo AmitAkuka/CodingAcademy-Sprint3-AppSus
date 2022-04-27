@@ -30,6 +30,10 @@ export class NoteApp extends React.Component {
       .then('color changed')
   }
 
+  onPinNote = (noteId) => {
+    notesService.pinNote(noteId).then((notes) => this.setState({ notes }))
+  }
+
   render() {
     const { notes } = this.state
     return (
@@ -38,6 +42,7 @@ export class NoteApp extends React.Component {
         <AddNote onAddNote={this.onAddNote} />
         {notes.length ? (
           <NoteList
+            onPinNote={this.onPinNote}
             onChangeNoteColor={this.onChangeNoteColor}
             onDeleteNote={this.onDeleteNote}
             notes={notes}

@@ -15,7 +15,7 @@ export class NotePreview extends React.Component {
 
   render() {
     const { isPainting } = this.state
-    const { note, onDeleteNote } = this.props
+    const { note, onDeleteNote, onPinNote } = this.props
     const { id, info } = note
     return (
       <div className="note" style={note.style}>
@@ -25,7 +25,10 @@ export class NotePreview extends React.Component {
         <div className="note-footer">
           <span className="created-at">{note.createdAt}</span>
           <div className="tools-container fa-md">
-            <i className="fa fa-thumb-tack fa-md"></i>
+            <i
+              onClick={() => onPinNote(id)}
+              className="fa fa-thumb-tack fa-md"
+            ></i>
             <i className="fa fa-pencil-square-o fa-md"></i>
             <i className="fa fa-envelope fa-md"></i>
             <i
