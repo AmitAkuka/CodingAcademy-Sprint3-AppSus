@@ -13,7 +13,7 @@
 @import './cmps/email-compose.css';
 @import './cmps/email-nav-bar.css';
 
-/* BASE IMPORTS */
+/* NOTES CMPS IMPORTS */
 
 @import '../css/cmps/notes-list.css';
 @import '../css/cmps/note-preview.css';
@@ -23,6 +23,7 @@
 @import '../css/cmps/todo-note.css';
 @import '../css/cmps/filter-notes.css';
 @import '../css/cmps/more-note-types.css';
+@import '../css/cmps/inline-edit.css';
 
 /* BASE IMPORTS */
 

@@ -10,37 +10,118 @@ export const notesService = {
   pinNote,
   addTodo,
   cloneNote,
-  onInlineEdit,
+  updateNoteTxt,
   getFilteredNotes,
 }
 
 const gNotes = [
   {
-    id: utilService.makeId(),
-    type: 'note-txt',
+    createdAt: '27.4.2022',
+    id: '9VlYFa4E',
+    info: { txt: 'txet wen!' },
     isPinned: false,
-    info: {
-      txt: 'I am a note!',
-    },
-    createdAt: new Date().toLocaleDateString(),
+    style: { backgroundColor: 'rgb(98, 167, 98)' },
+    type: 'note-txt',
   },
   {
-    id: utilService.makeId(),
-    type: 'note-txt',
-    isPinned: false,
-    info: {
-      txt: 'I am a note!',
-    },
-    createdAt: new Date().toLocaleDateString(),
+    id: 'aRKwz747',
+    createdAt: '27.4.2022',
+    id: 'aRKwz747',
+    info: { imgUrl: 'https://www.coding-academy.org/images/team/yaron.jpg' },
+    isPinned: true,
+    style: { backgroundColor: 'dodgerblue' },
+    type: 'note-img',
   },
   {
-    id: utilService.makeId(),
-    type: 'note-txt',
-    isPinned: false,
+    createdAt: '27.4.2022',
+    id: 'enpq2PzI',
+    info: { videoUrl: 'https://www.youtube.com/watch?v=FWy_LbhHtug' },
+    isPinned: true,
+    type: 'note-video',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: 'KTKyKgKX',
+    info: { todoHeading: 'get my life together' },
+    todoHeading: 'get my life together',
+    todos: ['start learning C++', 'doing deep refresh', 'doing something'],
+    isPinned: true,
+    type: 'note-todo',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: 'A6eAazWA',
     info: {
-      txt: 'I am a note!',
+      todoHeading: 'Coding meme generator',
+      todos: ['open vscode', 'FREAK OUT!!'],
     },
-    createdAt: new Date().toLocaleDateString(),
+    todoHeading: 'Coding meme generator',
+    todos: ['open vscode', 'FREAK OUT!!'],
+    isPinned: true,
+    type: 'note-todo',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: '97GEmdh7',
+    info: { imgUrl: 'https://www.coding-academy.org/images/team/yaron.jpg' },
+    imgUrl: 'https://www.coding-academy.org/images/team/yaron.jpg',
+    isPinned: false,
+    style: { backgroundColor: 'tomato' },
+    backgroundColor: 'tomato',
+    type: 'note-img',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: 'l8PFpo0s',
+    info: { txt: 'one more note' },
+    txt: 'one more note',
+    isPinned: false,
+    type: 'note-txt',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: 'ixQyy7DU',
+    info: { txt: 'my note' },
+    txt: 'my note',
+    isPinned: true,
+    type: 'note-txt',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: 'seQiNRrO',
+    info: {
+      imgUrl: 'https://c.tenor.com/NOGjHRHDL_cAAAAC/naruto-uzumaki-naruto.gif',
+    },
+    imgUrl: 'https://c.tenor.com/NOGjHRHDL_cAAAAC/naruto-uzumaki-naruto.gif',
+    isPinned: false,
+    type: 'note-img',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: 'HuHidVSL',
+    info: {
+      imgUrl:
+        'https://images.unsplash.com/photo-1651020696818-9b44bcc38f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    },
+    isPinned: false,
+    type: 'note-img',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: 'BYa3xWXC',
+    info: {
+      imgUrl:
+        'https://images.unsplash.com/photo-1650997062224-e1d14f5143ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1075&q=80',
+    },
+    isPinned: true,
+    type: 'note-img',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: 'Ky7gVaYa',
+    info: { canvasHeading: 'my canvas' },
+    isPinned: false,
+    type: 'note-canvas',
   },
 ]
 const STORAGE_KEY = 'notesDB'
@@ -153,7 +234,7 @@ function cloneNote(note) {
   return Promise.resolve(notesToDisplay)
 }
 
-function onInlineEdit(noteId, txt) {
+function updateNoteTxt(noteId, txt) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.info.txt = txt
