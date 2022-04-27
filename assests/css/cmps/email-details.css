@@ -1,0 +1,8 @@
+.email-container .email-details-container {
+    width: 80%;
+}
+
+.email-details-container .sender-info-container {
+    display: flex;
+    justify-content: space-between;
+}
