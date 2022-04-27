@@ -19,25 +19,25 @@ function query() {
     return Promise.resolve(emails)
 }
 
-function _createEmails() {
-    const emails = []
-    for (let i = 0; i < 20; i++) {
-        emails.push(_createEmail())
-    }
-    return emails
-}
+// function _createEmails() {
+//     const emails = []
+//     for (let i = 0; i < 20; i++) {
+//         emails.push(_createEmail())
+//     }
+//     return emails
+// }
 
-function _createEmail() {
-    console.log('creating email!')
-    return {
-        id: utilService.makeId(),
-        subject: 'Miss you!',
-        body: 'Would love to catch up sometimes',
-        isRead: false,
-        sentAt: 1551133930594,
-        to: 'momo@momo.com'
-    }
-}
+// function _createEmail() {
+//     console.log('creating email!')
+//     return {
+//         id: utilService.makeId(),
+//         subject: 'Miss you!',
+//         body: 'Would love to catch up sometimes',
+//         isRead: false,
+//         sentAt: 1551133930594,
+//         to: 'momo@momo.com'
+//     }
+// }
 
 
 function _loadFromStorage() {
