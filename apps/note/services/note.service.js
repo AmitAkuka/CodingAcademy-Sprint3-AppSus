@@ -10,6 +10,7 @@ export const notesService = {
   pinNote,
   addTodo,
   cloneNote,
+  onInlineEdit,
 }
 
 const gNotes = [
@@ -140,6 +141,15 @@ function cloneNote(note) {
   note.isPinned = false
   note.id = utilService.makeId()
   notes.push(note)
+  _saveNotesToStorage(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
+}
+
+function onInlineEdit(noteId, txt) {
+  const notes = _loadNotesFromStorage()
+  const note = getNoteById(notes, noteId)
+  note.info.txt = txt
   _saveNotesToStorage(notes)
   const notesToDisplay = getNotesToDisplay(notes)
   return Promise.resolve(notesToDisplay)

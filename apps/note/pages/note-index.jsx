@@ -44,6 +44,12 @@ export class NoteApp extends React.Component {
     notesService.cloneNote(note).then((notes) => this.setState({ notes }))
   }
 
+  onInlineEdit = (noteId, value) => {
+    notesService
+      .onInlineEdit(noteId, value)
+      .then((notes) => this.setState({ notes }))
+  }
+
   render() {
     const { notes } = this.state
     return (
@@ -58,6 +64,7 @@ export class NoteApp extends React.Component {
             notes={notes}
             onAddTodo={this.onAddTodo}
             onCloneNote={this.onCloneNote}
+            onInlineEdit={this.onInlineEdit}
           />
         ) : (
           'No notes Yet'

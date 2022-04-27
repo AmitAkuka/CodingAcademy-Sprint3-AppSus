@@ -29,9 +29,13 @@ export class NotePreview extends React.Component {
     this.props.onDeleteNote(id)
   }
 
+  onInlineEdit = (mashu) => {
+    this.props.onInlineEdit(this.props.note.id, mashu.target.innerText)
+  }
+
   render() {
     const { isPainting } = this.state
-    const { note, onDeleteNote, onPinNote, onCloneNote } = this.props
+    const { note, onPinNote, onCloneNote } = this.props
     const { id, info } = note
     return (
       <div className="note" style={note.style} ref={this.noteRef}>
@@ -39,7 +43,7 @@ export class NotePreview extends React.Component {
           <img className="pin-img" src="../../assets/img/pin-ico.png"></img>
         )}
         <div className="note-content">
-          {getNoteContent(info, this.onAddTodo)}
+          {getNoteContent(info, this.onAddTodo, this.onInlineEdit)}
         </div>
         <div className="note-footer">
           <span className="created-at">{note.createdAt}</span>
@@ -71,8 +75,13 @@ export class NotePreview extends React.Component {
   }
 }
 
-function getNoteContent(info, onAddTodo) {
-  if (info.txt) return <span contentEditable>{info.txt}</span>
+function getNoteContent(info, onAddTodo, onInlineEdit) {
+  if (info.txt)
+    return (
+      <span contentEditable onInput={onInlineEdit}>
+        {info.txt}
+      </span>
+    )
   if (info.imgUrl) return <img src={info.imgUrl}></img>
   if (info.videoUrl)
     return (
