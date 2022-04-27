@@ -57,6 +57,18 @@ export class NoteApp extends React.Component {
       .then((notes) => this.setState({ notes }))
   }
 
+  onRemoveTodo = (noteId, todoId) => {
+    notesService
+      .removeTodo(noteId, todoId)
+      .then((notes) => this.setState({ notes }))
+  }
+
+  onFinishTodo = (noteId, todoId) => {
+    notesService
+      .finishTodo(noteId, todoId)
+      .then((notes) => this.setState({ notes }))
+  }
+
   render() {
     const { notes } = this.state
     return (
@@ -72,6 +84,8 @@ export class NoteApp extends React.Component {
             onAddTodo={this.onAddTodo}
             onCloneNote={this.onCloneNote}
             onInlineEdit={this.onInlineEdit}
+            onRemoveTodo={this.onRemoveTodo}
+            onFinishTodo={this.onFinishTodo}
           />
         ) : (
           'No notes Yet'

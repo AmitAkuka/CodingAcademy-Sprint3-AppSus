@@ -8,6 +8,8 @@ export function NoteList({
   onAddTodo,
   onCloneNote,
   onInlineEdit,
+  onRemoveTodo,
+  onFinishTodo,
 }) {
   return (
     <section className="notes-list">
@@ -21,6 +23,8 @@ export function NoteList({
           note={note}
           onCloneNote={onCloneNote}
           onInlineEdit={onInlineEdit}
+          onRemoveTodo={onRemoveTodo}
+          onFinishTodo={onFinishTodo}
         />
       ))}
     </section>

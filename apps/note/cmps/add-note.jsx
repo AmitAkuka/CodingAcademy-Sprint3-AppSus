@@ -11,6 +11,11 @@ export class AddNote extends React.Component {
 
   inputRef = React.createRef()
 
+  txtIcoRef = React.createRef()
+  imgIcoRef = React.createRef()
+  videoIcoRef = React.createRef()
+  todoIcoRef = React.createRef()
+
   handleChange = ({ target }) => {
     const field = target.name
     let value = target.type === 'number' ? +target.value : target.value
@@ -19,7 +24,7 @@ export class AddNote extends React.Component {
     }))
   }
 
-  onChangeNoteType = (type) => {
+  onChangeNoteType = (ev, type) => {
     // changing input placeholder according to note type
     switch (type) {
       case 'note-txt':
@@ -42,6 +47,11 @@ export class AddNote extends React.Component {
         break
     }
 
+    this.clearChosenTypeIcons()
+    if (type !== 'note-canvas' && type !== 'note-audio') {
+      ev.target.classList.add('active')
+    }
+
     this.setState((prevState) => {
       return { newNote: { ...prevState.newNote, type } }
     })
@@ -54,6 +64,13 @@ export class AddNote extends React.Component {
     this.setState((prevState) => {
       return { newNote: { ...prevState.newNote, content: '' } }
     })
+  }
+
+  clearChosenTypeIcons() {
+    this.txtIcoRef.current.classList.remove('active')
+    this.imgIcoRef.current.classList.remove('active')
+    this.videoIcoRef.current.classList.remove('active')
+    this.todoIcoRef.current.classList.remove('active')
   }
 
   render() {
@@ -72,20 +89,24 @@ export class AddNote extends React.Component {
         </form>
         <div className="note-type-container">
           <i
-            onClick={() => this.onChangeNoteType('note-txt')}
-            className="fa fa-comment-o fa-lg"
+            onClick={(event) => this.onChangeNoteType(event, 'note-txt')}
+            className="fa fa-comment-o fa-lg active"
+            ref={this.txtIcoRef}
           ></i>
           <i
-            onClick={() => this.onChangeNoteType('note-img')}
+            onClick={(event) => this.onChangeNoteType(event, 'note-img')}
             className="fa fa-picture-o fa-lg"
+            ref={this.imgIcoRef}
           ></i>
           <i
-            onClick={() => this.onChangeNoteType('note-video')}
+            onClick={(event) => this.onChangeNoteType(event, 'note-video')}
             className="fa fa-youtube-play fa-lg"
+            ref={this.videoIcoRef}
           ></i>
           <i
-            onClick={() => this.onChangeNoteType('note-todo')}
+            onClick={(event) => this.onChangeNoteType(event, 'note-todo')}
             className="fa fa-list fa-lg"
+            ref={this.todoIcoRef}
           ></i>
           <i
             className="fa fa-bars fa-lg"
