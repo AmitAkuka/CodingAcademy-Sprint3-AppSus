@@ -6,6 +6,7 @@ export function NoteList({
   onPinNote,
   onChangeNoteColor,
   onAddTodo,
+  onCloneNote,
 }) {
   return (
     <section className="notes-list">
@@ -17,6 +18,7 @@ export function NoteList({
           onDeleteNote={onDeleteNote}
           key={note.id}
           note={note}
+          onCloneNote={onCloneNote}
         />
       ))}
     </section>

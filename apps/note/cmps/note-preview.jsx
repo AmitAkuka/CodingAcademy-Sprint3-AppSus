@@ -18,9 +18,13 @@ export class NotePreview extends React.Component {
     this.props.onAddTodo(this.props.note.id, todo)
   }
 
+  onCloneNote = () => {
+    this.props.onCloneNote(this.props.note)
+  }
+
   render() {
     const { isPainting } = this.state
-    const { note, onDeleteNote, onPinNote, onAddTodo } = this.props
+    const { note, onDeleteNote, onPinNote, onCloneNote } = this.props
     const { id, info } = note
     return (
       <div className="note" style={note.style}>
@@ -37,7 +41,10 @@ export class NotePreview extends React.Component {
               onClick={() => onPinNote(id)}
               className="fa fa-thumb-tack fa-md"
             ></i>
-            <i className="fa fa-pencil-square-o fa-md"></i>
+            <i
+              onClick={() => onCloneNote(note)}
+              className="fa fa-clone fa-md"
+            ></i>
             <i className="fa fa-envelope fa-md"></i>
             <i
               onClick={this.togglePainting}

@@ -9,6 +9,7 @@ export const notesService = {
   changeNoteColor,
   pinNote,
   addTodo,
+  cloneNote,
 }
 
 const gNotes = [
@@ -129,6 +130,16 @@ function addTodo(noteId, todo) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.info.todos.push(todo)
+  _saveNotesToStorage(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
+}
+
+function cloneNote(note) {
+  const notes = _loadNotesFromStorage()
+  note.isPinned = false
+  note.id = utilService.makeId()
+  notes.push(note)
   _saveNotesToStorage(notes)
   const notesToDisplay = getNotesToDisplay(notes)
   return Promise.resolve(notesToDisplay)

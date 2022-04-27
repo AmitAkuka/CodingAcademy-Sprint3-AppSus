@@ -38,6 +38,10 @@ export class NoteApp extends React.Component {
     notesService.addTodo(noteId, todo).then((notes) => this.setState({ notes }))
   }
 
+  onCloneNote = (note) => {
+    notesService.cloneNote(note).then((notes) => this.setState({ notes }))
+  }
+
   render() {
     const { notes } = this.state
     return (
@@ -51,6 +55,7 @@ export class NoteApp extends React.Component {
             onDeleteNote={this.onDeleteNote}
             notes={notes}
             onAddTodo={this.onAddTodo}
+            onCloneNote={this.onCloneNote}
           />
         ) : (
           'No notes Yet'
