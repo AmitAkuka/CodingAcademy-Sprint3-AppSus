@@ -19,6 +19,9 @@ export class NotePreview extends React.Component {
     const { id, info } = note
     return (
       <div className="note" style={note.style}>
+        {note.isPinned && (
+          <img className="pin-img" src="../../assets/img/pin-ico.png"></img>
+        )}
         <div className="note-content">
           <span>{getNoteContent(info)}</span>
         </div>

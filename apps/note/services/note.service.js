@@ -48,8 +48,8 @@ function query() {
     _saveNotesToStorage(notes)
   }
 
-  getNotesToDisplay(notes)
-  return Promise.resolve(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function getNotesToDisplay(notes) {
@@ -89,14 +89,16 @@ function addNote({ type, content }) {
   const notes = _loadNotesFromStorage()
   notes.push(newNote)
   _saveNotesToStorage(notes)
-  return Promise.resolve(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function deleteNote(noteId) {
   const notes = _loadNotesFromStorage()
   const updatedNotes = notes.filter((note) => note.id !== noteId)
   _saveNotesToStorage(updatedNotes)
-  return Promise.resolve(updatedNotes)
+  const notesToDisplay = getNotesToDisplay(updatedNotes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function changeNoteColor(noteId, color) {
@@ -104,7 +106,8 @@ function changeNoteColor(noteId, color) {
   const note = getNoteById(notes, noteId)
   note.style = { ...note.style, backgroundColor: color }
   _saveNotesToStorage(notes)
-  return Promise.resolve(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function pinNote(noteId) {
@@ -112,7 +115,8 @@ function pinNote(noteId) {
   const note = getNoteById(notes, noteId)
   note.isPinned = !note.isPinned
   _saveNotesToStorage(notes)
-  return Promise.resolve(notes)
+  const notesToDisplay = getNotesToDisplay(notes)
+  return Promise.resolve(notesToDisplay)
 }
 
 function _loadNotesFromStorage() {
