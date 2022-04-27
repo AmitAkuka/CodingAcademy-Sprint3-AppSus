@@ -85,6 +85,13 @@ function getNoteContent(info, onAddTodo, onInlineEdit) {
       ></iframe>
     )
   if (info.todos) return <Todos info={info} onAddTodo={onAddTodo} />
+  if (info.canvasHeading)
+    return (
+      <div className="canvas-container">
+        <h3>{info.canvasHeading}</h3>
+        <canvas width="100%" height="100%"></canvas>
+      </div>
+    )
 }
 
 function getVideoId(videoUrl) {

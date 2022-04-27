@@ -93,6 +93,12 @@ function addNote({ type, content }) {
         todoHeading: content,
         todos: [],
       }
+      break
+    case 'note-canvas':
+      newNote.info = {
+        canvasHeading: content,
+      }
+      break
   }
 
   const notes = _loadNotesFromStorage()

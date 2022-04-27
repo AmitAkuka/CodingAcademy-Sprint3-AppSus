@@ -14,6 +14,10 @@
     height: 100%;
     transition: .5s ease;
     word-break:keep-all;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
 }
 
 .note .pin-img {
@@ -22,6 +26,14 @@
     left: 5px;
     bottom: 5px;
     z-index: 999;
+}
+
+.note canvas {
+    background-color: white;
+}
+
+.note h3 {
+    text-align: center;
 }
 
 .note .note-footer {
@@ -49,3 +61,4 @@
 .note .note-footer .tools-container >* {
     cursor: pointer;
 }
+
