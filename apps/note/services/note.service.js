@@ -14,6 +14,7 @@ export const notesService = {
   getFilteredNotes,
   removeTodo,
   finishTodo,
+  addLoc,
 }
 
 const gNotes = [
@@ -119,15 +120,14 @@ const gNotes = [
 ]
 const STORAGE_KEY = 'notesDB'
 
-function query() {
+function query(filter) {
   let notes = _loadNotesFromStorage()
   if (!notes) {
     notes = gNotes
     _saveNotesToStorage(notes)
   }
 
-  const notesToDisplay = getNotesToDisplay(notes)
-  return Promise.resolve(notesToDisplay)
+  return getFilteredNotes(filter)
 }
 
 function getNotesToDisplay(notes) {
@@ -178,6 +178,13 @@ function addNote({ type, content }) {
         audioLink: content,
       }
       break
+    case 'note-map':
+      newNote.info = {
+        mapHeading: content,
+        locations: [],
+        mapId: utilService.makeId(),
+      }
+      break
   }
 
   const notes = _loadNotesFromStorage()
@@ -195,6 +202,7 @@ function changeNoteColor(noteId, color) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.style = { ...note.style, backgroundColor: color }
+  return _finishUpdating(notes)
 }
 
 function pinNote(noteId) {
@@ -244,6 +252,14 @@ function updateNoteTxt(noteId, txt) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.info.txt = txt
+  return _finishUpdating(notes)
+}
+
+function addLoc(noteId, pos) {
+  const notes = _loadNotesFromStorage()
+  const note = getNoteById(notes, noteId)
+  const location = { id: utilService.makeId(), ...pos }
+  note.info.locations.push(location)
   return _finishUpdating(notes)
 }
 

@@ -20,7 +20,7 @@ export class FilterNotes extends React.Component {
   onSearch = (ev) => {
     if (ev) ev.preventDefault()
     const { filterBy } = this.state
-    this.props.onSearch(filterBy)
+    this.props.onChangeFilter(filterBy)
   }
 
   render() {

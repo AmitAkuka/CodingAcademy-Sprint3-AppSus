@@ -9,6 +9,10 @@ export function MoreNotesTypes({ onChangeNoteType }) {
         onClick={(event) => onChangeNoteType(event, 'note-audio')}
         className="fa fa-volume-up fa-lg"
       ></i>
+      <i
+        onClick={(event) => onChangeNoteType(event, 'note-map')}
+        className="fa fa-map-o fa-lg"
+      ></i>
     </div>
   )
 }

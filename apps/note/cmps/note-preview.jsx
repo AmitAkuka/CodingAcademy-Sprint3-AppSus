@@ -3,8 +3,9 @@ import { InlineEdit } from './inline-edit.jsx'
 import { notesService } from '../services/note.service.js'
 import { Todos } from './todo.jsx'
 import { MapNote } from './map-note.jsx'
+const { withRouter } = ReactRouterDOM
 
-export class NotePreview extends React.Component {
+class _NotePreview extends React.Component {
   state = {
     isPainting: false,
   }
@@ -46,8 +47,24 @@ export class NotePreview extends React.Component {
     this.props.onFinishTodo(this.props.note.id, todoId)
   }
 
+  onAddLocation = (pos) => {
+    this.props.onAddLocation(this.props.note.id, pos)
+  }
+
+  sendToMail = (note) => {
+    const transformedNote = {
+      composer: 'me',
+      subject: 'some title',
+      body: 'hello',
+      sentAt: new Date().toLocaleString(),
+    }
+    this.props.history.push(
+      `/Emails/Inbox/?composer=me&subject=some title&?body=hello&sentAt=today`
+    )
+  }
+
   getNoteContent = () => {
-    const { info } = this.props.note
+    const { info, id } = this.props.note
     if (info.txt)
       return (
         <InlineEdit
@@ -86,7 +103,13 @@ export class NotePreview extends React.Component {
       )
 
     if (info.locations)
-      return <MapNote mapId={info.mapId} locations={info.locations} />
+      return (
+        <MapNote
+          onAddLocation={this.onAddLocation}
+          mapId={info.mapId}
+          locations={info.locations}
+        />
+      )
   }
 
   render() {
@@ -96,14 +119,14 @@ export class NotePreview extends React.Component {
     return (
       <div className="note" style={note.style} ref={this.noteRef}>
         <div>
-          <span className="created-at">{note.createdAt}</span>
           {note.isPinned && (
             <img className="pin-img" src="../../assets/img/pin-ico.png"></img>
           )}
           <div className="note-content">{this.getNoteContent()}</div>
         </div>
         <div className="note-footer">
-          <div className="tools-container fa-md">
+          <span className="created-at">{note.createdAt}</span>
+          <div className="tools-container">
             <i
               onClick={() => onPinNote(id)}
               className="fa fa-thumb-tack fa-md"
@@ -112,7 +135,10 @@ export class NotePreview extends React.Component {
               onClick={() => onCloneNote(note)}
               className="fa fa-clone fa-md"
             ></i>
-            <i className="fa fa-envelope fa-md"></i>
+            <i
+              onClick={() => this.sendToMail(note)}
+              className="fa fa-envelope fa-md"
+            ></i>
             <i
               onClick={this.togglePainting}
               className="fa fa-paint-brush fa-md"
@@ -134,3 +160,5 @@ export class NotePreview extends React.Component {
 function getVideoId(videoUrl) {
   return videoUrl.substring(videoUrl.indexOf('=') + 1)
 }
+
+export const NotePreview = withRouter(_NotePreview)
