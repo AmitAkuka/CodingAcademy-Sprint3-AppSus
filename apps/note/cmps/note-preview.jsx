@@ -106,13 +106,13 @@ export class NotePreview extends React.Component {
     return (
       <div className="note" style={note.style} ref={this.noteRef}>
         <div>
-          <span className="created-at">{note.createdAt}</span>
           {note.isPinned && (
             <img className="pin-img" src="../../assets/img/pin-ico.png"></img>
           )}
           <div className="note-content">{this.getNoteContent()}</div>
         </div>
         <div className="note-footer">
+          <span className="created-at">{note.createdAt}</span>
           <div className="tools-container fa-md">
             <i
               onClick={() => onPinNote(id)}

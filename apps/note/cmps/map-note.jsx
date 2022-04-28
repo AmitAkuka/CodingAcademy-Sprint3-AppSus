@@ -35,13 +35,9 @@ export class MapNote extends React.Component {
         <ul className="locations-list">
           {locations.map((loc) => {
             return (
-              <li key={loc.id} className="loc">
-                {
-                  <li key={loc.id} className="loc">{`lat:${loc.lat.toFixed(
-                    2
-                  )}, lng:${loc.lng.toFixed(2)}`}</li>
-                }
-              </li>
+              <li key={loc.id} className="loc">{`lat:${loc.lat.toFixed(
+                2
+              )}, lng:${loc.lng.toFixed(2)}`}</li>
             )
           })}
         </ul>

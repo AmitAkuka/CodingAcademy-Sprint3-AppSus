@@ -47,6 +47,7 @@
     justify-content: space-between;
     align-self: flex-end;
     margin-top: 1rem;
+    width: 100%;
 }
 
 .note .created-at {

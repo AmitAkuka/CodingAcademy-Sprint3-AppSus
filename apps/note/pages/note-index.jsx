@@ -6,6 +6,10 @@ import { FilterNotes } from '../cmps/filter-notes.jsx'
 export class NoteApp extends React.Component {
   state = {
     notes: [],
+    filterBy: {
+      txt: '',
+      type: 'all',
+    },
   }
 
   componentDidMount() {
@@ -13,85 +17,98 @@ export class NoteApp extends React.Component {
   }
 
   loadNotes = () => {
-    notesService.query().then((notes) => this.setState({ notes }))
+    notesService
+      .query(this.state.filterBy)
+      .then((notes) => this.setState({ notes }))
   }
 
   onAddNote = (note) => {
-    notesService.addNote(note).then((notes) => this.setState({ notes }))
+    notesService.addNote(note).then(this.loadNotes)
   }
 
   onDeleteNote = (noteId) => {
     setTimeout(() => {
-      notesService.deleteNote(noteId).then((notes) => this.setState({ notes }))
+      notesService.deleteNote(noteId).then(this.loadNotes)
     }, 1000)
   }
 
   onChangeNoteColor = (noteId, color) => {
-    notesService
-      .changeNoteColor(noteId, color)
-      .then((notes) => this.setState({ notes }))
-      .then('color changed')
+    notesService.changeNoteColor(noteId, color).then(this.loadNotes)
   }
 
   onPinNote = (noteId) => {
-    notesService.pinNote(noteId).then((notes) => this.setState({ notes }))
+    notesService.pinNote(noteId).then(this.loadNotes)
   }
 
   onAddTodo = (noteId, todo) => {
-    notesService.addTodo(noteId, todo).then((notes) => this.setState({ notes }))
+    notesService.addTodo(noteId, todo).then(this.loadNotes)
   }
 
   onCloneNote = (note) => {
-    notesService.cloneNote(note).then((notes) => this.setState({ notes }))
+    notesService.cloneNote(note).then(this.loadNotes)
   }
 
   onInlineEdit = (noteId, value) => {
-    notesService
-      .onInlineEdit(noteId, value)
-      .then((notes) => this.setState({ notes }))
+    notesService.onInlineEdit(noteId, value).then(this.loadNotes())
   }
 
-  onSearch = (filter) => {
-    notesService
-      .getFilteredNotes(filter)
-      .then((notes) => this.setState({ notes }))
+  onChangeFilter = (filterBy) => {
+    this.setState({ filterBy }, this.loadNotes)
   }
 
   onRemoveTodo = (noteId, todoId) => {
-    notesService
-      .removeTodo(noteId, todoId)
-      .then((notes) => this.setState({ notes }))
+    notesService.removeTodo(noteId, todoId).then(this.loadNotes())
   }
 
   onFinishTodo = (noteId, todoId) => {
-    notesService
-      .finishTodo(noteId, todoId)
-      .then((notes) => this.setState({ notes }))
+    notesService.finishTodo(noteId, todoId).then(this.loadNotes())
   }
 
   onAddLocation = (noteId, pos) => {
-    notesService.addLoc(noteId, pos).then((notes) => this.setState({ notes }))
+    notesService.addLoc(noteId, pos).then(this.loadNotes)
+  }
+
+  getPinnedNotes(notes) {
+    return notes.filter((note) => note.isPinned)
+  }
+
+  getRegNotes(notes) {
+    return notes.filter((note) => !note.isPinned)
   }
 
   render() {
     const { notes } = this.state
     return (
       <section className="note-app-container">
-        <FilterNotes onSearch={this.onSearch} />
+        <FilterNotes onChangeFilter={this.onChangeFilter} />
         <AddNote onAddNote={this.onAddNote} />
         {notes.length ? (
-          <NoteList
-            onPinNote={this.onPinNote}
-            onChangeNoteColor={this.onChangeNoteColor}
-            onDeleteNote={this.onDeleteNote}
-            notes={notes}
-            onAddTodo={this.onAddTodo}
-            onCloneNote={this.onCloneNote}
-            onInlineEdit={this.onInlineEdit}
-            onRemoveTodo={this.onRemoveTodo}
-            onFinishTodo={this.onFinishTodo}
-            onAddLocation={this.onAddLocation}
-          />
+          <section className="all-notes-container">
+            <NoteList
+              onPinNote={this.onPinNote}
+              onChangeNoteColor={this.onChangeNoteColor}
+              onDeleteNote={this.onDeleteNote}
+              notes={this.getPinnedNotes(notes)}
+              onAddTodo={this.onAddTodo}
+              onCloneNote={this.onCloneNote}
+              onInlineEdit={this.onInlineEdit}
+              onRemoveTodo={this.onRemoveTodo}
+              onFinishTodo={this.onFinishTodo}
+              onAddLocation={this.onAddLocation}
+            />
+            <NoteList
+              onPinNote={this.onPinNote}
+              onChangeNoteColor={this.onChangeNoteColor}
+              onDeleteNote={this.onDeleteNote}
+              notes={this.getRegNotes(notes)}
+              onAddTodo={this.onAddTodo}
+              onCloneNote={this.onCloneNote}
+              onInlineEdit={this.onInlineEdit}
+              onRemoveTodo={this.onRemoveTodo}
+              onFinishTodo={this.onFinishTodo}
+              onAddLocation={this.onAddLocation}
+            />
+          </section>
         ) : (
           'No notes Yet'
         )}

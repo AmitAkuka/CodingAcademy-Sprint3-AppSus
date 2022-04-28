@@ -120,15 +120,14 @@ const gNotes = [
 ]
 const STORAGE_KEY = 'notesDB'
 
-function query() {
+function query(filter) {
   let notes = _loadNotesFromStorage()
   if (!notes) {
     notes = gNotes
     _saveNotesToStorage(notes)
   }
 
-  const notesToDisplay = getNotesToDisplay(notes)
-  return Promise.resolve(notesToDisplay)
+  return getFilteredNotes(filter)
 }
 
 function getNotesToDisplay(notes) {
@@ -203,6 +202,7 @@ function changeNoteColor(noteId, color) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.style = { ...note.style, backgroundColor: color }
+  return _finishUpdating(notes)
 }
 
 function pinNote(noteId) {

@@ -12,7 +12,7 @@ export class Todos extends React.Component {
           <h3>{info.todoHeading}</h3>
         </div>
         <form className="todo-input" onSubmit={this.onAddTodo}>
-          <input type="text" placeholder="Todo here..." />
+          <input required type="text" placeholder="Todo here..." />
           <button type="submit" className="plus">
             <i className="fa fa-plus"></i>
           </button>
