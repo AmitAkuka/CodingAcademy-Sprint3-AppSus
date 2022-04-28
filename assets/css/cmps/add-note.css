@@ -2,7 +2,6 @@
     display: flex;
     box-shadow: 0 0 5px gray;
     margin-bottom: 1rem;
-    min-width: 500px;
     align-items: center;
     justify-content: space-between;
     padding: 0 0.5rem;
@@ -10,6 +9,8 @@
     align-self: center;
     padding: 0 1rem;
     position: relative;
+    max-width: 500px;
+    margin: auto;
 }
 
 .add-note form {

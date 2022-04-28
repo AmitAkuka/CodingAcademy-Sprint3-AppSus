@@ -99,24 +99,29 @@ export class AddNote extends React.Component {
             onClick={(event) => this.onChangeNoteType(event, 'note-txt')}
             className="fa fa-comment-o fa-lg active"
             ref={this.txtIcoRef}
+            title="Text"
           ></i>
           <i
             onClick={(event) => this.onChangeNoteType(event, 'note-img')}
             className="fa fa-picture-o fa-lg"
             ref={this.imgIcoRef}
+            title="Image"
           ></i>
           <i
             onClick={(event) => this.onChangeNoteType(event, 'note-video')}
             className="fa fa-youtube-play fa-lg"
             ref={this.videoIcoRef}
+            title="Video"
           ></i>
           <i
             onClick={(event) => this.onChangeNoteType(event, 'note-todo')}
             className="fa fa-list fa-lg"
             ref={this.todoIcoRef}
+            title="Todo"
           ></i>
           <i
             className="fa fa-bars fa-lg"
+            title="More notes"
             onClick={() => this.setState({ isMoreTypes: !isMoreTypes })}
           ></i>
         </div>

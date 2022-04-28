@@ -11,7 +11,6 @@
     border-radius: 20px;
     padding-left: 0.5rem;
     width: 100%;
-    /* padding-inline-start: 0.3rem; */
 }
 
 .note .todos .todo-input .plus {
@@ -39,6 +38,7 @@
 }
 .note .todos .todo-list .todo .todo-txt {
     transition: color 0.3s;
+    cursor: pointer;
 }
 
 .note .todos .todo-list .todo .todo-done {

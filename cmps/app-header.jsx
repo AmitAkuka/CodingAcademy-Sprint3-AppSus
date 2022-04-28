@@ -9,7 +9,7 @@ export function AppHeader() {
       </div>
       <nav>
         <ul>
-          <NavLink to="/">
+          <NavLink to="/" exact>
             <li>Home</li>
           </NavLink>
           <NavLink to="/Notes">

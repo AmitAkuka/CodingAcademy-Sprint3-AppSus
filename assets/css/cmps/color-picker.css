@@ -6,8 +6,9 @@
     padding: 0.25rem 0.5rem;
     border-radius: 5px;
     bottom: -30px;
-    right: -30%;
+    right: 0;
     z-index: 9999;
+    box-shadow: 0 0 5px black;
 }
 
 .color-picker .color {
@@ -15,6 +16,10 @@
     height: 20px;
     background-color: black;
     border-radius: 5px;
+}
+
+.color-picker .color:hover {
+    border: 1px solid white;
 }
 
 .color-picker .color.red {

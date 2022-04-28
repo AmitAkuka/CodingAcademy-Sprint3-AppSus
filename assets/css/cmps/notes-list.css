@@ -1,5 +1,30 @@
 .notes-list {
-    column-count: 4;
+    column-count: 1;
     height: fit-content;
     padding-bottom: 1rem;
+    padding: 0 1rem;
+}
+
+.notes-list:not(:last-child) {
+    margin-bottom: 2rem;
+}
+
+@media screen and (min-width:600px) {
+    .notes-list {
+        column-count: 2;
+    }
+    
+}
+@media screen and (min-width:890px) {
+    .notes-list {
+        column-count: 4;
+    }
+    
+}
+
+@media screen and (min-width:1250px) {
+    .notes-list {
+        column-count: 6;
+    }
+    
 }

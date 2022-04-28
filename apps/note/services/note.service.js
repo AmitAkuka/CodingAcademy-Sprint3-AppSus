@@ -56,13 +56,75 @@ const gNotes = [
   },
   {
     createdAt: '27.4.2022',
+    id: 'enpq2PzI',
+    info: { videoUrl: 'https://www.youtube.com/watch?v=6OkUjnrfjC4' },
+    isPinned: false,
+    type: 'note-video',
+  },
+  {
+    createdAt: '23.01.1997',
+    id: '9VlQFa4E',
+    info: { txt: 'Avi was born today!!!' },
+    isPinned: false,
+    style: { backgroundColor: 'rgb(98, 167, 98)' },
+    type: 'note-txt',
+  },
+  {
+    createdAt: '27.4.2022',
     id: '97GEmdh7',
     info: { imgUrl: 'https://www.coding-academy.org/images/team/yaron.jpg' },
-    imgUrl: 'https://www.coding-academy.org/images/team/yaron.jpg',
+    isPinned: false,
+    style: { backgroundColor: 'dodgerblue' },
+    type: 'note-img',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: '97GEmdh7',
+    info: {
+      imgUrl: 'https://c.tenor.com/yY_2I-E9xNIAAAAC/head-banging-anime.gif',
+    },
     isPinned: false,
     style: { backgroundColor: 'tomato' },
-    backgroundColor: 'tomato',
     type: 'note-img',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: '97GEmdh7',
+    info: {
+      imgUrl: 'https://giphy.com/gifs/papermag-e5EcjjJx3dCFi',
+    },
+    isPinned: false,
+    style: { backgroundColor: 'tomato' },
+    type: 'note-img',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: '97GEmdh7',
+    info: {
+      imgUrl:
+        'https://media1.giphy.com/media/e5EcjjJx3dCFi/giphy.gif?cid=ecf05e47haac99zn8nei22fhddyeu2kg4rftx4ezczunv3ql&rid=giphy.gif&ct=g',
+    },
+    isPinned: false,
+    style: { backgroundColor: 'rgb(98, 167, 98)' },
+    type: 'note-img',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: '97GEmdh7',
+    info: {
+      imgUrl: 'https://giphy.com/gifs/forever-alone-V46sLZRVrOUXm',
+    },
+    isPinned: true,
+    style: { backgroundColor: 'rgb(98, 167, 98)' },
+    type: 'note-img',
+  },
+  {
+    createdAt: '27.4.2022',
+    id: 'enpq2PzI',
+    info: { videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+    style: { backgroundColor: 'rgb(197, 79, 197)' },
+    isPinned: true,
+    type: 'note-video',
   },
   {
     createdAt: '27.4.2022',
@@ -86,7 +148,7 @@ const gNotes = [
     info: {
       imgUrl: 'https://c.tenor.com/NOGjHRHDL_cAAAAC/naruto-uzumaki-naruto.gif',
     },
-    imgUrl: 'https://c.tenor.com/NOGjHRHDL_cAAAAC/naruto-uzumaki-naruto.gif',
+
     isPinned: false,
     type: 'note-img',
   },

@@ -14,16 +14,22 @@ export class NoteApp extends React.Component {
 
   componentDidMount() {
     const urlSrcPrm = new URLSearchParams(this.props.location.search)
-    console.log(urlSrcPrm)
-    // let paramObj = {}
-    // for (var value of urlSrcPrm.keys()) {
-    //     paramObj[value] = urlSrcPrm.get(value);
-    // }
-    // if (!Object.keys(paramObj)) paramObj = null
-    // console.log(paramObj);
-    // this.setState(prevState => ({ ...prevState, filterBy: paramObj }), () => {
-    //     this.loadCars()
-    // })
+    let paramObj = {}
+    for (var value of urlSrcPrm.keys()) {
+      paramObj[value] = urlSrcPrm.get(value)
+    }
+
+    console.log(paramObj)
+    if (Object.keys(paramObj).length) {
+      console.log('in')
+      const newNote = {
+        type: 'note-txt',
+        content: paramObj.body,
+      }
+
+      this.onAddNote(newNote)
+      return
+    }
     this.loadNotes()
   }
 
@@ -95,6 +101,7 @@ export class NoteApp extends React.Component {
         <AddNote onAddNote={this.onAddNote} />
         {notes.length ? (
           <section className="all-notes-container">
+            <h3>Pinned notes</h3>
             <NoteList
               onPinNote={this.onPinNote}
               onChangeNoteColor={this.onChangeNoteColor}
@@ -107,6 +114,7 @@ export class NoteApp extends React.Component {
               onFinishTodo={this.onFinishTodo}
               onAddLocation={this.onAddLocation}
             />
+            <h3>Regular notes</h3>
             <NoteList
               onPinNote={this.onPinNote}
               onChangeNoteColor={this.onChangeNoteColor}

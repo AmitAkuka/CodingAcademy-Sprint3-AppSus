@@ -1,5 +1,7 @@
 .note-app-container {
-    max-width: 980px;
     margin: auto;
+}
+
+.all-notes-container {
     padding: 0 1rem;
 }
