@@ -39,7 +39,6 @@ const gNotes = [
     type: 'note-map',
   },
   {
-    id: 'aRKwz747',
     createdAt: '27.4.2022',
     id: 'aRKwz747',
     info: { imgUrl: 'https://www.coding-academy.org/images/team/yaron.jpg' },
@@ -56,7 +55,7 @@ const gNotes = [
   },
   {
     createdAt: '27.4.2022',
-    id: 'enpq2PzI',
+    id: 'enMq2PzI',
     info: { videoUrl: 'https://www.youtube.com/watch?v=6OkUjnrfjC4' },
     isPinned: false,
     type: 'note-video',
@@ -79,7 +78,7 @@ const gNotes = [
   },
   {
     createdAt: '27.4.2022',
-    id: '97GEmdh7',
+    id: '97GEmdM7',
     info: {
       imgUrl: 'https://c.tenor.com/yY_2I-E9xNIAAAAC/head-banging-anime.gif',
     },
@@ -89,7 +88,7 @@ const gNotes = [
   },
   {
     createdAt: '27.4.2022',
-    id: '97GEmdh7',
+    id: '97GE6dh7',
     info: {
       imgUrl: 'https://giphy.com/gifs/papermag-e5EcjjJx3dCFi',
     },
@@ -99,7 +98,7 @@ const gNotes = [
   },
   {
     createdAt: '27.4.2022',
-    id: '97GEmdh7',
+    id: '97GEmSh7',
     info: {
       imgUrl:
         'https://media1.giphy.com/media/e5EcjjJx3dCFi/giphy.gif?cid=ecf05e47haac99zn8nei22fhddyeu2kg4rftx4ezczunv3ql&rid=giphy.gif&ct=g',
@@ -110,7 +109,7 @@ const gNotes = [
   },
   {
     createdAt: '27.4.2022',
-    id: '97GEmdh7',
+    id: '9NGEmdh7',
     info: {
       imgUrl: 'https://giphy.com/gifs/forever-alone-V46sLZRVrOUXm',
     },
@@ -120,7 +119,7 @@ const gNotes = [
   },
   {
     createdAt: '27.4.2022',
-    id: 'enpq2PzI',
+    id: 'enWq2PzI',
     info: { videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
     style: { backgroundColor: 'rgb(197, 79, 197)' },
     isPinned: true,
