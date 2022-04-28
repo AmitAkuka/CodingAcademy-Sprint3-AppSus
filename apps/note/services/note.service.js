@@ -14,6 +14,7 @@ export const notesService = {
   getFilteredNotes,
   removeTodo,
   finishTodo,
+  addLoc,
 }
 
 const gNotes = [
@@ -178,6 +179,13 @@ function addNote({ type, content }) {
         audioLink: content,
       }
       break
+    case 'note-map':
+      newNote.info = {
+        mapHeading: content,
+        locations: [],
+        mapId: utilService.makeId(),
+      }
+      break
   }
 
   const notes = _loadNotesFromStorage()
@@ -244,6 +252,14 @@ function updateNoteTxt(noteId, txt) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
   note.info.txt = txt
+  return _finishUpdating(notes)
+}
+
+function addLoc(noteId, pos) {
+  const notes = _loadNotesFromStorage()
+  const note = getNoteById(notes, noteId)
+  const location = { id: utilService.makeId(), ...pos }
+  note.info.locations.push(location)
   return _finishUpdating(notes)
 }
 

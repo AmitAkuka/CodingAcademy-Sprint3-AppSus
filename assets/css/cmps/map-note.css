@@ -1,0 +1,14 @@
+.map-note .map-container {
+    height: 300px;
+}
+
+.map-note .locs-heading {
+    margin-bottom: 0;
+}
+
+.map-note .locations-list {
+    list-style-type: none;
+    padding: 0;
+    padding-inline-start: 0.5rem;
+    margin: 0;
+}

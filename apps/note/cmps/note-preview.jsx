@@ -46,8 +46,12 @@ export class NotePreview extends React.Component {
     this.props.onFinishTodo(this.props.note.id, todoId)
   }
 
+  onAddLocation = (pos) => {
+    this.props.onAddLocation(this.props.note.id, pos)
+  }
+
   getNoteContent = () => {
-    const { info } = this.props.note
+    const { info, id } = this.props.note
     if (info.txt)
       return (
         <InlineEdit
@@ -86,7 +90,13 @@ export class NotePreview extends React.Component {
       )
 
     if (info.locations)
-      return <MapNote mapId={info.mapId} locations={info.locations} />
+      return (
+        <MapNote
+          onAddLocation={this.onAddLocation}
+          mapId={info.mapId}
+          locations={info.locations}
+        />
+      )
   }
 
   render() {

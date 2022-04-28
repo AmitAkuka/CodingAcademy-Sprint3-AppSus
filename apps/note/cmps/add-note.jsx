@@ -34,7 +34,7 @@ export class AddNote extends React.Component {
         this.inputRef.current.placeholder = 'Give me a link to an image'
         break
       case 'note-video':
-        this.inputRef.current.placeholder = 'Give a nice youtube link'
+        this.inputRef.current.placeholder = 'Give me a nice youtube link'
         break
       case 'note-todo':
         this.inputRef.current.placeholder = 'What are those todos about??'
@@ -45,10 +45,17 @@ export class AddNote extends React.Component {
       case 'note-audio':
         this.inputRef.current.placeholder = 'What are we listening to today?'
         break
+      case 'note-map':
+        this.inputRef.current.placeholder = 'Give us a title for this map'
+        break
     }
 
     this.clearChosenTypeIcons()
-    if (type !== 'note-canvas' && type !== 'note-audio') {
+    if (
+      type !== 'note-canvas' &&
+      type !== 'note-audio' &&
+      type !== 'note-map'
+    ) {
       ev.target.classList.add('active')
     }
 

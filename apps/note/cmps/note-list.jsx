@@ -10,6 +10,7 @@ export function NoteList({
   onInlineEdit,
   onRemoveTodo,
   onFinishTodo,
+  onAddLocation,
 }) {
   return (
     <section className="notes-list">
@@ -25,6 +26,7 @@ export function NoteList({
           onInlineEdit={onInlineEdit}
           onRemoveTodo={onRemoveTodo}
           onFinishTodo={onFinishTodo}
+          onAddLocation={onAddLocation}
         />
       ))}
     </section>

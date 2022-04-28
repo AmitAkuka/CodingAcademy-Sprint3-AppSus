@@ -69,6 +69,10 @@ export class NoteApp extends React.Component {
       .then((notes) => this.setState({ notes }))
   }
 
+  onAddLocation = (noteId, pos) => {
+    notesService.addLoc(noteId, pos).then((notes) => this.setState({ notes }))
+  }
+
   render() {
     const { notes } = this.state
     return (
@@ -86,6 +90,7 @@ export class NoteApp extends React.Component {
             onInlineEdit={this.onInlineEdit}
             onRemoveTodo={this.onRemoveTodo}
             onFinishTodo={this.onFinishTodo}
+            onAddLocation={this.onAddLocation}
           />
         ) : (
           'No notes Yet'
