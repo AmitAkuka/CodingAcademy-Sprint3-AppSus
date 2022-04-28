@@ -61,7 +61,7 @@ class _NotePreview extends React.Component {
 
     const urlSrcPrm = new URLSearchParams(transformedNote)
     const searchStr = urlSrcPrm.toString()
-    this.props.history.push(`/car?${searchStr}`)
+    this.props.history.push(`/Emails/Inbox?${searchStr}`)
   }
 
   getNoteContent = () => {
