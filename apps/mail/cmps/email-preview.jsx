@@ -1,9 +1,17 @@
-const { Link } = ReactRouterDOM
+const { withRouter } = ReactRouterDOM
 
-export function EmailPreview({ email, onFavoriteAdd, onSelectEmail }) {
-  const sentTime = new Date(Date.now())
-  const { id, isReaded, isFavorite, subject, body, sentAt } = email
-  return <Link to={`/Emails/${id}`} className="clean-link" onClick={() => onSelectEmail(email)}>
+class _EmailPreview extends React.Component {
+
+  emailSelectedClick = (email) => {
+    this.props.onSelectEmail(email)
+    this.props.history.push(`/Emails/${this.props.filterBy}/${email.id}`)
+  }
+  
+  render(){
+    const sentTime = new Date(Date.now())
+    const {email, onFavoriteAdd, onSelectEmail} = this.props
+    const { isReaded, isFavorite, subject, body, sentAt } = email
+    return <section onClick={() => this.emailSelectedClick(email)}>
     <div className={(isReaded) ? 'email-preview readed' : 'email-preview'}>
       <i className={(isFavorite) ? "fa fa-star" : "fa fa-star-o"} onClick={(event) => onFavoriteAdd(event, email)}></i>
       <div className="email-info-container">
@@ -18,5 +26,9 @@ export function EmailPreview({ email, onFavoriteAdd, onSelectEmail }) {
           </div>
       </div>
     </div>
-  </Link>
+  </section>
 }
+}
+
+
+export const EmailPreview  = withRouter(_EmailPreview)

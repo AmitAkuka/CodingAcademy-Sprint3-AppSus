@@ -23,6 +23,11 @@
     display: none;
 }
 
+
+/* .email-app-container>a {
+    z-index: 0;
+} */
+
 .email-preview .fa.fa-star {
     color: gold;
 }
@@ -38,7 +43,7 @@
 
 .email-preview .fa.fa-star:hover,
 .email-preview .fa.fa-star-o:hover {
-    background-color: lightcyan;
+    background-color: lightblue;
     border-radius: 15px;
 }
 

@@ -8,7 +8,8 @@ export const emailService = {
     setEmailFavorite,
     setReadedEmail,
     getUnreadAmout,
-    addEmail
+    addEmail,
+    getEmailById
 }
 const EMAILS_KEY = 'emailsDB'
 const loggedinUser = {
@@ -48,7 +49,8 @@ function addEmail({ to, subject, body }) {
         from: loggedinUser.email,
         userName: loggedinUser.fullname,
         isFavorite: false,
-        isReaded: true
+        isReaded: true,
+        profilePic: 'AmitAkuka'
     })
     _saveToLocalStorage(emails)
     return Promise.resolve()
@@ -64,7 +66,8 @@ function _createEmails() {
             from: 'Yaron@CodingAcademy.com',
             userName: 'Yaron Biton',
             isFavorite: false,
-            isReaded: false
+            isReaded: false,
+            profilePic: 'YaronBiton'
         },
         {
             id: utilService.makeId(),
@@ -75,7 +78,8 @@ function _createEmails() {
             from: 'RichardHeart@gmail.com',
             userName: 'Richard Heart',
             isFavorite: false,
-            isReaded: false
+            isReaded: false,
+            profilePic: 'RichardHeart'
         },
         {
             id: utilService.makeId(),
@@ -86,7 +90,8 @@ function _createEmails() {
             from: 'KimKardashian@gmail.com',
             userName: 'Kim Kardashian',
             isFavorite: false,
-            isReaded: false
+            isReaded: false,
+            profilePic: 'KimKardashian'
         },
         {
             id: utilService.makeId(),
@@ -97,7 +102,8 @@ function _createEmails() {
             from: 'ElonMusk@gmail.com',
             userName: 'Elon Musk',
             isFavorite: false,
-            isReaded: false
+            isReaded: false,
+            profilePic: 'ElonMusk'
         },
         {
             id: utilService.makeId(),
@@ -108,7 +114,8 @@ function _createEmails() {
             from: 'JoeBiden@gmail.com',
             userName: 'Joe Biden',
             isFavorite: false,
-            isReaded: false
+            isReaded: false,
+            profilePic: 'JoeBiden'
         }
     ]
     return emails
@@ -124,8 +131,9 @@ function setEmailFavorite(emailId) {
     return Promise.resolve()
 }
 
-function setReadedEmail(email, isMarkAsUnreaded) {
-    console.log(isMarkAsUnreaded)
+function setReadedEmail(email, isUnreadBtnClk) {
+    //isUnreadBtnClk will always be false if user clicked on the email itself
+    if (email.isReaded && !isUnreadBtnClk) return Promise.resolve();
     let emails = _loadFromStorage()
     getEmailIndexById(email.id)
         .then(emailIdx => {

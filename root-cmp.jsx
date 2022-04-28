@@ -3,6 +3,7 @@ import { AppHome } from './pages/app-home.jsx'
 import { EmailApp } from './apps/mail/pages/email-index.jsx'
 import { NoteApp } from './apps/note/pages/note-index.jsx'
 import { EmailCompose } from './apps/mail/cmps/email-compose.jsx'
+import { EmailDetails } from './apps/mail/cmps/email-details.jsx'
 import { AppHeader } from './cmps/app-header.jsx'
 // import { AppHome } from './pages/app-home.jsx' Dont forget to import books
 
@@ -16,11 +17,10 @@ export function App() {
   return <Router>
     <AppHeader />
     <section className="main-app-container">
+        
       <Switch>
-        {/* ALL ROUTES HERE */}
-        {/* REMEMBER - THE MOST SPECIFIC ROUTE AT THE TOP!!! */}
+        <Route path={["/Emails/Inbox","/Emails/Starred","/Emails/Sent","/Emails/Drafts"]} component={EmailApp} />
         <Route path="/Notes" component={NoteApp} />
-        <Route path="/Emails" component={EmailApp} />
         <Route path="/" component={AppHome} />
       </Switch>
     </section>

@@ -5,6 +5,8 @@ import { EmailDetails } from '../cmps/email-details.jsx'
 import { EmailFolderList } from '../cmps/email-folder-list.jsx'
 import { EmailFilter } from '../cmps/email-filter.jsx'
 
+const { Route } = ReactRouterDOM
+
 export class EmailApp extends React.Component {
 
   state = {
@@ -23,26 +25,27 @@ export class EmailApp extends React.Component {
 
   loadEmails = () => {
     emailService.query(this.state.filterBy)
-      .then(emails => { this.setState({ emails }) })
+      .then(emails => this.setState({ emails }) )
   }
 
-  onFavoriteAdd = (ev, email) => {
-    ev.stopPropagation();
+  onFavoriteAdd = (event, email) => {
+    console.log('Favorite')
+    event.stopPropagation();
     emailService.setEmailFavorite(email.id)
       .then(this.loadEmails)
   }
 
-  onSelectEmail = (selectedEmail, ev = false) => {
+  onSelectEmail = (selectedEmail, event = false) => {
     //if there is event sent - means user clicked preview button
-    let isMarkAsUnreaded = false
-    if (ev) {
-      ev.stopPropagation();
-      isMarkAsUnreaded = true
+    let isUnreadBtnClk = false
+    if (event) {
+      event.stopPropagation()
+      isUnreadBtnClk = true
     }
-    emailService.setReadedEmail(selectedEmail, isMarkAsUnreaded)
+    emailService.setReadedEmail(selectedEmail, isUnreadBtnClk)
       .then(() => emailService.getUnreadAmout())
       .then((unreadedAmout) => {
-        if (ev) {
+        if (event) {
           this.setState({ unreadedAmout })
           this.loadEmails()
         } else this.setState({ selectedEmail, unreadedAmout })
@@ -50,6 +53,7 @@ export class EmailApp extends React.Component {
   }
 
   onFilterEmails = (filterBy) => {
+    console.log('FILTET SET',filterBy)
     this.setState({ filterBy }, () => {
       this.loadEmails()
       this.setState({ selectedEmail: null })
@@ -57,13 +61,13 @@ export class EmailApp extends React.Component {
   }
 
   render() {
-    const { emails, selectedEmail, unreadedAmout } = this.state
+    const { emails, selectedEmail, unreadedAmout,filterBy } = this.state
     return <section className="main-email-container">
       <EmailFilter onFilterEmails={this.onFilterEmails}/>
       <section className="email-container">
         <EmailFolderList unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />
-        {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onSelectEmail={this.onSelectEmail} />}
-        {selectedEmail && <EmailDetails email={selectedEmail} />}
+        {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onSelectEmail={this.onSelectEmail} filterBy={filterBy}/>}
+        {selectedEmail && <Route path={["/Emails/Inbox/:emailId","/Emails/Starred/:emailId","/Emails/Sent/:emailId","/Emails/Drafts/:emailId"]} component={EmailDetails} />}
       </section>
     </section>
   }

@@ -3,19 +3,41 @@
 }
 
 .email-container .nav-container {
-    min-width: 15vw;
     padding-top: 15px;
     padding-inline-end: 20px;
     border-top: 1px solid lightgray;
 }
 
+.nav-container .compose-btn {
+    border: 2px solid black;
+    border-radius: 25px;
+    margin-inline-start: 10px;
+    font-weight: 500;
+    background-color: #f6f3e9;
+    max-width: 175px;
+    min-width: 175px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
 .email-container .nav-container>* {
-    margin-bottom: 10px;
     cursor: pointer;
-    border-radius: 0 15px 15px 0;
-    height: 40px;
     display: flex;
     align-items: center;
+}
+
+.email-container .nav-container>*:not(.compose-btn) {
+    border-radius: 0 15px 15px 0;
+    margin-bottom: 10px;
+}
+
+.email-container .nav-container>*:not(.compose-btn):hover {
+    background-color: lightblue;
+}
+
+.email-container .nav-container a div {
+    padding: 10px;
+    width: 100%;
 }
 
 .email-container .nav-container>*:hover {
@@ -25,6 +47,10 @@
 .email-container .nav-container div>* {
     margin-inline-start: 20px;
     margin-inline-end: 20px;
+}
+
+.email-container .nav-container div span {
+    margin-inline-start: 65px;
 }
 
 .email-list-container {
@@ -39,22 +65,11 @@
     font-size: 23px;
 }
 
-.nav-container div:first-child {
-    border: 2px solid black;
-    border-radius: 25px;
-    margin-inline-start: 10px;
-    font-weight: 500;
-    background-color: #f6f3e9;
-    max-width: 175px;
-    min-width: 175px;
-    height: 50px;
-}
-
 .nav-container .unreaded-amout {
     text-align: end;
     width: 100%;
 }
 
 .active {
-    background-color: lightcyan;
+    background-color: lightblue;
 }

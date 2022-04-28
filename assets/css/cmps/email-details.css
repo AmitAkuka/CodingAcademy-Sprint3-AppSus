@@ -1,9 +1,35 @@
 .email-container .email-details-container {
+    /* change to prev container width */
     width: 80%;
     border: 1px solid lightgrey;
+    display: flex;
+    flex-direction: column;
+    padding-inline-start: 50px;
+    padding-inline-end: 50px;
 }
 
 .email-details-container .sender-info-container {
     display: flex;
     justify-content: space-between;
+}
+
+.email-details-container .sender-info-container img {
+    border-radius: 50px;
+    height: 70px;
+    width: 70px;
+    margin-inline-end: 10px;
+}
+
+.email-details-container .sender-info {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+
+.email-details-container .sender-info span {
+    margin-inline-start: 10px;
+}
+
+.email-details-container h2 {
+    border-bottom: 1px solid black;
 }
