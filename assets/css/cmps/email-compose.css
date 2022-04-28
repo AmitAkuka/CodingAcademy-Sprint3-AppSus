@@ -3,7 +3,7 @@
     bottom: 0;
     height: 420px;
     width: 450px;
-    right: 75px;
+    right: 140px;
     border-radius: 17px 17px 0 0;
     border: 1px solid dimgray;
 }
@@ -51,14 +51,13 @@
     background-color: lightblue;
 }
 
-
-/* .compose-content-container button {
+.compose-content-container button {
     font-size: 2rem;
     margin-inline-start: 5px;
     margin-inline-end: 5px;
-    max-height: 45px;
+    height: 45px;
     border-radius: 25px;
-} */
+}
 
 .compose-buttons-container button i {
     height: 32px;

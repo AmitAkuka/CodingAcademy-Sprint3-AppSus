@@ -17,20 +17,26 @@ const loggedinUser = {
     fullname: 'Sprint3 Appsus'
 }
 
-function query(filter, readStateFilter = filter) {
+function query({ folderListFilter, unreadReadFilter }) {
     let emails = _loadFromStorage()
     if (!emails) {
         emails = _createEmails()
         _saveToLocalStorage(emails)
     }
-    if (filter) {
+    if (folderListFilter || unreadReadFilter) {
         emails = emails.filter(email => {
-            if (filter === 'Inbox' && readStateFilter) {
-                return (email.from !== loggedinUser.email)
-            } else if (filter === 'Starred' && readStateFilter) {
-                return (email.isFavorite)
-            } else if (filter === 'Sent' && readStateFilter) {
-                return (email.from === loggedinUser.email)
+            if (folderListFilter === 'Inbox') {
+                if (unreadReadFilter === 'All') return (email.from !== loggedinUser.email)
+                if (unreadReadFilter === 'Read') return (email.from !== loggedinUser.email && email.isReaded)
+                if (unreadReadFilter === 'Unread') return (email.from !== loggedinUser.email && !email.isReaded)
+            } else if (folderListFilter === 'Starred') {
+                if (unreadReadFilter === 'All') return (email.isFavorite)
+                if (unreadReadFilter === 'Read') return (email.isFavorite && email.isReaded)
+                if (unreadReadFilter === 'Unread') return (email.isFavorite && !email.isReaded)
+            } else if (folderListFilter === 'Sent') {
+                if (unreadReadFilter === 'All') return (email.from === loggedinUser.email)
+                if (unreadReadFilter === 'Read') return (email.from === loggedinUser.email && email.isReaded)
+                if (unreadReadFilter === 'Unread') return (email.from === loggedinUser.email && !email.isReaded)
             }
         })
     }

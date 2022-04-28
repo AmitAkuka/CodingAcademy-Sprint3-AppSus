@@ -8,9 +8,9 @@ export class EmailFolderList extends React.Component {
     filterName: 'Inbox'
   }
 
-  onChangeFilter = (filterName) =>{
-    this.setState({filterName})
-    this.props.onFilterEmails(filterName)
+  onChangeFilter = (folderListFilter) =>{
+    this.setState({folderListFilter})
+    this.props.onFilterEmails({folderListFilter})
   }
 
   onComposeClick = () => {

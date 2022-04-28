@@ -11,7 +11,10 @@ export class EmailApp extends React.Component {
 
   state = {
     emails: [],
-    filterBy: 'Inbox',
+    filterBy: {
+      folderListFilter: 'Inbox',
+      unreadReadFilter: 'All',
+    },
     selectedEmail: null,
     unreadedAmout: 0
   }
@@ -24,6 +27,7 @@ export class EmailApp extends React.Component {
   }
 
   loadEmails = () => {
+    console.log('Loading')
     emailService.query(this.state.filterBy)
       .then(emails => this.setState({ emails }) )
   }
@@ -43,18 +47,24 @@ export class EmailApp extends React.Component {
       isUnreadBtnClk = true
     }
     emailService.setReadedEmail(selectedEmail, isUnreadBtnClk)
-      .then(() => emailService.getUnreadAmout())
-      .then((unreadedAmout) => {
-        if (event) {
-          this.setState({ unreadedAmout })
-          this.loadEmails()
-        } else this.setState({ selectedEmail, unreadedAmout })
+    .then(() => emailService.getUnreadAmout())
+    .then((unreadedAmout) => {
+      if (event) {
+        this.setState({ unreadedAmout })
+        this.loadEmails()
+      } else{
+        console.log('No event')
+        console.log(selectedEmail)
+          this.setState({ selectedEmail, unreadedAmout })
+        } 
       })
   }
 
   onFilterEmails = (filterBy) => {
-    console.log('FILTET SET',filterBy)
-    this.setState({ filterBy }, () => {
+    console.log('FILTER SET',filterBy)
+    const filterName = Object.keys(filterBy)
+    const filterValue = Object.values(filterBy)[0]
+    this.setState((prevState) => ({ filterBy: { ...prevState.filterBy, [filterName]: filterValue } }), () => {
       this.loadEmails()
       this.setState({ selectedEmail: null })
     })
@@ -62,6 +72,7 @@ export class EmailApp extends React.Component {
 
   render() {
     const { emails, selectedEmail, unreadedAmout,filterBy } = this.state
+    console.log(selectedEmail)
     return <section className="main-email-container">
       <EmailFilter onFilterEmails={this.onFilterEmails}/>
       <section className="email-container">
