@@ -2,6 +2,7 @@ import { ColorPicker } from './color-picker.jsx'
 import { InlineEdit } from './inline-edit.jsx'
 import { notesService } from '../services/note.service.js'
 import { Todos } from './todo.jsx'
+import { MapNote } from './map-note.jsx'
 
 export class NotePreview extends React.Component {
   state = {
@@ -77,6 +78,15 @@ export class NotePreview extends React.Component {
           <canvas width="100%" height="100%"></canvas>
         </div>
       )
+    if (info.audioLink)
+      return (
+        <audio controls autoplay>
+          <source src={info.audioLink} type="audio/mp3" />
+        </audio>
+      )
+
+    if (info.locations)
+      return <MapNote mapId={info.mapId} locations={info.locations} />
   }
 
   render() {

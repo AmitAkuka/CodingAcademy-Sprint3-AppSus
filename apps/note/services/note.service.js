@@ -26,6 +26,18 @@ const gNotes = [
     type: 'note-txt',
   },
   {
+    createdAt: '27.4.2022',
+    id: '9VlYFQ4E',
+    info: {
+      mapHeading: 'My map',
+      locations: [],
+      mapId: utilService.makeId(),
+    },
+    isPinned: false,
+    style: { backgroundColor: 'rgb(98, 167, 98)' },
+    type: 'note-map',
+  },
+  {
     id: 'aRKwz747',
     createdAt: '27.4.2022',
     id: 'aRKwz747',
@@ -40,27 +52,6 @@ const gNotes = [
     info: { videoUrl: 'https://www.youtube.com/watch?v=FWy_LbhHtug' },
     isPinned: true,
     type: 'note-video',
-  },
-  {
-    createdAt: '27.4.2022',
-    id: 'KTKyKgKX',
-    info: { todoHeading: 'get my life together' },
-    todoHeading: 'get my life together',
-    todos: ['start learning C++', 'doing deep refresh', 'doing something'],
-    isPinned: true,
-    type: 'note-todo',
-  },
-  {
-    createdAt: '27.4.2022',
-    id: 'A6eAazWA',
-    info: {
-      todoHeading: 'Coding meme generator',
-      todos: ['open vscode', 'FREAK OUT!!'],
-    },
-    todoHeading: 'Coding meme generator',
-    todos: ['open vscode', 'FREAK OUT!!'],
-    isPinned: true,
-    type: 'note-todo',
   },
   {
     createdAt: '27.4.2022',
@@ -180,6 +171,11 @@ function addNote({ type, content }) {
     case 'note-canvas':
       newNote.info = {
         canvasHeading: content,
+      }
+      break
+    case 'note-audio':
+      newNote.info = {
+        audioLink: content,
       }
       break
   }
