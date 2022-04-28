@@ -51,13 +51,14 @@
     background-color: lightblue;
 }
 
-.compose-content-container button {
+
+/* .compose-content-container button {
     font-size: 2rem;
     margin-inline-start: 5px;
     margin-inline-end: 5px;
-    height: 45px;
+    max-height: 45px;
     border-radius: 25px;
-}
+} */
 
 .compose-buttons-container button i {
     height: 32px;
