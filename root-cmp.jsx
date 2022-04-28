@@ -3,7 +3,6 @@ import { AppHome } from './pages/app-home.jsx'
 import { EmailApp } from './apps/mail/pages/email-index.jsx'
 import { NoteApp } from './apps/note/pages/note-index.jsx'
 import { EmailCompose } from './apps/mail/cmps/email-compose.jsx'
-import { EmailDetails } from './apps/mail/cmps/email-details.jsx'
 import { AppHeader } from './cmps/app-header.jsx'
 // import { AppHome } from './pages/app-home.jsx' Dont forget to import books
 

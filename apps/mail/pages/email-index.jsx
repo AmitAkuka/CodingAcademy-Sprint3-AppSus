@@ -1,4 +1,5 @@
 import { emailService } from '../services/email.service.js'
+import { eventBusService } from "../../../services/event-bus-service.js"
 
 import { EmailList } from '../cmps/email-list.jsx'
 import { EmailDetails } from '../cmps/email-details.jsx'
@@ -21,7 +22,19 @@ export class EmailApp extends React.Component {
 
   componentDidMount() {
     console.log('Component Mounted! , loading emails')
-    this.loadEmails()
+    const urlSrcPrm = new URLSearchParams(this.props.location.search)
+    let paramObj = {}
+    for (let value of urlSrcPrm.keys()) {
+      paramObj[value] = urlSrcPrm.get(value);
+    }
+    if (!Object.keys(paramObj)) {
+      paramObj = null
+    }
+    if (paramObj) {
+      console.log('got param', paramObj)
+      eventBusService.emit('show-compose')
+      this.loadEmails()
+    }else this.loadEmails()
     emailService.getUnreadAmout()
       .then((unreadedAmout) => this.setState({ unreadedAmout }))
   }
@@ -29,7 +42,7 @@ export class EmailApp extends React.Component {
   loadEmails = () => {
     console.log('Loading')
     emailService.query(this.state.filterBy)
-      .then(emails => this.setState({ emails }) )
+      .then(emails => this.setState({ emails }))
   }
 
   onFavoriteAdd = (event, email) => {
@@ -47,27 +60,27 @@ export class EmailApp extends React.Component {
       isUnreadBtnClk = true
     }
     emailService.setReadedEmail(selectedEmail, isUnreadBtnClk)
-    .then(() => emailService.getUnreadAmout())
-    .then((unreadedAmout) => {
-      if (event) {
-        this.setState({ unreadedAmout })
-        this.loadEmails()
-      } else{
-        console.log('No event')
-        console.log(selectedEmail)
+      .then(() => emailService.getUnreadAmout())
+      .then((unreadedAmout) => {
+        if (event) {
+          this.setState({ unreadedAmout })
+          this.loadEmails()
+        } else {
+          console.log('No event')
+          console.log(selectedEmail)
           this.setState({ selectedEmail, unreadedAmout })
-        } 
+        }
       })
   }
 
-  onDeleteEmail = (email,event) => {
+  onDeleteEmail = (email, event) => {
     event.stopPropagation()
     emailService.deleteEmail(email.id)
       .then(this.loadEmails)
   }
 
   onFilterEmails = (filterBy) => {
-    console.log('FILTER SET',filterBy)
+    console.log('FILTER SET', filterBy)
     const filterName = Object.keys(filterBy)
     const filterValue = Object.values(filterBy)[0]
     this.setState((prevState) => ({ filterBy: { ...prevState.filterBy, [filterName]: filterValue } }), () => {
@@ -77,14 +90,14 @@ export class EmailApp extends React.Component {
   }
 
   render() {
-    const { emails, selectedEmail, unreadedAmout,filterBy } = this.state
+    const { emails, selectedEmail, unreadedAmout, filterBy } = this.state
     console.log(selectedEmail)
     return <section className="main-email-container">
-      <EmailFilter onFilterEmails={this.onFilterEmails}/>
+      <EmailFilter onFilterEmails={this.onFilterEmails} />
       <section className="email-container">
         <EmailFolderList unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />
-        {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onDeleteEmail={this.onDeleteEmail} onSelectEmail={this.onSelectEmail} filterBy={filterBy}/>}
-        {selectedEmail && <Route path={["/Emails/Inbox/:emailId","/Emails/Starred/:emailId","/Emails/Sent/:emailId","/Emails/Drafts/:emailId"]} component={EmailDetails} />}
+        {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onDeleteEmail={this.onDeleteEmail} onSelectEmail={this.onSelectEmail} filterBy={filterBy} />}
+        {selectedEmail && <Route path={["/Emails/Inbox/:emailId", "/Emails/Starred/:emailId", "/Emails/Sent/:emailId", "/Emails/Drafts/:emailId"]} component={EmailDetails} />}
       </section>
     </section>
   }

@@ -1,7 +1,9 @@
 import { eventBusService } from "../../../services/event-bus-service.js"
 import { emailService } from "../services/email.service.js";
 
-export class EmailCompose extends React.Component {
+const { withRouter } = ReactRouterDOM
+
+class _EmailCompose extends React.Component {
 
   state = {
     isComposeOpen: false,
@@ -14,6 +16,22 @@ export class EmailCompose extends React.Component {
   removeEvent;
 
   componentDidMount() {
+    const urlSrcPrm = new URLSearchParams(this.props.location.search)
+    let paramObj = {}
+    for (let value of urlSrcPrm.keys()) {
+      paramObj[value] = urlSrcPrm.get(value);
+    }
+    if (!Object.keys(paramObj)) {
+      paramObj = null
+    }
+    if (paramObj) {
+      console.log('got param', paramObj)
+      const { to, subject, body } = paramObj
+      this.removeEvent = eventBusService.on('show-compose', () => {
+        this.setState(({mailContent: {to: 'Amit.Akoka@gmail.com', subject, body }}))
+        return
+      })
+    }
     this.removeEvent = eventBusService.on('show-compose', () => {
       this.setState({ isComposeOpen: !this.state.isComposeOpen })
     })
@@ -30,9 +48,9 @@ export class EmailCompose extends React.Component {
     this.setState((prevState) => ({ mailContent: { ...prevState.mailContent, [field]: value } }))
   }
 
-  onSendMail = (ev) =>{
+  onSendMail = (ev) => {
     ev.preventDefault()
-    const {mailContent} = this.state
+    const { mailContent } = this.state
     emailService.addEmail(mailContent)
       .then(() => this.onCloseCompose())
   }
@@ -42,7 +60,7 @@ export class EmailCompose extends React.Component {
     this.setState({ isComposeOpen: false })
   }
 
-  onDelete(){
+  onDelete() {
     console.log('delete')
   }
 
@@ -51,10 +69,10 @@ export class EmailCompose extends React.Component {
     if (!isComposeOpen) return <React.Fragment></React.Fragment>
     const { to, subject, body } = this.state.mailContent
     return <section className="email-compose-container">
-        <div className="compose-header">
-          <h1>New Message</h1>
-          <button onClick={() => this.onCloseCompose()}><i className="fa fa-times"></i></button>
-        </div>
+      <div className="compose-header">
+        <h1>New Message</h1>
+        <button onClick={() => this.onCloseCompose()}><i className="fa fa-times"></i></button>
+      </div>
       <form onSubmit={this.onSendMail}>
         <div className="compose-content-container">
           <div className="email-input-container">
@@ -78,3 +96,5 @@ export class EmailCompose extends React.Component {
     </section>
   }
 }
+
+export const EmailCompose = withRouter(_EmailCompose)
