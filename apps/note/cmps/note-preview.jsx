@@ -52,14 +52,37 @@ class _NotePreview extends React.Component {
   }
 
   sendToMail = (note) => {
-    const transformedNote = {
-      composer: 'me',
-      subject: 'some title',
-      body: 'hello',
-      sentAt: new Date().toLocaleString(),
+    let subject = ''
+    let body = ''
+
+    switch (note.type) {
+      case 'note-txt':
+        subject = 'New email'
+        body = note.info.txt
+        break
+      case 'note-img':
+        subject = 'Come see this image!!!'
+        body = note.info.imgUrl
+        break
+      case 'note-video':
+        subject = 'Come see this crazy video!!!'
+        body = note.info.videoUrl
+        break
+      case 'note-todo':
+        subject = 'My missions for today'
+        body = note.info
+        break
+      case 'note-audio':
+        subject = 'You have to listen to this'
+        body = note.info.audioUrl
+        break
+      case 'note-map':
+        subject = 'Check out these locations'
+        body = note.info.locations
+        break
     }
 
-    const urlSrcPrm = new URLSearchParams(transformedNote)
+    const urlSrcPrm = new URLSearchParams({ subject, body, to: '' })
     const searchStr = urlSrcPrm.toString()
     this.props.history.push(`/Emails/Inbox?${searchStr}`)
   }
