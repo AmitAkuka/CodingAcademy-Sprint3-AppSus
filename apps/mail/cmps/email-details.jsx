@@ -28,9 +28,7 @@ export class EmailDetails extends React.Component {
 
 
   render() {
-    console.log(this.props.match.params)
     if (!this.state.email) return <React.Fragment></React.Fragment>
-    console.log(this.state.email)
     const { subject, from, sentAt, body, userName, profilePic } = this.state.email
     return <section className="email-details-container">
       <h2>{subject}</h2>

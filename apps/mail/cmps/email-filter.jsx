@@ -1,16 +1,22 @@
-export class EmailFilter extends React.Component{
+export class EmailFilter extends React.Component {
 
   state = {
-    emailStateFilter: 'All'
+    filterName: 'All'
   }
 
-  render(){
-    const {emailStateFilter: activeFilter} = this.state
+  onChangeFilter = (unreadReadFilter) => {
+    this.setState({filterName: unreadReadFilter })
+    this.props.onFilterEmails({ unreadReadFilter })
+  }
+
+  render() {
+    const { filterName } = this.state
+    console.log(filterName)
     return <section className="email-filter-container">
       <section className="sub-filter-container">
-        <button className={(activeFilter === 'All') ? 'selected' : ''}>All</button>
-        <button className={(activeFilter === 'Read') ? 'selected' : ''}>Read</button>
-        <button className={(activeFilter === 'Unread') ? 'selected' : ''}>Unread</button>
+        <button className={(filterName === 'All') ? 'Active' : ''} onClick={() => this.onChangeFilter('All')} >All</button>
+        <button className={(filterName === 'Read') ? 'Active' : ''} onClick={() => this.onChangeFilter('Read')} >Read</button>
+        <button className={(filterName === 'Unread') ? 'Active' : ''} onClick={() => this.onChangeFilter('Unread')} >Unread</button>
       </section>
     </section>
   }

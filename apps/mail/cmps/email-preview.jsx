@@ -3,8 +3,9 @@ const { withRouter } = ReactRouterDOM
 class _EmailPreview extends React.Component {
 
   emailSelectedClick = (email) => {
+    const {folderListFilter} = this.props.filterBy
     this.props.onSelectEmail(email)
-    this.props.history.push(`/Emails/${this.props.filterBy}/${email.id}`)
+    this.props.history.push(`/Emails/${folderListFilter}/${email.id}`)
   }
   
   render(){
