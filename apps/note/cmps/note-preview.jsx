@@ -58,9 +58,10 @@ class _NotePreview extends React.Component {
       body: 'hello',
       sentAt: new Date().toLocaleString(),
     }
-    this.props.history.push(
-      `/Emails/Inbox/?composer=me&subject=some title&?body=hello&sentAt=today`
-    )
+
+    const urlSrcPrm = new URLSearchParams(transformedNote)
+    const searchStr = urlSrcPrm.toString()
+    this.props.history.push(`/car?${searchStr}`)
   }
 
   getNoteContent = () => {
