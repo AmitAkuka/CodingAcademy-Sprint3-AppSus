@@ -13,6 +13,17 @@ export class NoteApp extends React.Component {
   }
 
   componentDidMount() {
+    const urlSrcPrm = new URLSearchParams(this.props.location.search)
+    console.log(urlSrcPrm)
+    // let paramObj = {}
+    // for (var value of urlSrcPrm.keys()) {
+    //     paramObj[value] = urlSrcPrm.get(value);
+    // }
+    // if (!Object.keys(paramObj)) paramObj = null
+    // console.log(paramObj);
+    // this.setState(prevState => ({ ...prevState, filterBy: paramObj }), () => {
+    //     this.loadCars()
+    // })
     this.loadNotes()
   }
 

@@ -1,0 +1,49 @@
+.app-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    box-shadow: 0 5px 0 lightgray;
+    margin-bottom: 1rem;
+}
+
+.app-header-container .logo {
+    display: flex;
+    align-items: center;
+}
+
+.app-header-container .logo img {
+    width: 50px;
+}
+
+.app-header-container h1 {
+    margin: 0;
+}
+
+.app-header-container nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+}
+
+.app-header-container nav ul a {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    transition: all 0.3s;
+}
+
+.app-header-container nav ul a:not(:last-child) {
+    border-inline-end: 1px solid lightgray;
+}
+
+.app-header-container nav ul a:hover {
+    box-shadow: 0 5px 0 gray;
+}
+
+.app-header-container nav ul a.active {
+    background-color: gray;
+    color: white;
+}
