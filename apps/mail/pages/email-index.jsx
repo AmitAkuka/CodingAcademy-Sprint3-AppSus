@@ -60,6 +60,12 @@ export class EmailApp extends React.Component {
       })
   }
 
+  onDeleteEmail = (email,event) => {
+    event.stopPropagation()
+    emailService.deleteEmail(email.id)
+      .then(this.loadEmails)
+  }
+
   onFilterEmails = (filterBy) => {
     console.log('FILTER SET',filterBy)
     const filterName = Object.keys(filterBy)
@@ -77,7 +83,7 @@ export class EmailApp extends React.Component {
       <EmailFilter onFilterEmails={this.onFilterEmails}/>
       <section className="email-container">
         <EmailFolderList unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />
-        {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onSelectEmail={this.onSelectEmail} filterBy={filterBy}/>}
+        {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onDeleteEmail={this.onDeleteEmail} onSelectEmail={this.onSelectEmail} filterBy={filterBy}/>}
         {selectedEmail && <Route path={["/Emails/Inbox/:emailId","/Emails/Starred/:emailId","/Emails/Sent/:emailId","/Emails/Drafts/:emailId"]} component={EmailDetails} />}
       </section>
     </section>

@@ -9,7 +9,8 @@ export const emailService = {
     setReadedEmail,
     getUnreadAmout,
     addEmail,
-    getEmailById
+    getEmailById,
+    deleteEmail
 }
 const EMAILS_KEY = 'emailsDB'
 const loggedinUser = {
@@ -19,7 +20,7 @@ const loggedinUser = {
 
 function query({ folderListFilter, unreadReadFilter }) {
     let emails = _loadFromStorage()
-    if (!emails) {
+    if (!emails || !emails.length) {
         emails = _createEmails()
         _saveToLocalStorage(emails)
     }
@@ -167,6 +168,16 @@ function getEmailById(emailId) {
     let emails = _loadFromStorage()
     let email = emails.find(email => email.id === emailId)
     return Promise.resolve(email)
+}
+
+function deleteEmail(emailId) {
+    let emails = _loadFromStorage()
+    getEmailIndexById(emailId)
+        .then(emailIdx => {
+            emails.splice(emailIdx, 1)
+            _saveToLocalStorage(emails)
+        })
+    return Promise.resolve()
 }
 
 // function _createEmails() {

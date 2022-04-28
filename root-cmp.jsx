@@ -17,9 +17,9 @@ export function App() {
   return <Router>
     <AppHeader />
     <section className="main-app-container">
-        
+
       <Switch>
-        <Route path={["/Emails/Inbox","/Emails/Starred","/Emails/Sent","/Emails/Drafts"]} component={EmailApp} />
+        <Route path={["/Emails/Inbox", "/Emails/Starred", "/Emails/Sent", "/Emails/Drafts"]} component={EmailApp} />
         <Route path="/Notes" component={NoteApp} />
         <Route path="/" component={AppHome} />
       </Switch>

@@ -1,3 +1,8 @@
+.email-main-container {
+    flex-grow: 1;
+    margin-inline-end: 25px;
+}
+
 .email-container {
     display: flex;
 }
@@ -29,6 +34,7 @@
 .email-container .nav-container>*:not(.compose-btn) {
     border-radius: 0 15px 15px 0;
     margin-bottom: 10px;
+    width: 240px;
 }
 
 .email-container .nav-container>*:not(.compose-btn):hover {
@@ -51,10 +57,6 @@
 
 .email-container .nav-container div span {
     margin-inline-start: 65px;
-}
-
-.email-list-container {
-    width: 80vw;
 }
 
 .fa.fa-paper-plane {
