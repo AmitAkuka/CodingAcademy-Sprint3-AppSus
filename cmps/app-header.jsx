@@ -1,11 +1,20 @@
-const { NavLink } = ReactRouterDOM
+const { NavLink,Link } = ReactRouterDOM
 
 export function AppHeader() {
   return (
     <header className="app-header-container">
       <div className="logo">
+        <div className="nav-container">
+        <i className="fa fa-bars"></i>
+        </div>
+        <Link to="/">
         <img src="../../assets/img/horse-logo.jpg" alt="" />
-        <h1>Appsus</h1>
+        <h1>AppSus</h1>
+        </Link>
+      <section className="main-input-container">
+      <i class="fa fa-search"></i>
+      <input type="text" placeholder="Search here..." />
+      </section>
       </div>
       <nav>
         <ul>
