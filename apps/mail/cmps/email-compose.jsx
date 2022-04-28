@@ -21,14 +21,14 @@ class _EmailCompose extends React.Component {
     for (let value of urlSrcPrm.keys()) {
       paramObj[value] = urlSrcPrm.get(value);
     }
-    if (!Object.keys(paramObj)) {
+    if (!Object.keys(paramObj).length) {
       paramObj = null
     }
     if (paramObj) {
       console.log('got param', paramObj)
       const { to, subject, body } = paramObj
       this.removeEvent = eventBusService.on('show-compose', () => {
-        this.setState(({mailContent: {to: 'Amit.Akoka@gmail.com', subject, body }}))
+        this.setState(({mailContent: {to: 'user@AppSus.com', subject, body }}))
         return
       })
     }

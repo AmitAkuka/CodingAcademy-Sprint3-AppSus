@@ -27,7 +27,7 @@ export class EmailApp extends React.Component {
     for (let value of urlSrcPrm.keys()) {
       paramObj[value] = urlSrcPrm.get(value);
     }
-    if (!Object.keys(paramObj)) {
+    if (!Object.keys(paramObj).length) {
       paramObj = null
     }
     if (paramObj) {
