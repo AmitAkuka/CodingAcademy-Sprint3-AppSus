@@ -23,6 +23,9 @@
 .email-details-container .sender-info {
     display: flex;
     align-items: center;
+}
+
+.email-details-container span:first-child {
     font-weight: 700;
 }
 
@@ -41,6 +44,16 @@
 
 .email-header-container .buttons-container {
     margin-top: 25px;
+}
+
+.addresses-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.email-body-container {
+    margin-top: 20px;
 }
 
 .buttons-container button {

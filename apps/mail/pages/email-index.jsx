@@ -4,7 +4,7 @@ import { eventBusService } from "../../../services/event-bus-service.js"
 import { EmailList } from '../cmps/email-list.jsx'
 import { EmailDetails } from '../cmps/email-details.jsx'
 import { EmailFolderList } from '../cmps/email-folder-list.jsx'
-import { EmailFilter } from '../cmps/email-filter.jsx'
+import { AppHeader } from '../../../cmps/app-header.jsx'
 
 const { Route } = ReactRouterDOM
 
@@ -15,6 +15,8 @@ export class EmailApp extends React.Component {
     filterBy: {
       folderListFilter: 'Inbox',
       unreadReadFilter: 'All',
+      searchStrFilter: '',
+      emailParamFilter: 'Date'
     },
     selectedEmail: null,
     unreadedAmout: 0
@@ -31,22 +33,20 @@ export class EmailApp extends React.Component {
       paramObj = null
     }
     if (paramObj) {
-      console.log('got param', paramObj)
       eventBusService.emit('show-compose')
       this.loadEmails()
-    }else this.loadEmails()
+    } else this.loadEmails()
     emailService.getUnreadAmout()
       .then((unreadedAmout) => this.setState({ unreadedAmout }))
   }
 
   loadEmails = () => {
-    console.log('Loading')
     emailService.query(this.state.filterBy)
       .then(emails => this.setState({ emails }))
+      console.log('got emails!',this.state.emails)
   }
 
   onFavoriteAdd = (event, email) => {
-    console.log('Favorite')
     event.stopPropagation();
     emailService.setEmailFavorite(email.id)
       .then(this.loadEmails)
@@ -66,8 +66,6 @@ export class EmailApp extends React.Component {
           this.setState({ unreadedAmout })
           this.loadEmails()
         } else {
-          console.log('No event')
-          console.log(selectedEmail)
           this.setState({ selectedEmail, unreadedAmout })
         }
       })
@@ -76,29 +74,42 @@ export class EmailApp extends React.Component {
   onDeleteEmail = (email, event) => {
     event.stopPropagation()
     emailService.deleteEmail(email.id)
-      .then(this.loadEmails)
+      .then(() => {
+        this.loadEmails()
+        this.setState({ selectedEmail: null })
+      })
   }
 
   onFilterEmails = (filterBy) => {
     console.log('FILTER SET', filterBy)
     const filterName = Object.keys(filterBy)
     const filterValue = Object.values(filterBy)[0]
+    console.log('Our new filter:', filterName,filterValue)
     this.setState((prevState) => ({ filterBy: { ...prevState.filterBy, [filterName]: filterValue } }), () => {
       this.loadEmails()
       this.setState({ selectedEmail: null })
     })
   }
 
+  onTransferToNote = (email) => {
+    const { to, subject, body } = email
+    const urlSrcPrm = new URLSearchParams({ to, subject, body })
+    const paramStr = urlSrcPrm.toString()
+    this.props.history.push(`/Notes?${paramStr}`)
+  }
+
   render() {
     const { emails, selectedEmail, unreadedAmout, filterBy } = this.state
-    console.log(selectedEmail)
-    return <section className="main-email-container">
-      <EmailFilter onFilterEmails={this.onFilterEmails} />
-      <section className="email-container">
-        <EmailFolderList unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />
-        {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onDeleteEmail={this.onDeleteEmail} onSelectEmail={this.onSelectEmail} filterBy={filterBy} />}
-        {selectedEmail && <Route path={["/Emails/Inbox/:emailId", "/Emails/Starred/:emailId", "/Emails/Sent/:emailId", "/Emails/Drafts/:emailId"]} component={EmailDetails} />}
+    // const { pathname } = this.props.location
+    return <React.Fragment>
+      <AppHeader onFilterEmails={this.onFilterEmails} />
+      <section className="main-email-container">
+        <section className="email-container">
+          <EmailFolderList unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />
+          {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onDeleteEmail={this.onDeleteEmail} onSelectEmail={this.onSelectEmail} filterBy={filterBy} />}
+          {selectedEmail && <Route path={["/Emails/Inbox/:emailId", "/Emails/Starred/:emailId", "/Emails/Sent/:emailId", "/Emails/Drafts/:emailId"]}> <EmailDetails email={selectedEmail} onDeleteEmail={this.onDeleteEmail} onTransferToNote={this.onTransferToNote} /> </Route>}
+        </section>
       </section>
-    </section>
+    </React.Fragment>
   }
 }

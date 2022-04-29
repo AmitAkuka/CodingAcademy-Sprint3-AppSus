@@ -6,6 +6,13 @@
     right: 140px;
     border-radius: 17px 17px 0 0;
     border: 1px solid dimgray;
+    animation-name: scale-in-ver-center;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: none;
 }
 
 .email-compose-container .compose-header {
@@ -39,7 +46,7 @@
 
 .compose-header button,
 .compose-content-container button {
-    height: 25px;
+    height: 30px;
     background: transparent;
     outline: none;
     border: 0;
