@@ -1,6 +1,8 @@
-const { NavLink,Link } = ReactRouterDOM
+import { EmailFilter } from "../apps/mail/cmps/email-filter.jsx"
 
-export function AppHeader() {
+const { NavLink,Link,Route, Switch } = ReactRouterDOM
+
+export function AppHeader({onFilterEmails}) {
   return (
     <header className="app-header-container">
       <div className="logo">
@@ -11,12 +13,12 @@ export function AppHeader() {
         <img src="../../assets/img/horse-logo.jpg" alt="" />
         <h1>AppSus</h1>
         </Link>
-      <section className="main-input-container">
-      <i class="fa fa-search"></i>
-      <input type="text" placeholder="Search here..." />
-      </section>
+      <Switch>
+        <Route path="/Emails"><EmailFilter onFilterEmails={onFilterEmails} /></Route>
+        {/* <Route path="/Notes" component={NoteApp} /> */}
+      </Switch>
       </div>
-      <nav>
+      <nav className="nav-btns-container">
         <ul>
           <NavLink to="/" exact>
             <li>Home</li>

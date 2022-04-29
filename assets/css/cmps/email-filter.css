@@ -1,30 +1,106 @@
 .email-filter-container {
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.main-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.main-input-container input {
+    margin-inline-start: 20px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    height: 40px;
+    border-radius: 10px;
+    width: 400px;
+    outline: 0;
+    border: 0;
+    box-shadow: 0px 2px 5px 1px lightgrey;
+    padding-inline-start: 35px;
+    padding-inline-end: 135px;
+}
+
+.main-input-container .sort-filter {
+    position: absolute;
+    right: 10px;
+    height: 40px;
+    border-radius: 10px;
+    border: 0;
+    outline: 0;
+}
+
+.main-input-container .sort-filter:focus {
+    outline: 0;
+}
+
+.main-input-container i {
+    position: absolute;
+    margin-inline-start: 30px;
 }
 
 .sub-filter-container {
     box-shadow: 0px 1px 5px 0px;
+    width: 300px;
 }
 
 .sub-filter-container button {
-    background: transparent;
-    outline: none;
-    border: 0;
+    overflow: hidden;
+    color: #fff;
+    pointer-events: auto;
     cursor: pointer;
-    font-size: 0.9rem;
-    height: 50px;
-    width: 90px;
-    font-weight: 600;
-    background-color: #e2e2e2;
+    border: none;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    position: relative;
+    display: inline-block;
+    height: 40px;
+    width: 100px;
 }
 
-.sub-filter-container button:hover {
-    background-color: rgb(167, 167, 167);
+.sub-filter-container button span {
+    display: block;
+    position: relative;
 }
 
-.email-filter-container .sub-filter-container .Active {
-    background-color: #b4ffff;
+.sub-filter-container button>span {
+    overflow: hidden;
+}
+
+.sub-filter-container button>span>span {
+    overflow: hidden;
+    mix-blend-mode: difference;
+}
+
+.sub-filter-container button:hover>span>span {
+    animation: MoveUpInitial 0.2s forwards, MoveUpEnd 0.2s forwards 0.2s;
+}
+
+.sub-filter-container button::before {
+    content: '';
+    background: #000;
+    transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+    transform-origin: 100% 50%;
+}
+
+.sub-filter-container button:hover::before {
+    transform: scale3d(0, 1, 1);
+    transform-origin: 0% 50%;
+}
+
+.sub-filter-container button::before,
+.sub-filter-container button::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.sub-filter-container button.Active::before {
+    background: #e7e7e7;
 }

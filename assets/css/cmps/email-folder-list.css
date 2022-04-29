@@ -10,19 +10,16 @@
 .email-container .nav-container {
     padding-top: 15px;
     padding-inline-end: 20px;
-    border-top: 1px solid lightgray;
 }
 
 .nav-container .compose-btn {
-    border: 2px solid black;
     border-radius: 25px;
     margin-inline-start: 10px;
-    font-weight: 500;
     background-color: #f6f3e9;
-    max-width: 175px;
-    min-width: 175px;
-    height: 50px;
+    height: 55px;
     margin-bottom: 20px;
+    width: 165px;
+    box-shadow: 0 0 4px 0px;
 }
 
 .email-container .nav-container>* {
@@ -32,7 +29,7 @@
 }
 
 .email-container .nav-container>*:not(.compose-btn) {
-    border-radius: 0 15px 15px 0;
+    border-radius: 0 25px 25px 0;
     margin-bottom: 10px;
     width: 240px;
 }
@@ -47,12 +44,12 @@
 }
 
 .email-container .nav-container>*:hover {
-    background-color: lightcyan;
+    background-color: #a3a3a3;
 }
 
 .email-container .nav-container div>* {
-    margin-inline-start: 20px;
-    margin-inline-end: 20px;
+    margin-inline-start: 15px;
+    margin-inline-end: 15px;
 }
 
 .email-container .nav-container div span {
@@ -63,7 +60,9 @@
     font-size: 19px;
 }
 
-.fa.fa-inbox {
+.folder-btn .fa.fa-inbox,
+.folder-btn .fa.fa-star:not(.email-preview),
+.folder-btn .fa.fa-file-text {
     font-size: 23px;
 }
 

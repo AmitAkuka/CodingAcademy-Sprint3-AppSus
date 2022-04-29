@@ -18,7 +18,8 @@ const loggedinUser = {
     fullname: 'Sprint3 Appsus'
 }
 
-function query({ folderListFilter, unreadReadFilter }) {
+function query({ folderListFilter, unreadReadFilter, searchStrFilter, emailParamFilter }) {
+    console.log(emailParamFilter)
     let emails = _loadFromStorage()
     if (!emails || !emails.length) {
         emails = _createEmails()
@@ -27,18 +28,75 @@ function query({ folderListFilter, unreadReadFilter }) {
     if (folderListFilter || unreadReadFilter) {
         emails = emails.filter(email => {
             if (folderListFilter === 'Inbox') {
-                if (unreadReadFilter === 'All') return (email.from !== loggedinUser.email)
-                if (unreadReadFilter === 'Read') return (email.from !== loggedinUser.email && email.isReaded)
-                if (unreadReadFilter === 'Unread') return (email.from !== loggedinUser.email && !email.isReaded)
+                if (unreadReadFilter === 'All') {
+                    return (email.from !== loggedinUser.email &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                } else if (unreadReadFilter === 'Read') {
+                    console.log('read')
+                    return (email.from !== loggedinUser.email && email.isReaded &&
+                        ((email.userName.toLowerCase().includes(searchStrFilter)) ||
+                            (email.subject.toLowerCase().includes(searchStrFilter)) ||
+                            (email.body.toLowerCase().includes(searchStrFilter))))
+                } else if (unreadReadFilter === 'Unread') {
+                    return (email.from !== loggedinUser.email && !email.isReaded &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                }
             } else if (folderListFilter === 'Starred') {
-                if (unreadReadFilter === 'All') return (email.isFavorite)
-                if (unreadReadFilter === 'Read') return (email.isFavorite && email.isReaded)
-                if (unreadReadFilter === 'Unread') return (email.isFavorite && !email.isReaded)
+                if (unreadReadFilter === 'All') {
+                    return (email.isFavorite &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                } else if (unreadReadFilter === 'Read') {
+                    return (email.isFavorite && email.isReaded &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                } else if (unreadReadFilter === 'Unread') {
+                    return (email.isFavorite && !email.isReaded &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                }
             } else if (folderListFilter === 'Sent') {
-                if (unreadReadFilter === 'All') return (email.from === loggedinUser.email)
-                if (unreadReadFilter === 'Read') return (email.from === loggedinUser.email && email.isReaded)
-                if (unreadReadFilter === 'Unread') return (email.from === loggedinUser.email && !email.isReaded)
+                if (unreadReadFilter === 'All') {
+                    return (email.from === loggedinUser.email &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                } else if (unreadReadFilter === 'Read') {
+                    return (email.from === loggedinUser.email && email.isReaded &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                } else if (unreadReadFilter === 'Unread') {
+                    return (email.from === loggedinUser.email && !email.isReaded &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                }
             }
+        })
+
+    }
+    console.log('sortBy', emailParamFilter)
+    if (emailParamFilter === 'Date') {
+        emails = emails.sort((a, b) => b.sentAt - a.sentAt)
+    } else if (emailParamFilter === 'Name') {
+        emails = emails.sort(function(a, b) {
+            if (a.userName < b.userName) { return -1; }
+            if (a.userName > b.userName) { return 1; }
+            return 0;
+        })
+    } else if (emailParamFilter === 'Subject') {
+        emails = emails.sort(function(a, b) {
+            if (a.subject < b.subject) { return -1; }
+            if (a.subject > b.subject) { return 1; }
+            return 0;
         })
     }
     console.log('Loaded Emails')
@@ -51,7 +109,7 @@ function addEmail({ to, subject, body }) {
         id: utilService.makeId(),
         subject,
         body,
-        sentAt: 'few secounds ago..',
+        sentAt: 'few seconds ago..',
         to,
         from: loggedinUser.email,
         userName: loggedinUser.fullname,
@@ -67,8 +125,8 @@ function _createEmails() {
     const emails = [{
             id: utilService.makeId(),
             subject: 'Whats going on with sprint3??',
-            body: 'Its so easy! finish with it, and dont forget to use deep refresh when needed!',
-            sentAt: 'Apr 7',
+            body: 'Its so easy! dont forget to use deep refresh when needed!',
+            sentAt: 1651256929216,
             to: loggedinUser.email,
             from: 'Yaron@CodingAcademy.com',
             userName: 'Yaron Biton',
@@ -80,7 +138,7 @@ function _createEmails() {
             id: utilService.makeId(),
             subject: 'Pulse Hex progress',
             body: 'Dont worry, prec-20 will be ready soon!',
-            sentAt: 'Aug 28',
+            sentAt: 1251256929216,
             to: loggedinUser.email,
             from: 'RichardHeart@gmail.com',
             userName: 'Richard Heart',
@@ -92,7 +150,7 @@ function _createEmails() {
             id: utilService.makeId(),
             subject: 'Miss you baby!',
             body: 'Would love to catch up sometimes',
-            sentAt: 'Mar 10',
+            sentAt: 1601256929216,
             to: loggedinUser.email,
             from: 'KimKardashian@gmail.com',
             userName: 'Kim Kardashian',
@@ -104,7 +162,7 @@ function _createEmails() {
             id: utilService.makeId(),
             subject: 'SpaceX',
             body: 'Would you like to join?',
-            sentAt: 'Aug 28',
+            sentAt: 1551256929216,
             to: loggedinUser.email,
             from: 'ElonMusk@gmail.com',
             userName: 'Elon Musk',
@@ -116,7 +174,7 @@ function _createEmails() {
             id: utilService.makeId(),
             subject: 'Wake me up',
             body: 'Please dont forget to wake me up, so i wont fall asleep',
-            sentAt: 'Feb 2',
+            sentAt: 1650006929216,
             to: loggedinUser.email,
             from: 'JoeBiden@gmail.com',
             userName: 'Joe Biden',

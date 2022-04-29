@@ -16,6 +16,7 @@
 
 .email-list-container .email-preview:hover {
     background-color: lightcyan;
+    box-shadow: inset 0px -1px 2px 0px lightgrey;
 }
 
 .email-list-container .email-preview:hover .email-preview-buttons button {
@@ -86,15 +87,19 @@
 }
 
 .email-preview h2:first-child {
-    width: 220px;
+    min-width: 220px;
 }
 
-.email-preview h2:nth-child(2) {
+.email-preview .email-info-container .body-preview {
     flex-grow: 1;
 }
 
+.email-preview .email-info-container .body-preview span {
+    font-weight: 500;
+}
+
 .time-preview {
-    width: 13%;
+    min-width: 80px;
     text-align: end;
     margin-inline-end: 20px;
     font-size: 1rem;

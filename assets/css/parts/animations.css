@@ -1,62 +1,93 @@
+/* Email app */
+
+.slide-left {
+    animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-left {
+    0% {
+        background: linear-gradient(90deg, white 0%, white 5%, #6dd5ed 100%);
+        transform: translateX(500px);
+    }
+    100% {
+        transform: translateX(0);
+        transition-delay: 2s;
+    }
+}
+
+@keyframes scale-in-ver-center {
+    0% {
+        transform: scaleX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+
+/* Note app */
+
 .fade-in {
-	animation: fade-in 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: fade-in 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 @keyframes fade-in {
     0% {
-      opacity: 0;
+        opacity: 0;
     }
     100% {
-      opacity: 1;
+        opacity: 1;
     }
 }
-  
-  .fade-out {
-	animation: fade-out 1s ease-out both;
+
+.fade-out {
+    animation: fade-out 1s ease-out both;
 }
 
 @keyframes fade-out {
     0% {
-      opacity: 1;
+        opacity: 1;
     }
     100% {
-      opacity: 0;
+        opacity: 0;
     }
-  }
-  
-  .swing-out-top-bck {
+}
+
+.swing-out-top-bck {
     animation: swing-out-top-bck 0.45s cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
-  }
+}
 
-  @keyframes swing-out-top-bck {
+@keyframes swing-out-top-bck {
     0% {
-      transform: rotateX(0deg);
-      transform-origin: top;
-      opacity: 1;
+        transform: rotateX(0deg);
+        transform-origin: top;
+        opacity: 1;
     }
     100% {
-      transform: rotateX(-100deg);
-      transform-origin: top;
-      opacity: 0;
+        transform: rotateX(-100deg);
+        transform-origin: top;
+        opacity: 0;
     }
-  }
+}
 
-  .fall-down-fade {
+.fall-down-fade {
     animation: fallAway forwards 1s ease-out 1;
 }
-  
-  @keyframes fallAway {
+
+@keyframes fallAway {
     0% {
-      transform: rotateZ(0deg);
-      top: 0;
-      opacity: 1;
+        transform: rotateZ(0deg);
+        top: 0;
+        opacity: 1;
     }
     25% {
-      transform: rotateZ(-15deg);
+        transform: rotateZ(-15deg);
     }
     100% {
-      top: 300px;
-      transform: rotateZ(-5deg);
-      opacity: 0;
+        top: 300px;
+        transform: rotateZ(-5deg);
+        opacity: 0;
     }
-  }
+}
