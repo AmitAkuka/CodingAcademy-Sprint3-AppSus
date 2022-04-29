@@ -1,40 +1,43 @@
 export class InlineEdit extends React.Component {
   state = {
-    isEditing: false,
     txt: this.props.txt,
   }
 
+  textRef = React.createRef()
+
+  componentDidMount() {
+    this.resizeTextBox(this.textRef.current)
+  }
+
   handleChange = ({ target }) => {
-    this.setState({ txt: target.value })
+    this.resizeTextBox(target)
+    
+    this.setState({ txt: target.value }, () => this.props.onInlineInputChange(this.state.txt))
+    
   }
 
-  onInlineEdit = () => {
-    this.setState({ isEditing: true })
-  }
-
-  onInlineInputChange = (ev) => {
-    ev.preventDefault()
-    this.props.onInlineInputChange(this.state.txt)
-    this.setState({ isEditing: false })
+  resizeTextBox(target) {
+    if (target.scrollHeight > 33) {
+      target.style.height = '5px'
+      target.style.height = (target.scrollHeight) + 'px'
+    }
   }
 
   render() {
-    const { txt, isEditing } = this.state
+    const { txt } = this.state
     return (
       <div className="inline-txt-container">
-        {!isEditing && <span onDoubleClick={this.onInlineEdit}>{txt}</span>}
-        {isEditing && (
           <form onSubmit={this.onInlineInputChange} id="inline-form">
-            <input
+            <textarea
               className="inline-input"
+              rows={1}
               type="text"
               name="txt"
-              placeholder="text"
               value={txt}
               onChange={this.handleChange}
+              ref={this.textRef}
             />
           </form>
-        )}
       </div>
     )
   }

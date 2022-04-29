@@ -13,9 +13,20 @@
     margin: auto;
 }
 
-.add-note form {
+.add-note .add-note-form {
     flex-basis: 80%;
+    display: flex;
+    align-items: center;
+    margin-inline-end: 0.5rem;
+}
 
+.add-note .add-note-form .rec-ico {
+    color: lightgray;
+    cursor: pointer;
+}
+
+.add-note .add-note-form .rec-ico.red {
+    color: tomato
 }
 
 .add-note input {

@@ -184,7 +184,7 @@ const STORAGE_KEY = 'notesDB'
 function query(filter) {
   let notes = _loadNotesFromStorage()
   if (!notes) {
-    notes = gNotes
+    notes = _addTextLines(gNotes)
     _saveNotesToStorage(notes)
   }
 
@@ -205,7 +205,7 @@ function getNoteById(notes, id) {
   return notes.find((note) => note.id === id)
 }
 
-function addNote({ type, content }) {
+function addNote({ type, content, audioUrl }) {
   const newNote = {
     id: utilService.makeId(),
     type,
@@ -246,6 +246,11 @@ function addNote({ type, content }) {
         mapId: utilService.makeId(),
       }
       break
+      case 'note-record':
+        newNote.info = {
+          noteHeading: content,
+          audioUrl
+        }
   }
 
   const notes = _loadNotesFromStorage()
@@ -312,7 +317,8 @@ function cloneNote(note) {
 function updateNoteTxt(noteId, txt) {
   const notes = _loadNotesFromStorage()
   const note = getNoteById(notes, noteId)
-  note.info.txt = txt
+  if(note.type === 'note.txt') note.info.txt = txt
+  else note.desc = txt
   return _finishUpdating(notes)
 }
 
@@ -336,6 +342,14 @@ function getFilteredNotes({ txt, type }) {
 
   const notesToDisplay = getNotesToDisplay(filteredNotes)
   return Promise.resolve(notesToDisplay)
+}
+
+function _addTextLines(notes) {
+  return notes.map(note => {
+    if (note.type !== 'note-txt') return {...note, desc:'You can write here what ever you like...'}
+    else return note
+  })
+   notes
 }
 
 function _finishUpdating(notes) {
