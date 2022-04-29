@@ -1,8 +1,8 @@
 import { ColorPicker } from './color-picker.jsx'
-import { InlineEdit } from './inline-edit.jsx'
 import { notesService } from '../services/note.service.js'
-import { Todos } from './todo.jsx'
-import { MapNote } from './map-note.jsx'
+import { NoteContent } from './dynamic-note-content.jsx'
+import { InlineEdit } from './inline-edit.jsx'
+
 const { withRouter } = ReactRouterDOM
 
 class _NotePreview extends React.Component {
@@ -137,16 +137,27 @@ class _NotePreview extends React.Component {
   }
 
   render() {
+
     const { isPainting } = this.state
     const { note, onPinNote, onCloneNote } = this.props
     const { id } = note
+
+
     return (
       <div className="note" style={note.style} ref={this.noteRef}>
         <div>
           {note.isPinned && (
-            <img className="pin-img" src="../../assets/img/pin-ico.png"></img>
+            <img className="pin-img" src='../../../assets/img/pin-ico.png'></img>
           )}
-          <div className="note-content">{this.getNoteContent()}</div>
+          <div className="note-content">
+            <NoteContent 
+              note={note} 
+              onRemoveTodo={this.onRemoveTodo} 
+              onAddTodo={this.onAddTodo} 
+              onFinishTodo={this.onFinishTodo} 
+              onAddLocation={this.onAddLocation} />
+              {note.type !== 'note-txt' && <InlineEdit txt={note.desc} onInlineInputChange={this.onInlineInputChange}/>}
+          </div>
         </div>
         <div className="note-footer">
           <span className="created-at">{note.createdAt}</span>
@@ -181,8 +192,5 @@ class _NotePreview extends React.Component {
   }
 }
 
-function getVideoId(videoUrl) {
-  return videoUrl.substring(videoUrl.indexOf('=') + 1)
-}
 
 export const NotePreview = withRouter(_NotePreview)

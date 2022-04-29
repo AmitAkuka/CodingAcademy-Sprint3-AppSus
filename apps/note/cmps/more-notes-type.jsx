@@ -16,6 +16,13 @@ export function MoreNotesTypes({ onChangeNoteType }) {
         className="fa fa-map-o fa-lg"
         title="Map"
       ></i>
+      <i class="fa fa-microphone fa-lg" title="Record" onClick={(event) => onChangeNoteType(event, 'note-record')}></i>
+      <i
+            onClick={(event) => onChangeNoteType(event, 'note-todo')}
+            className="fa fa-list fa-lg"
+            title="Todo"
+          ></i>
     </div>
+    
   )
 }

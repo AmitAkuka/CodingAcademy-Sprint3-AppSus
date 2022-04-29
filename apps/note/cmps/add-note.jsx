@@ -7,6 +7,9 @@ export class AddNote extends React.Component {
       content: '',
     },
     isMoreTypes: false,
+    isAddingRecord: false,
+    isRecording: false,
+    mediaRecorder: null,
   }
 
   inputRef = React.createRef()
@@ -14,7 +17,6 @@ export class AddNote extends React.Component {
   txtIcoRef = React.createRef()
   imgIcoRef = React.createRef()
   videoIcoRef = React.createRef()
-  todoIcoRef = React.createRef()
 
   handleChange = ({ target }) => {
     const field = target.name
@@ -48,19 +50,25 @@ export class AddNote extends React.Component {
       case 'note-map':
         this.inputRef.current.placeholder = 'Give us a title for this map'
         break
+      case 'note-record':
+        this.inputRef.current.placeholder = 'What are you recording about?'
+        break
     }
 
     this.clearChosenTypeIcons()
     if (
       type !== 'note-canvas' &&
       type !== 'note-audio' &&
-      type !== 'note-map'
+      type !== 'note-map' && 
+      type !== 'note-record' &&
+      type !== 'note-todo'
     ) {
       ev.target.classList.add('active')
     }
 
+
     this.setState((prevState) => {
-      return { newNote: { ...prevState.newNote, type } }
+      return { newNote: { ...prevState.newNote, type }, isAddingRecord: type === 'note-record' }
     })
   }
 
@@ -77,14 +85,47 @@ export class AddNote extends React.Component {
     this.txtIcoRef.current.classList.remove('active')
     this.imgIcoRef.current.classList.remove('active')
     this.videoIcoRef.current.classList.remove('active')
-    this.todoIcoRef.current.classList.remove('active')
+  }
+
+  toggleRecord = (ev) => {
+    const {isRecording} = this.state
+    ev.target.classList.toggle('red')
+    
+    if(!isRecording) {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        const mediaRecorder = new MediaRecorder(stream);
+        this.setState({mediaRecorder, isRecording:true}, this.startRecording)
+      })
+    } else {
+      this.setState({isRecording:true}, this.stopRecording)
+    }
+  }
+  
+  startRecording = () => {
+    const {mediaRecorder} = this.state
+    mediaRecorder.start()
+    const audioChunks = [];
+    mediaRecorder.addEventListener("dataavailable", event => {
+      audioChunks.push(event.data);
+    });
+    mediaRecorder.addEventListener("stop", () => {
+      const audioBlob = new Blob(audioChunks);
+      const audioUrl = URL.createObjectURL(audioBlob);
+      this.setState((prevState) => {return {newNote: {...prevState.newNote, audioUrl}}})
+    });
+  }
+
+  stopRecording = () => {
+    const {mediaRecorder} = this.state
+    mediaRecorder.stop();
   }
 
   render() {
-    const { newNote, isMoreTypes } = this.state
+    const { newNote, isMoreTypes, isAddingRecord } = this.state
     return (
       <section className="add-note">
-        <form onSubmit={this.onAddNote}>
+        <form className='add-note-form' onSubmit={this.onAddNote}>
           <input
             name="content"
             type="text"
@@ -92,7 +133,8 @@ export class AddNote extends React.Component {
             onChange={this.handleChange}
             value={newNote.content}
             ref={this.inputRef}
-          />
+            />
+            {isAddingRecord && <i className="fa fa-circle fa-lg rec-ico" onClick={this.toggleRecord}></i>}
         </form>
         <div className="note-type-container">
           <i
@@ -112,12 +154,6 @@ export class AddNote extends React.Component {
             className="fa fa-youtube-play fa-lg"
             ref={this.videoIcoRef}
             title="Video"
-          ></i>
-          <i
-            onClick={(event) => this.onChangeNoteType(event, 'note-todo')}
-            className="fa fa-list fa-lg"
-            ref={this.todoIcoRef}
-            title="Todo"
           ></i>
           <i
             className="fa fa-bars fa-lg"
