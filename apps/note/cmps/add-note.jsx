@@ -98,13 +98,15 @@ export class AddNote extends React.Component {
         this.setState({mediaRecorder, isRecording:true}, this.startRecording)
       })
     } else {
-      this.setState({isRecording:true}, this.stopRecording)
+      this.setState({isRecording:false}, this.stopRecording)
     }
   }
   
   startRecording = () => {
     const {mediaRecorder} = this.state
     mediaRecorder.start()
+    this.inputRef.current.placeholder = 'Recording...'
+    this.inputRef.current.disabled = true
     const audioChunks = [];
     mediaRecorder.addEventListener("dataavailable", event => {
       audioChunks.push(event.data);
@@ -119,6 +121,8 @@ export class AddNote extends React.Component {
   stopRecording = () => {
     const {mediaRecorder} = this.state
     mediaRecorder.stop();
+    this.inputRef.current.placeholder = 'What are you recording about?'
+    this.inputRef.current.disabled = false
   }
 
   render() {

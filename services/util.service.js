@@ -6,6 +6,7 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    getRandFromArray
 }
 
 function makeId(length = 8) {
@@ -59,4 +60,9 @@ function getMonthName(date) {
         "July", "August", "September", "October", "November", "December"
     ]
     return monthNames[date.getMonth()]
+}
+
+function getRandFromArray(array) {
+    const idx = getRandomIntInclusive(0, array.length - 1)
+    return array[idx]
 }
