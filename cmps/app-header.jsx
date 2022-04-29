@@ -1,8 +1,9 @@
 import { EmailFilter } from "../apps/mail/cmps/email-filter.jsx"
+import { FilterNotes } from "../apps/note/cmps/filter-notes.jsx"
 
 const { NavLink,Link,Route, Switch } = ReactRouterDOM
 
-export function AppHeader({onFilterEmails}) {
+export function AppHeader({onFilter}) {
   return (
     <header className="app-header-container">
       <div className="logo">
@@ -14,8 +15,8 @@ export function AppHeader({onFilterEmails}) {
         <h1>AppSus</h1>
         </Link>
       <Switch>
-        <Route path="/Emails"><EmailFilter onFilterEmails={onFilterEmails} /></Route>
-        {/* <Route path="/Notes" component={NoteApp} /> */}
+        <Route path="/Emails"><EmailFilter onFilterEmails={onFilter} /></Route>
+        <Route path="/Notes" ><FilterNotes onChangeFilter={onFilter}/> </Route>
       </Switch>
       </div>
       <nav className="nav-btns-container">
