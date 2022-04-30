@@ -100,7 +100,7 @@ class _NotePreview extends React.Component {
           {note.isPinned && (
             <img
               className="pin-img"
-              src="../../../assets/img/pin-ico.png"
+              src={'../../../assets/img/pin-ico.png'}
             ></img>
           )}
           <div className="note-content">
