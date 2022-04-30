@@ -62,11 +62,6 @@
     font-size: 23px;
 }
 
-.nav-container .unreaded-amout {
-    text-align: end;
-    width: 100%;
-}
-
 .active {
     background-color: lightblue;
 }

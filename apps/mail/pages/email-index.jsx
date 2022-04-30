@@ -101,7 +101,7 @@ export class EmailApp extends React.Component {
     const { emails, selectedEmail, unreadedAmout, filterBy } = this.state
     // const { pathname } = this.props.location
     return <React.Fragment>
-      <AppHeader onFilterEmails={this.onFilterEmails} />
+      <AppHeader onFilter={this.onFilterEmails} />
       <section className="main-email-container">
         <section className="email-container">
           <EmailFolderList unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />

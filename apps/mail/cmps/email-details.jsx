@@ -12,7 +12,7 @@ export function EmailDetails({email,onDeleteEmail,onTransferToNote}) {
       </header>
       <div className="sender-info-container">
         <div className="sender-info">
-          <img src={`../../assets/img/ProfilePics/${profilePic}.png`} />
+          <img src={`assets/img/ProfilePics/${profilePic}.png`} />
           <div className="addresses-container">
             <div className="sender-address-container">
               <span>{'From: ' + userName}</span><span> {'<' + from + '>'}</span>

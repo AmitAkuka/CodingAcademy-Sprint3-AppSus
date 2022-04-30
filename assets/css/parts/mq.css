@@ -51,10 +51,6 @@
         flex-direction: column;
         align-items: center;
     }
-    .nav-container .unreaded-amout {
-        text-align: left;
-        width: 0;
-    }
     .folder-btn span {
         padding-inline-start: 0;
     }
@@ -63,9 +59,6 @@
     }
     .email-main-container {
         margin-inline-end: 0;
-    }
-    html {
-        font-size: 14px;
     }
 }
 
@@ -90,6 +83,9 @@
     .sub-filter-container {
         margin-inline-start: 20px;
     }
+    .email-container .email-details-container {
+        margin-inline-end: 25px;
+    }
     html {
         font-size: 14px;
     }
@@ -99,14 +95,6 @@
 /* LARGE */
 
 @media screen and (min-width: 1040px) {
-    /* .main-layout {
-      max-width: 800px;
-  } */
-    /* .main-header .main-nav a {
-      height: 120px;
-      width: 120px;
-  }
-  */
     .sub-filter-container {
         margin-inline-start: 0px;
     }

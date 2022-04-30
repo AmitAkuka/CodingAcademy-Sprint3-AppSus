@@ -1,5 +1,4 @@
 .email-container .email-details-container {
-    margin-inline-end: 25px;
     flex-grow: 1;
     border: 1px solid lightgrey;
     display: flex;

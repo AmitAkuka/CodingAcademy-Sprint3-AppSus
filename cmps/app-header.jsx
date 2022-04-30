@@ -15,6 +15,7 @@ export class AppHeader extends React.Component {
   }
   render() {
     const { onFilter } = this.props
+    console.log(this.props)
     const { isNavListOpen } = this.state
     return <header className="app-header-container main-layout">
       <div className="logo">
@@ -22,7 +23,7 @@ export class AppHeader extends React.Component {
           {/* <i className="fa fa-bars"></i> */}
         </div>
         <Link to="/">
-          <img src="../../assets/img/horse-logo.jpg" />
+          <img src="assets/img/horse-logo.jpg" />
           <h1>AppSus</h1>
         </Link>
         <Switch>
@@ -31,7 +32,7 @@ export class AppHeader extends React.Component {
         </Switch>
       </div>
       <nav className="nav-btns-container">
-        <img src="../../assets/img/squared-menu.png" onClick={this.onClickNavMenu} />
+        <img src="assets/img/squared-menu.png" onClick={this.onClickNavMenu} />
         {isNavListOpen && <NavList onClickNavMenu={this.onClickNavMenu}/>}
       </nav>
     </header>
