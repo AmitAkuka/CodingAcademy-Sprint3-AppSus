@@ -7,11 +7,11 @@ export class NoteContent extends React.Component {
     
    render() {
 
-        const NoteContent = ({note,onAddLocation, onAddTodo, onFinishTodo, onRemoveTodo}) => {
+        const NoteContent = ({note,onAddLocation, onAddTodo, onFinishTodo, onRemoveTodo, onInlineInputChange}) => {
             const {type, info} = note
       switch(type) {
         case 'note-txt':
-          return <InlineEdit txt= {info.txt} />
+          return <InlineEdit txt={info.txt} onInlineInputChange={this.props.onInlineInputChange} />
         case 'note-img':
           return <img src={info.imgUrl}></img>
         case 'note-video':
@@ -51,7 +51,7 @@ export class NoteContent extends React.Component {
             <h3>{info.subject}</h3>
             <h4>From: {info.to}</h4>
             </div>
-            <InlineEdit txt={info.body} />
+            <InlineEdit txt={info.body} onInlineInputChange={onInlineInputChange} />
           </div>
       }
     }

@@ -27,7 +27,7 @@ export class InlineEdit extends React.Component {
     const { txt } = this.state
     return (
       <div className="inline-txt-container">
-          <form onSubmit={this.onInlineInputChange} id="inline-form">
+          <form id="inline-form">
             <textarea
               className="inline-input"
               rows={1}

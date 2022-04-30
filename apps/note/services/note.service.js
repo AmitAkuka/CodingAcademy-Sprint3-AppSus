@@ -421,6 +421,7 @@ function cloneNote(note) {
 function updateNoteTxt(noteId, txt) {
   const notes = _loadNotesFromStorage();
   const note = getNoteById(notes, noteId);
+  console.log(note);
   if (note.type === "note.txt") note.info.txt = txt;
   else note.desc = txt;
   return _finishUpdating(notes);

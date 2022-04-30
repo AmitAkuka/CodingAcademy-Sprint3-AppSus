@@ -142,7 +142,6 @@ class _NotePreview extends React.Component {
     const { note, onPinNote, onCloneNote } = this.props
     const { id, style } = note
 
-
     return (
       <div className="note" style={note.style} ref={this.noteRef}>
         <div>
@@ -155,7 +154,9 @@ class _NotePreview extends React.Component {
               onRemoveTodo={this.onRemoveTodo} 
               onAddTodo={this.onAddTodo} 
               onFinishTodo={this.onFinishTodo} 
-              onAddLocation={this.onAddLocation} />
+              onAddLocation={this.onAddLocation} 
+              onInlineInputChange={this.onInlineInputChange}
+              />
               {note.type !== 'note-txt' && <InlineEdit txt={note.desc} onInlineInputChange={this.onInlineInputChange}/>}
           </div>
         </div>
@@ -163,22 +164,27 @@ class _NotePreview extends React.Component {
           <span className={style && style.backgroundColor === 'yellow' ? 'created-at dark' : 'created-at'}>{note.createdAt}</span>
           <div className="tools-container">
             <i
+            title='Pin note'
               onClick={() => onPinNote(id)}
               className="fa fa-thumb-tack fa-md"
             ></i>
             <i
+            title='Clone note'
               onClick={() => onCloneNote(note)}
               className="fa fa-clone fa-md"
             ></i>
             <i
+            title='Send via email'
               onClick={() => this.sendToMail(note)}
               className="fa fa-envelope fa-md"
             ></i>
             <i
+            title='Background color'
               onClick={this.togglePainting}
               className="fa fa-paint-brush fa-md"
             ></i>
             <i
+            title='Delete'
               onClick={() => this.onDeleteNote(id)}
               className="fa fa-trash fa-lg"
             ></i>
