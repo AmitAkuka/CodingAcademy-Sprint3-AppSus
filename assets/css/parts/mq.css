@@ -60,6 +60,19 @@
     .email-main-container {
         margin-inline-end: 0;
     }
+    .main-input-container input {
+        width: 250px;
+    }
+    .main-input-container .sort-filter {
+        width: 100px;
+    }
+    .sub-filter-container {
+        margin-inline-start: 20px;
+        width: 225px;
+    }
+    .sub-filter-container button {
+        width: 75px;
+    }
 }
 
 

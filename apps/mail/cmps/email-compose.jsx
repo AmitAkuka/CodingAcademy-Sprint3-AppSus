@@ -49,7 +49,11 @@ class _EmailCompose extends React.Component {
     ev.preventDefault()
     const { mailContent } = this.state
     emailService.addEmail(mailContent)
-      .then(() => this.onDelete())
+      .then(() =>  {
+        eventBusService.emit('user-msg', {
+          type: 'success', txt: 'Email sent successfuly!'
+      })
+          this.onDelete()})
   }
 
 
@@ -60,6 +64,9 @@ class _EmailCompose extends React.Component {
 
   onDelete() {
     this.cleanCompose()
+    eventBusService.emit('user-msg', {
+      type: 'success', txt: 'Email deleted successfuly!'
+  })
     this.props.history.push({search: ''})
   }
 

@@ -1,0 +1,38 @@
+.user-msg-container {
+    height: 100px;
+    width: 250px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+}
+
+.user-msg-container button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+.user-msg-container h5 {
+    margin: 5px;
+}
+
+.success {
+    background-color: #22ed22;
+    border: 2px solid white;
+}
+
+.danger {
+    background-color: red;
+    color: black;
+    border: 2px solid black;
+}

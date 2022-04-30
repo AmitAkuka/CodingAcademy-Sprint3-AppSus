@@ -5,7 +5,7 @@ import { EmailList } from '../cmps/email-list.jsx'
 import { EmailDetails } from '../cmps/email-details.jsx'
 import { EmailFolderList } from '../cmps/email-folder-list.jsx'
 import { AppHeader } from '../../../cmps/app-header.jsx'
-// import { EmailCompose } from '../cmps/email-compose.jsx'
+
 
 const { Route } = ReactRouterDOM
 
@@ -48,7 +48,11 @@ export class EmailApp extends React.Component {
   onFavoriteAdd = (event, email) => {
     event.stopPropagation();
     emailService.setEmailFavorite(email.id)
-      .then(this.loadEmails)
+      .then(() => {
+        let msg = (email.isFavorite) ? {type: 'danger',txt: 'Deleted from favorites!'} : {type: 'success',txt: 'Added to favorites!'}
+        eventBusService.emit('user-msg', {
+          type: msg.type, txt: msg.txt })
+        this.loadEmails()})
   }
 
   onSelectEmail = (selectedEmail, event = false) => {
@@ -74,6 +78,8 @@ export class EmailApp extends React.Component {
     event.stopPropagation()
     emailService.deleteEmail(email.id)
       .then(() => {
+        eventBusService.emit('user-msg', {
+          type: 'danger', txt: 'Email deleted!' })
         this.loadEmails()
         this.setState({ selectedEmail: null })
       })

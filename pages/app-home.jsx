@@ -1,4 +1,3 @@
-import { AppHeader } from "../cmps/app-header.jsx"
 const { Link } = ReactRouterDOM
 
 export function AppHome() {

@@ -1,0 +1,71 @@
+.app-about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    justify-content: center;
+}
+
+.app-about-container h1 {
+    font-size: 5rem;
+    font-weight: 700;
+}
+
+.app-about-container main {
+    display: flex;
+    gap: 120px;
+}
+
+.avi-info-container,
+.amit-info-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+}
+
+.avi-info-container>img,
+.amit-info-container>img {
+    border-radius: 325px;
+    height: 250px;
+}
+
+.avi-info-container a button,
+.amit-info-container a button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.avi-info-container button>img,
+.amit-info-container button>img {
+    height: 40px;
+}
+
+.app-about-container a>button {
+    margin-bottom: 50px;
+}
+
+.app-about-container h1 {
+    margin: 0;
+}
+
+.app-about-container footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    height: 12vh;
+    width: 100%;
+    background: #252525;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.app-about-container footer img {
+    height: 80px;
+}

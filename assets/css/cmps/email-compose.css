@@ -2,8 +2,8 @@
     position: fixed;
     bottom: 0;
     height: 420px;
-    width: 450px;
-    right: 140px;
+    width: 440px;
+    right: 40px;
     border-radius: 17px 17px 0 0;
     border: 1px solid dimgray;
     animation-name: scale-in-ver-center;

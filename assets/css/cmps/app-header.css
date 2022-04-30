@@ -164,9 +164,13 @@ footer .info-container {
     display: flex;
     justify-content: space-around;
     gap: 50px;
+    flex-wrap: wrap;
 }
 
-.home-buttons-container button {
+.home-buttons-container button,
+.amit-info-container button,
+.avi-info-container button,
+.app-about-container a>button {
     background-color: #222;
     border-radius: 4px;
     border-style: none;
