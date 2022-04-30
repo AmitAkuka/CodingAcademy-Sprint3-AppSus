@@ -29,11 +29,6 @@
     z-index: 999;
 }
 
-.note canvas {
-    background-color: white;
-    width: 100%;
-}
-
 .note audio {
     width: 100%;
     padding: 0.5rem;
