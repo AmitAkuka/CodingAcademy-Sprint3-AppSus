@@ -1,0 +1,26 @@
+.canvas-container .tools-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: rgb(48, 48, 48);
+    background-color: lightgray;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.canvas-container .tools-container .draw-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.canvas-container .tools-container .draw-container i.sm {
+    font-size: 12px;
+}
+.canvas-container .tools-container .draw-container i.md {
+    font-size: 16px;
+}
+.canvas-container .tools-container .draw-container i.lg {
+    font-size: 20px;
+}

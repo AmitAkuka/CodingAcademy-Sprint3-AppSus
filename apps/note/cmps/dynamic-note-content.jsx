@@ -1,6 +1,7 @@
 import { MapNote } from './map-note.jsx'
 import { Todos } from './todo.jsx'
 import { InlineEdit } from './inline-edit.jsx'
+import { NoteCanvas } from './note-canvas.jsx'
 
 export class NoteContent extends React.Component {
   render() {
@@ -45,12 +46,7 @@ export class NoteContent extends React.Component {
             </audio>
           )
         case 'note-canvas':
-          return (
-            <div className="canvas-container">
-              <h3>{info.canvasHeading}</h3>
-              <canvas width="100%" height="100%"></canvas>
-            </div>
-          )
+          return <NoteCanvas noteHeading={info.canvasHeading} />
         case 'note-map':
           return (
             <MapNote

@@ -2,7 +2,6 @@ import { ColorPicker } from './color-picker.jsx'
 import { notesService } from '../services/note.service.js'
 import { NoteContent } from './dynamic-note-content.jsx'
 import { InlineEdit } from './inline-edit.jsx'
-import { node } from 'prop-types'
 
 const { withRouter } = ReactRouterDOM
 
