@@ -11,6 +11,7 @@ export function NoteList({
   onRemoveTodo,
   onFinishTodo,
   onAddLocation,
+  onInlineInputChange,
 }) {
   return (
     <section className="notes-list">
@@ -27,6 +28,7 @@ export function NoteList({
           onRemoveTodo={onRemoveTodo}
           onFinishTodo={onFinishTodo}
           onAddLocation={onAddLocation}
+          onInlineInputChange={onInlineInputChange}
         />
       ))}
     </section>

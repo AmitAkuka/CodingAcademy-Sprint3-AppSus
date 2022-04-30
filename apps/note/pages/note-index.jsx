@@ -26,9 +26,8 @@ export class NoteApp extends React.Component {
         content: {
           body: paramObj.body,
           subject: paramObj.subject,
-          to: paramObj.to
-        }
-
+          to: paramObj.to,
+        },
       }
 
       this.onAddNote(newNote)
@@ -69,8 +68,8 @@ export class NoteApp extends React.Component {
     notesService.cloneNote(note).then(this.loadNotes)
   }
 
-  onInlineEdit = (noteId, value) => {
-    notesService.onInlineEdit(noteId, value).then(this.loadNotes())
+  onInlineInputChange = (noteId, value) => {
+    notesService.updateNoteTxt(noteId, value).then(this.loadNotes())
   }
 
   onChangeFilter = (filterBy) => {
@@ -101,7 +100,7 @@ export class NoteApp extends React.Component {
     const { notes } = this.state
     return (
       <React.Fragment>
-        <AppHeader onFilter={this.onChangeFilter}/>
+        <AppHeader onFilter={this.onChangeFilter} />
         <section className="note-app-container">
           <AddNote onAddNote={this.onAddNote} />
           {notes.length ? (
@@ -114,7 +113,7 @@ export class NoteApp extends React.Component {
                 notes={this.getPinnedNotes(notes)}
                 onAddTodo={this.onAddTodo}
                 onCloneNote={this.onCloneNote}
-                onInlineEdit={this.onInlineEdit}
+                onInlineInputChange={this.onInlineInputChange}
                 onRemoveTodo={this.onRemoveTodo}
                 onFinishTodo={this.onFinishTodo}
                 onAddLocation={this.onAddLocation}
@@ -127,7 +126,7 @@ export class NoteApp extends React.Component {
                 notes={this.getRegNotes(notes)}
                 onAddTodo={this.onAddTodo}
                 onCloneNote={this.onCloneNote}
-                onInlineEdit={this.onInlineEdit}
+                onInlineInputChange={this.onInlineInputChange}
                 onRemoveTodo={this.onRemoveTodo}
                 onFinishTodo={this.onFinishTodo}
                 onAddLocation={this.onAddLocation}
