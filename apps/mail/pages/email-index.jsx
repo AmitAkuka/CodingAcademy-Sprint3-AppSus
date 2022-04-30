@@ -5,6 +5,7 @@ import { EmailList } from '../cmps/email-list.jsx'
 import { EmailDetails } from '../cmps/email-details.jsx'
 import { EmailFolderList } from '../cmps/email-folder-list.jsx'
 import { AppHeader } from '../../../cmps/app-header.jsx'
+// import { EmailCompose } from '../cmps/email-compose.jsx'
 
 const { Route } = ReactRouterDOM
 
@@ -32,10 +33,8 @@ export class EmailApp extends React.Component {
     if (!Object.keys(paramObj).length) {
       paramObj = null
     }
-    if (paramObj) {
-      eventBusService.emit('show-compose')
-      this.loadEmails()
-    } else this.loadEmails()
+    if (paramObj) eventBusService.emit('show-compose')
+    this.loadEmails()
     emailService.getUnreadAmout()
       .then((unreadedAmout) => this.setState({ unreadedAmout }))
   }
@@ -43,7 +42,7 @@ export class EmailApp extends React.Component {
   loadEmails = () => {
     emailService.query(this.state.filterBy)
       .then(emails => this.setState({ emails }))
-      console.log('got emails!',this.state.emails)
+    console.log('got emails!', this.state.emails)
   }
 
   onFavoriteAdd = (event, email) => {
@@ -84,7 +83,7 @@ export class EmailApp extends React.Component {
     console.log('FILTER SET', filterBy)
     const filterName = Object.keys(filterBy)
     const filterValue = Object.values(filterBy)[0]
-    console.log('Our new filter:', filterName,filterValue)
+    console.log('Our new filter:', filterName, filterValue)
     this.setState((prevState) => ({ filterBy: { ...prevState.filterBy, [filterName]: filterValue } }), () => {
       this.loadEmails()
       this.setState({ selectedEmail: null })
@@ -92,8 +91,8 @@ export class EmailApp extends React.Component {
   }
 
   onTransferToNote = (email) => {
-    const { to, subject, body } = email
-    const urlSrcPrm = new URLSearchParams({ to, subject, body })
+    const { id,to, subject, body } = email
+    const urlSrcPrm = new URLSearchParams({ id, to, subject, body })
     const paramStr = urlSrcPrm.toString()
     this.props.history.push(`/Notes?${paramStr}`)
   }

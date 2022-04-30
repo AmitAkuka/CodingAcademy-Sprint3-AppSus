@@ -58,7 +58,6 @@
 .email-preview-buttons {
     margin-inline-end: 15px;
     display: flex;
-    position: absolute;
     right: 0;
 }
 
@@ -83,7 +82,7 @@
 }
 
 .email-preview h2 {
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .email-preview h2:first-child {
@@ -92,6 +91,12 @@
 
 .email-preview .email-info-container .body-preview {
     flex-grow: 1;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .email-preview .email-info-container .body-preview span {
@@ -99,9 +104,10 @@
 }
 
 .time-preview {
-    min-width: 80px;
+    min-width: 125px;
+    margin-inline-end: 10px;
+    margin-inline-start: 10px;
     text-align: end;
-    margin-inline-end: 20px;
     font-size: 1rem;
 }
 

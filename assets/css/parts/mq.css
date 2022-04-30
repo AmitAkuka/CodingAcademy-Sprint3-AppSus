@@ -1,0 +1,123 @@
+/* Media queries
+
+
+/* SMALL */
+
+@media screen and (max-width: 740px) {
+    .sub-filter-container {
+        margin-inline-start: 70px;
+    }
+    .app-header-container .logo img {
+        width: 40px;
+    }
+    .email-filter-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    .email-preview h2:first-child {
+        min-width: 160px;
+    }
+    .main-input-container {
+        padding-inline-start: 0;
+    }
+    .sub-filter-container {
+        margin-inline-start: 20px;
+    }
+    html {
+        font-size: 14px;
+    }
+    .email-container .nav-container {
+        padding-inline-end: 0;
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        align-items: center;
+    }
+    .nav-container .compose-btn {
+        border-radius: 30px;
+        width: 60px;
+    }
+    .nav-container .compose-btn span {
+        display: none;
+    }
+    .email-container .nav-container>*:not(.compose-btn) {
+        width: 90px;
+        border-radius: 45px;
+        height: 90px;
+    }
+    .email-container .nav-container a div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-container .unreaded-amout {
+        text-align: left;
+        width: 0;
+    }
+    .folder-btn span {
+        padding-inline-start: 0;
+    }
+    .email-container {
+        flex-direction: column;
+    }
+    .email-main-container {
+        margin-inline-end: 0;
+    }
+    html {
+        font-size: 14px;
+    }
+}
+
+
+/* MEDIUM */
+
+@media screen and (min-width: 740px) {
+    .app-header-container .logo img {
+        width: 40px;
+    }
+    .email-filter-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    .email-preview h2:first-child {
+        min-width: 160px;
+    }
+    .main-input-container {
+        padding-inline-start: 0;
+    }
+    .sub-filter-container {
+        margin-inline-start: 20px;
+    }
+    html {
+        font-size: 14px;
+    }
+}
+
+
+/* LARGE */
+
+@media screen and (min-width: 1040px) {
+    /* .main-layout {
+      max-width: 800px;
+  } */
+    /* .main-header .main-nav a {
+      height: 120px;
+      width: 120px;
+  }
+  */
+    .sub-filter-container {
+        margin-inline-start: 0px;
+    }
+    .email-filter-container {
+        flex-direction: row;
+        gap: 50px;
+    }
+    .email-preview h2:first-child {
+        min-width: 220px;
+    }
+    html {
+        font-size: 16px;
+    }
+}

@@ -1,16 +1,15 @@
 .app-header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 0.5rem;
+    padding: 0 1.2rem;
     box-shadow: -1px 2px 5px 0px lightgrey;
-    margin-bottom: 1rem;
     height: 120px;
 }
 
 .app-header-container .logo {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .app-header-container .logo img {
@@ -62,6 +61,142 @@
     color: darkgray;
 }
 
+.nav-btns-container {
+    height: 45px;
+    cursor: pointer;
+    padding: 5px;
+    margin-inline-end: 5px;
+    margin-inline-start: 20px;
+}
+
+.nav-btns-container>img {
+    height: 100%
+}
+
+.nav-menu-container .icons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+.icons-container a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    padding: 5px
+}
+
+.icons-container img {
+    height: 40px;
+    width: 50px;
+}
+
+.icons-container>*:hover {
+    background-color: lightblue;
+}
+
+.nav-btns-container .nav-menu-container {
+    height: 250px;
+    position: fixed;
+    width: 150px;
+    right: 10px;
+    background: #2f2f2f;
+    z-index: 1;
+    border-radius: 10px;
+}
+
 .logo a {
     display: flex;
 }
+
+.app-home-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    width: 100%;
+}
+
+.app-home-container main {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.app-home-container main img {
+    height: 400px;
+    width: 550px;
+}
+
+.app-home-container main h1 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.app-home-container footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    height: 12vh;
+    width: 100%;
+    background: #252525;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.app-home-container footer img {
+    height: 80px;
+}
+
+footer .info-container {
+    display: flex;
+    align-items: center;
+}
+
+.home-buttons-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 50px;
+}
+
+.home-buttons-container button {
+    background-color: #222;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    max-width: none;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 20px 8px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 180px;
+    height: 70px;
+}
+
+.home-buttons-container button:hover,
+.home-buttons-container button:focus {
+    opacity: .75;
+}
+
+
+/* NAV MENU ICONS */

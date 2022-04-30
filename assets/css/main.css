@@ -2,8 +2,8 @@
 
 
 /* General CMPS IMPORTS */
-@import '../css/cmps/app-header.css';
 
+@import '../css/cmps/app-header.css';
 
 /* EMAIL CMPS IMPORTS */
 
@@ -31,6 +31,8 @@
 /* BASE IMPORTS */
 
 @import './parts/base.css';
+@import './parts/layout.css';
 @import './parts/fonts.css';
 @import './parts/helpers.css';
 @import './parts/animations.css';
+@import './parts/mq.css';

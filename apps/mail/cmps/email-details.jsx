@@ -1,6 +1,6 @@
 export function EmailDetails({email,onDeleteEmail,onTransferToNote}) {
 
-    const { id, subject, from, sentAt, body, userName, profilePic } = email
+    const { subject, from, sentAt, body, userName, profilePic } = email
     return <section className="email-details-container">
       <header className="email-header-container">
         <h2>{subject}</h2>

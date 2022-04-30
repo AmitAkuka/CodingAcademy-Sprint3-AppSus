@@ -109,7 +109,7 @@ function addEmail({ to, subject, body }) {
         id: utilService.makeId(),
         subject,
         body,
-        sentAt: 'few seconds ago..',
+        sentAt: Date.now(),
         to,
         from: loggedinUser.email,
         userName: loggedinUser.fullname,

@@ -26,6 +26,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .email-container .nav-container>*:not(.compose-btn) {
@@ -47,13 +48,8 @@
     background-color: #a3a3a3;
 }
 
-.email-container .nav-container div>* {
-    margin-inline-start: 15px;
-    margin-inline-end: 15px;
-}
-
-.email-container .nav-container div span {
-    margin-inline-start: 65px;
+.folder-btn span {
+    padding-inline-start: 65px;
 }
 
 .fa.fa-paper-plane {
