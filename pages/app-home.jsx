@@ -7,7 +7,7 @@ export function AppHome() {
         <img src="assets/img/Appsus-logo.png" />
         <h1>Welcome to AppSus!</h1>
         <section className="home-buttons-container">
-         <Link to="/Books"><button>Book App</button></Link> 
+         <Link to="/book-app"><button>Book App</button></Link> 
          <Link to="/Notes"><button>Note App</button></Link> 
          <Link to="/Emails/Inbox"><button>Email App</button></Link> 
          <Link to="/About"><button>About</button></Link> 
