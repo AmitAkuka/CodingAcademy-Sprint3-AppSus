@@ -140,7 +140,7 @@ class _NotePreview extends React.Component {
 
     const { isPainting } = this.state
     const { note, onPinNote, onCloneNote } = this.props
-    const { id } = note
+    const { id, style } = note
 
 
     return (
@@ -160,7 +160,7 @@ class _NotePreview extends React.Component {
           </div>
         </div>
         <div className="note-footer">
-          <span className="created-at">{note.createdAt}</span>
+          <span className={style && style.backgroundColor === 'yellow' ? 'created-at dark' : 'created-at'}>{note.createdAt}</span>
           <div className="tools-container">
             <i
               onClick={() => onPinNote(id)}

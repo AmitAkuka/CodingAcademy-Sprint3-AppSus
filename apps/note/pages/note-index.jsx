@@ -19,13 +19,16 @@ export class NoteApp extends React.Component {
     for (var value of urlSrcPrm.keys()) {
       paramObj[value] = urlSrcPrm.get(value)
     }
-
-    console.log(paramObj)
     if (Object.keys(paramObj).length) {
       console.log('in')
       const newNote = {
-        type: 'note-txt',
-        content: paramObj.body,
+        type: 'note-email',
+        content: {
+          body: paramObj.body,
+          subject: paramObj.subject,
+          to: paramObj.to
+        }
+
       }
 
       this.onAddNote(newNote)

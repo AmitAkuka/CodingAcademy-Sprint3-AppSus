@@ -33,6 +33,7 @@ export class MapNote extends React.Component {
         <div className="map-container" id={`${mapId}`}></div>
         <h4 className="locs-heading">Your locations:</h4>
         <ul className="locations-list">
+          {!locations.length && <span>click the map to add locations</span>}
           {locations.map((loc) => {
             return (
               <li key={loc.id} className="loc">{`lat:${loc.lat.toFixed(

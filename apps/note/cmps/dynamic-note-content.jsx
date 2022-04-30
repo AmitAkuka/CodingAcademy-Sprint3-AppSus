@@ -45,6 +45,14 @@ export class NoteContent extends React.Component {
           <source src={info.audioUrl} type="audio/mp3" />
         </audio>
           </div>
+        case 'note-email':
+          return <div className='email-note-container'>
+            <div className="email-note-header">
+            <h3>{info.subject}</h3>
+            <h4>From: {info.to}</h4>
+            </div>
+            <InlineEdit txt={info.body} />
+          </div>
       }
     }
 
