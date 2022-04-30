@@ -1,8 +1,8 @@
 import { notesService } from '../services/note.service.js'
 import { NoteList } from '../cmps/note-list.jsx'
 import { AddNote } from '../cmps/add-note.jsx'
-import { FilterNotes } from '../cmps/filter-notes.jsx'
 import { AppHeader } from '../../../cmps/app-header.jsx'
+import { eventBusService } from '../../../services/event-bus-service.js'
 
 export class NoteApp extends React.Component {
   state = {
@@ -20,7 +20,6 @@ export class NoteApp extends React.Component {
       paramObj[value] = urlSrcPrm.get(value)
     }
     if (Object.keys(paramObj).length) {
-      console.log('in')
       const newNote = {
         type: 'note-email',
         content: {
@@ -44,12 +43,21 @@ export class NoteApp extends React.Component {
 
   onAddNote = (note) => {
     notesService.addNote(note).then(this.loadNotes)
+    eventBusService.emit('user-msg', {
+      type: 'success',
+      txt: 'Note added succesfuly!',
+    })
   }
 
   onDeleteNote = (noteId) => {
     setTimeout(() => {
       notesService.deleteNote(noteId).then(this.loadNotes)
     }, 1000)
+
+    eventBusService.emit('user-msg', {
+      type: 'danger',
+      txt: 'Note deleted!',
+    })
   }
 
   onChangeNoteColor = (noteId, color) => {
@@ -58,14 +66,26 @@ export class NoteApp extends React.Component {
 
   onPinNote = (noteId) => {
     notesService.pinNote(noteId).then(this.loadNotes)
+    eventBusService.emit('user-msg', {
+      type: 'success',
+      txt: 'Note pinned!',
+    })
   }
 
   onAddTodo = (noteId, todo) => {
     notesService.addTodo(noteId, todo).then(this.loadNotes)
+    eventBusService.emit('user-msg', {
+      type: 'success',
+      txt: 'Todo added!',
+    })
   }
 
   onCloneNote = (note) => {
     notesService.cloneNote(note).then(this.loadNotes)
+    eventBusService.emit('user-msg', {
+      type: 'success',
+      txt: 'Note cloned!',
+    })
   }
 
   onInlineInputChange = (noteId, value) => {
@@ -78,6 +98,10 @@ export class NoteApp extends React.Component {
 
   onRemoveTodo = (noteId, todoId) => {
     notesService.removeTodo(noteId, todoId).then(this.loadNotes())
+    eventBusService.emit('user-msg', {
+      type: 'danger',
+      txt: 'Todo removed!',
+    })
   }
 
   onFinishTodo = (noteId, todoId) => {
