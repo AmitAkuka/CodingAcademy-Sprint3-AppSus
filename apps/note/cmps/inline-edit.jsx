@@ -11,15 +11,17 @@ export class InlineEdit extends React.Component {
 
   handleChange = ({ target }) => {
     this.resizeTextBox(target)
-    
-    this.setState({ txt: target.value }, () => this.props.onInlineInputChange(this.state.txt))
-    
+    this.setState({ txt: target.value })
+  }
+
+  saveTxt = () => {
+    this.props.onInlineInputChange(this.state.txt)
   }
 
   resizeTextBox(target) {
     if (target.scrollHeight > 33) {
       target.style.height = '5px'
-      target.style.height = (target.scrollHeight) + 'px'
+      target.style.height = target.scrollHeight + 16 + 'px'
     }
   }
 
@@ -27,17 +29,18 @@ export class InlineEdit extends React.Component {
     const { txt } = this.state
     return (
       <div className="inline-txt-container">
-          <form onSubmit={this.onInlineInputChange} id="inline-form">
-            <textarea
-              className="inline-input"
-              rows={1}
-              type="text"
-              name="txt"
-              value={txt}
-              onChange={this.handleChange}
-              ref={this.textRef}
-            />
-          </form>
+        <form id="inline-form">
+          <textarea
+            className="inline-input"
+            rows={1}
+            type="text"
+            name="txt"
+            value={txt}
+            onChange={this.handleChange}
+            ref={this.textRef}
+            onBlur={this.saveTxt}
+          />
+        </form>
       </div>
     )
   }

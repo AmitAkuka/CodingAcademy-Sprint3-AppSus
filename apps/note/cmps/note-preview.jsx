@@ -2,6 +2,7 @@ import { ColorPicker } from './color-picker.jsx'
 import { notesService } from '../services/note.service.js'
 import { NoteContent } from './dynamic-note-content.jsx'
 import { InlineEdit } from './inline-edit.jsx'
+import { node } from 'prop-types'
 
 const { withRouter } = ReactRouterDOM
 
@@ -12,8 +13,12 @@ class _NotePreview extends React.Component {
 
   noteRef = React.createRef()
 
-  togglePainting = () => {
-    this.setState({ isPainting: !this.state.isPainting })
+  openPainting = () => {
+    if (this.state.isPainting) return
+    this.setState({ isPainting: true })
+  }
+  closePainting = () => {
+    this.setState({ isPainting: false })
   }
 
   onChangeNoteColor = (color) => {
@@ -34,9 +39,7 @@ class _NotePreview extends React.Component {
   }
 
   onInlineInputChange = (txt) => {
-    notesService
-      .updateNoteTxt(this.props.note.id, txt)
-      .then((notes) => this.setState({ notes }))
+    this.props.onInlineInputChange(this.props.note.id, txt)
   }
 
   onRemoveTodo = (todoId) => {
@@ -87,110 +90,84 @@ class _NotePreview extends React.Component {
     this.props.history.push(`/Emails/Inbox?${searchStr}`)
   }
 
-  getNoteContent = () => {
-    const { info, id } = this.props.note
-    if (info.txt)
-      return (
-        <InlineEdit
-          txt={info.txt}
-          onInlineInputChange={this.onInlineInputChange}
-        />
-      )
-    if (info.imgUrl) return <img src={info.imgUrl}></img>
-    if (info.videoUrl)
-      return (
-        <iframe
-          src={`https://www.youtube.com/embed/${getVideoId(info.videoUrl)}`}
-        ></iframe>
-      )
-    if (info.todos)
-      return (
-        <Todos
-          onRemoveTodo={this.onRemoveTodo}
-          info={info}
-          onAddTodo={this.onAddTodo}
-          onFinishTodo={this.onFinishTodo}
-        />
-      )
-    if (info.canvasHeading)
-      return (
-        <div className="canvas-container">
-          <h3>{info.canvasHeading}</h3>
-          <canvas width="100%" height="100%"></canvas>
-        </div>
-      )
-    if (info.audioLink)
-      return (
-        <audio controls autoplay>
-          <source src={info.audioLink} type="audio/mp3" />
-        </audio>
-      )
-
-    if (info.locations)
-      return (
-        <MapNote
-          onAddLocation={this.onAddLocation}
-          mapId={info.mapId}
-          locations={info.locations}
-        />
-      )
-  }
-
   render() {
-
     const { isPainting } = this.state
     const { note, onPinNote, onCloneNote } = this.props
-    const { id } = note
-
+    const { id, style } = note
 
     return (
       <div className="note" style={note.style} ref={this.noteRef}>
         <div>
           {note.isPinned && (
-            <img className="pin-img" src='../../../assets/img/pin-ico.png'></img>
+            <img
+              className="pin-img"
+              src="../../../assets/img/pin-ico.png"
+            ></img>
           )}
           <div className="note-content">
-            <NoteContent 
-              note={note} 
-              onRemoveTodo={this.onRemoveTodo} 
-              onAddTodo={this.onAddTodo} 
-              onFinishTodo={this.onFinishTodo} 
-              onAddLocation={this.onAddLocation} />
-              {note.type !== 'note-txt' && <InlineEdit txt={note.desc} onInlineInputChange={this.onInlineInputChange}/>}
+            <NoteContent
+              note={note}
+              onRemoveTodo={this.onRemoveTodo}
+              onAddTodo={this.onAddTodo}
+              onFinishTodo={this.onFinishTodo}
+              onAddLocation={this.onAddLocation}
+              onInlineInputChange={this.onInlineInputChange}
+            />
+            {note.type !== 'note-txt' && (
+              <InlineEdit
+                txt={note.desc}
+                onInlineInputChange={this.onInlineInputChange}
+              />
+            )}
           </div>
         </div>
         <div className="note-footer">
-          <span className="created-at">{note.createdAt}</span>
+          <span
+            className={
+              style && style.backgroundColor === 'yellow'
+                ? 'created-at dark'
+                : 'created-at'
+            }
+          >
+            {note.createdAt}
+          </span>
           <div className="tools-container">
             <i
+              title="Pin note"
               onClick={() => onPinNote(id)}
               className="fa fa-thumb-tack fa-md"
             ></i>
             <i
+              title="Clone note"
               onClick={() => onCloneNote(note)}
               className="fa fa-clone fa-md"
             ></i>
             <i
+              title="Send via email"
               onClick={() => this.sendToMail(note)}
               className="fa fa-envelope fa-md"
             ></i>
             <i
-              onClick={this.togglePainting}
+              title="Background color"
+              onClick={this.openPainting}
               className="fa fa-paint-brush fa-md"
             ></i>
             <i
+              title="Delete"
               onClick={() => this.onDeleteNote(id)}
               className="fa fa-trash fa-lg"
             ></i>
           </div>
         </div>
         {isPainting && (
-          <ColorPicker onChangeNoteColor={this.onChangeNoteColor} />
+          <ColorPicker
+            closePainting={this.closePainting}
+            onChangeNoteColor={this.onChangeNoteColor}
+          />
         )}
       </div>
     )
   }
 }
-
 
 export const NotePreview = withRouter(_NotePreview)

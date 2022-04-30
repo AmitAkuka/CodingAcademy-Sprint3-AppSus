@@ -26,17 +26,19 @@ export class FilterNotes extends React.Component {
   render() {
     const { filterBy } = this.state
     return (
-      <div className="filter-notes">
+      <div className="notes-filter-container">
+        <section className="main-input-container">
         <form onSubmit={this.onSearch}>
+        <i className="fa fa-search"></i>
           <input
             onChange={this.handleChange}
             type="text"
             name="txt"
-            placeholder="Search..."
+            placeholder="Search here..."
             value={filterBy.txt}
             disabled={filterBy.type !== 'note-txt'}
           />
-          <select onChange={this.handleChange} name="type">
+          <select className="sort-filter" onChange={this.handleChange} name="type">
             <option value="all">All</option>
             <option value="note-txt">Text</option>
             <option value="note-img">Image</option>
@@ -45,6 +47,7 @@ export class FilterNotes extends React.Component {
             <option value="note-pinned">Pinned</option>
           </select>
         </form>
+        </section>
       </div>
     )
   }

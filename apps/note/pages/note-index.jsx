@@ -2,6 +2,7 @@ import { notesService } from '../services/note.service.js'
 import { NoteList } from '../cmps/note-list.jsx'
 import { AddNote } from '../cmps/add-note.jsx'
 import { FilterNotes } from '../cmps/filter-notes.jsx'
+import { AppHeader } from '../../../cmps/app-header.jsx'
 
 export class NoteApp extends React.Component {
   state = {
@@ -18,13 +19,15 @@ export class NoteApp extends React.Component {
     for (var value of urlSrcPrm.keys()) {
       paramObj[value] = urlSrcPrm.get(value)
     }
-
-    console.log(paramObj)
     if (Object.keys(paramObj).length) {
       console.log('in')
       const newNote = {
-        type: 'note-txt',
-        content: paramObj.body,
+        type: 'note-email',
+        content: {
+          body: paramObj.body,
+          subject: paramObj.subject,
+          to: paramObj.to,
+        },
       }
 
       this.onAddNote(newNote)
@@ -65,8 +68,8 @@ export class NoteApp extends React.Component {
     notesService.cloneNote(note).then(this.loadNotes)
   }
 
-  onInlineEdit = (noteId, value) => {
-    notesService.onInlineEdit(noteId, value).then(this.loadNotes())
+  onInlineInputChange = (noteId, value) => {
+    notesService.updateNoteTxt(noteId, value).then(this.loadNotes())
   }
 
   onChangeFilter = (filterBy) => {
@@ -96,42 +99,44 @@ export class NoteApp extends React.Component {
   render() {
     const { notes } = this.state
     return (
-      <section className="note-app-container">
-        <FilterNotes onChangeFilter={this.onChangeFilter} />
-        <AddNote onAddNote={this.onAddNote} />
-        {notes.length ? (
-          <section className="all-notes-container">
-            <h3>Pinned notes</h3>
-            <NoteList
-              onPinNote={this.onPinNote}
-              onChangeNoteColor={this.onChangeNoteColor}
-              onDeleteNote={this.onDeleteNote}
-              notes={this.getPinnedNotes(notes)}
-              onAddTodo={this.onAddTodo}
-              onCloneNote={this.onCloneNote}
-              onInlineEdit={this.onInlineEdit}
-              onRemoveTodo={this.onRemoveTodo}
-              onFinishTodo={this.onFinishTodo}
-              onAddLocation={this.onAddLocation}
-            />
-            <h3>Regular notes</h3>
-            <NoteList
-              onPinNote={this.onPinNote}
-              onChangeNoteColor={this.onChangeNoteColor}
-              onDeleteNote={this.onDeleteNote}
-              notes={this.getRegNotes(notes)}
-              onAddTodo={this.onAddTodo}
-              onCloneNote={this.onCloneNote}
-              onInlineEdit={this.onInlineEdit}
-              onRemoveTodo={this.onRemoveTodo}
-              onFinishTodo={this.onFinishTodo}
-              onAddLocation={this.onAddLocation}
-            />
-          </section>
-        ) : (
-          'No notes Yet'
-        )}
-      </section>
+      <React.Fragment>
+        <AppHeader onFilter={this.onChangeFilter} />
+        <section className="note-app-container">
+          <AddNote onAddNote={this.onAddNote} />
+          {notes.length ? (
+            <section className="all-notes-container">
+              <h3>Pinned notes</h3>
+              <NoteList
+                onPinNote={this.onPinNote}
+                onChangeNoteColor={this.onChangeNoteColor}
+                onDeleteNote={this.onDeleteNote}
+                notes={this.getPinnedNotes(notes)}
+                onAddTodo={this.onAddTodo}
+                onCloneNote={this.onCloneNote}
+                onInlineInputChange={this.onInlineInputChange}
+                onRemoveTodo={this.onRemoveTodo}
+                onFinishTodo={this.onFinishTodo}
+                onAddLocation={this.onAddLocation}
+              />
+              <h3>Regular notes</h3>
+              <NoteList
+                onPinNote={this.onPinNote}
+                onChangeNoteColor={this.onChangeNoteColor}
+                onDeleteNote={this.onDeleteNote}
+                notes={this.getRegNotes(notes)}
+                onAddTodo={this.onAddTodo}
+                onCloneNote={this.onCloneNote}
+                onInlineInputChange={this.onInlineInputChange}
+                onRemoveTodo={this.onRemoveTodo}
+                onFinishTodo={this.onFinishTodo}
+                onAddLocation={this.onAddLocation}
+              />
+            </section>
+          ) : (
+            'No notes Yet'
+          )}
+        </section>
+      </React.Fragment>
     )
   }
 }

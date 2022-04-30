@@ -59,16 +59,18 @@ export class AddNote extends React.Component {
     if (
       type !== 'note-canvas' &&
       type !== 'note-audio' &&
-      type !== 'note-map' && 
+      type !== 'note-map' &&
       type !== 'note-record' &&
       type !== 'note-todo'
     ) {
       ev.target.classList.add('active')
     }
 
-
     this.setState((prevState) => {
-      return { newNote: { ...prevState.newNote, type }, isAddingRecord: type === 'note-record' }
+      return {
+        newNote: { ...prevState.newNote, type },
+        isAddingRecord: type === 'note-record',
+      }
     })
   }
 
@@ -88,44 +90,57 @@ export class AddNote extends React.Component {
   }
 
   toggleRecord = (ev) => {
-    const {isRecording} = this.state
+    const { isRecording } = this.state
     ev.target.classList.toggle('red')
-    
-    if(!isRecording) {
-      navigator.mediaDevices.getUserMedia({ audio: true })
-      .then(stream => {
-        const mediaRecorder = new MediaRecorder(stream);
-        this.setState({mediaRecorder, isRecording:true}, this.startRecording)
+
+    if (!isRecording) {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+        const mediaRecorder = new MediaRecorder(stream)
+        this.setState({ mediaRecorder, isRecording: true }, this.startRecording)
       })
     } else {
-      this.setState({isRecording:true}, this.stopRecording)
+      this.setState({ isRecording: false }, this.stopRecording)
     }
   }
-  
+
   startRecording = () => {
-    const {mediaRecorder} = this.state
+    const { mediaRecorder } = this.state
     mediaRecorder.start()
-    const audioChunks = [];
-    mediaRecorder.addEventListener("dataavailable", event => {
-      audioChunks.push(event.data);
-    });
-    mediaRecorder.addEventListener("stop", () => {
-      const audioBlob = new Blob(audioChunks);
-      const audioUrl = URL.createObjectURL(audioBlob);
-      this.setState((prevState) => {return {newNote: {...prevState.newNote, audioUrl}}})
-    });
+    this.inputRef.current.placeholder = 'Recording...'
+    this.inputRef.current.disabled = true
+    const audioChunks = []
+    mediaRecorder.addEventListener('dataavailable', (event) => {
+      audioChunks.push(event.data)
+    })
+    mediaRecorder.addEventListener('stop', () => {
+      const audioBlob = new Blob(audioChunks)
+      const audioUrl = URL.createObjectURL(audioBlob)
+      this.setState((prevState) => {
+        return { newNote: { ...prevState.newNote, audioUrl } }
+      })
+    })
   }
 
   stopRecording = () => {
-    const {mediaRecorder} = this.state
-    mediaRecorder.stop();
+    const { mediaRecorder } = this.state
+    mediaRecorder.stop()
+    this.inputRef.current.placeholder = 'What are you recording about?'
+    this.inputRef.current.disabled = false
+  }
+
+  openMoreTypes = () => {
+    if (this.state.isMoreTypes) return
+    this.setState({ isMoreTypes: true })
+  }
+  closeMoreTypes = () => {
+    this.setState({ isMoreTypes: false })
   }
 
   render() {
     const { newNote, isMoreTypes, isAddingRecord } = this.state
     return (
       <section className="add-note">
-        <form className='add-note-form' onSubmit={this.onAddNote}>
+        <form className="add-note-form" onSubmit={this.onAddNote}>
           <input
             name="content"
             type="text"
@@ -133,8 +148,13 @@ export class AddNote extends React.Component {
             onChange={this.handleChange}
             value={newNote.content}
             ref={this.inputRef}
-            />
-            {isAddingRecord && <i className="fa fa-circle fa-lg rec-ico" onClick={this.toggleRecord}></i>}
+          />
+          {isAddingRecord && (
+            <i
+              className="fa fa-circle fa-lg rec-ico"
+              onClick={this.toggleRecord}
+            ></i>
+          )}
         </form>
         <div className="note-type-container">
           <i
@@ -158,11 +178,14 @@ export class AddNote extends React.Component {
           <i
             className="fa fa-bars fa-lg"
             title="More notes"
-            onClick={() => this.setState({ isMoreTypes: !isMoreTypes })}
+            onClick={this.openMoreTypes}
           ></i>
         </div>
         {isMoreTypes && (
-          <MoreNotesTypes onChangeNoteType={this.onChangeNoteType} />
+          <MoreNotesTypes
+            closeMoreTypes={this.closeMoreTypes}
+            onChangeNoteType={this.onChangeNoteType}
+          />
         )}
       </section>
     )

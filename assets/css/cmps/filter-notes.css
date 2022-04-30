@@ -1,29 +1,43 @@
-.filter-notes {
-    margin-bottom: 1rem;
-    box-shadow: 0 0 5px gray;
-    border-radius: 50px;
-}
-
-.filter-notes form {
+.notes-filter-container {
     display: flex;
-    justify-content: space-between;
-    padding: 0 1.5rem;
+    gap: 20px;
 }
 
-.filter-notes input,
-.filter-notes select {
-    height: 50px;
+.main-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.main-input-container input {
+    margin-inline-start: 20px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    height: 40px;
+    border-radius: 10px;
+    width: 400px;
+    outline: 0;
+    border: 0;
+    box-shadow: 0px 2px 5px 1px lightgrey;
+    padding-inline-start: 35px;
+    padding-inline-end: 135px;
+}
+
+.main-input-container .sort-filter {
+    position: absolute;
+    right: 10px;
+    height: 40px;
+    border-radius: 10px;
     border: 0;
     outline: 0;
 }
 
-.filter-notes select {
-    color: gray;
-    border-inline-start: 1px solid lightgray;
-    padding-inline-start: 1.5rem;
-
+.main-input-container .sort-filter:focus {
+    outline: 0;
 }
 
-.filter-notes input {
-    flex-basis: 80%;
+.main-input-container i {
+    position: absolute;
+    top: 11px;
 }

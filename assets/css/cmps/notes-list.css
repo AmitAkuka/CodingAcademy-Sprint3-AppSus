@@ -3,6 +3,8 @@
     height: fit-content;
     padding-bottom: 1rem;
     padding: 0 1rem;
+    max-width: 1500px;
+    margin: auto;
 }
 
 .notes-list:not(:last-child) {
@@ -17,14 +19,14 @@
 }
 @media screen and (min-width:890px) {
     .notes-list {
-        column-count: 4;
+        column-count: 3;
     }
     
 }
 
 @media screen and (min-width:1250px) {
     .notes-list {
-        column-count: 6;
+        column-count: 5;
     }
     
 }

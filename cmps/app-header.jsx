@@ -1,6 +1,6 @@
 import { EmailFilter } from "../apps/mail/cmps/email-filter.jsx"
 import { NavList } from "./nav-list.jsx"
-
+import { FilterNotes } from "../apps/note/cmps/filter-notes.jsx"
 const { Link, Route, Switch } = ReactRouterDOM
 
 export class AppHeader extends React.Component {
@@ -14,7 +14,7 @@ export class AppHeader extends React.Component {
     this.setState({ isNavListOpen: !isNavListOpen })
   }
   render() {
-    const { onFilterEmails } = this.props
+    const { onFilter } = this.props
     const { isNavListOpen } = this.state
     return <header className="app-header-container main-layout">
       <div className="logo">
@@ -26,8 +26,8 @@ export class AppHeader extends React.Component {
           <h1>AppSus</h1>
         </Link>
         <Switch>
-          <Route path="/Emails"><EmailFilter onFilterEmails={onFilterEmails} /></Route>
-          {/* <Route path="/Notes" component={NoteApp} /> */}
+          <Route path="/Emails"><EmailFilter onFilterEmails={onFilter} /></Route>
+          <Route path="/Notes" ><FilterNotes onChangeFilter={onFilter}/> </Route>
         </Switch>
       </div>
       <nav className="nav-btns-container">
