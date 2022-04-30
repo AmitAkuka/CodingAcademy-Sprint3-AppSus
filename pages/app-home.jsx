@@ -5,7 +5,7 @@ export function AppHome() {
   return (
     <section className="app-home-container">
       <main>
-        <img src="../assets/img/Appsus-logo.png" />
+        <img src="assets/img/Appsus-logo.png" />
         <h1>Welcome to AppSus!</h1>
         <section className="home-buttons-container">
          <Link to="/Books"><button>Book App</button></Link> 
@@ -17,7 +17,7 @@ export function AppHome() {
       <footer>
         <div className="info-container">
          Made with
-         <img src="../assets/img/reacticon.gif" /> 
+         <img src="assets/img/reacticon.gif" /> 
          by Avi Isakov and Amit Akuka
         </div>
         </footer>
