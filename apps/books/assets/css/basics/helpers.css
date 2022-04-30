@@ -1,0 +1,68 @@
+.app {
+    width: 100%;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: var(--color-primary);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    max-width: 80%;
+    color: var(--color-back);
+}
+
+
+.modal-open {
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+.red {
+    color: rgb(218, 81, 57);
+}
+
+.green {
+    color: rgb(69, 107, 69);
+}
+
+.main-content {
+    position: relative;
+    max-width: 980px;
+    margin: auto;
+    padding: 0 1rem;
+}
+
+.btn {
+    border: 0;
+    background-color: var(--color-secondary);
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--color-primary);
+}
+
+.logo {
+    margin-inline-start: 10px;
+    cursor: pointer;
+}
+
+.logo:hover {
+    color: var(--color-secondary);
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}

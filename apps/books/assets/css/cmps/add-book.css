@@ -1,0 +1,62 @@
+.add-book {
+    background-color: var(--color-back);
+    height: 90vh;
+}
+
+.add-book .page-title {
+    display: flex;
+    justify-content: space-between;
+    max-width: 980px;
+    margin: auto;
+}
+
+
+.add-book form .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 980px;
+    margin: auto;
+}
+
+.add-book form input {
+    width: 400px;
+    height: 50px;
+    font-size: 1rem;
+    padding-inline-start: 1rem;
+}
+
+.add-book form input::placeholder {
+    opacity: 0.5;
+}
+
+.add-book form .btn-search {
+    background: transparent;
+    position: absolute;
+    right: 0.3rem;
+    width: auto;
+}
+
+.add-book form .btn-search img {
+    width: 24px;
+    height: 24px;
+}
+
+.add-book .search-list .search-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-primary);
+    padding: 0.3rem 0.5rem;
+    transition: all 0.3s;
+}
+
+.add-book .search-list .search-item:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.add-book .search-list .search-item img {
+    width: 24px;
+    cursor: pointer;
+}

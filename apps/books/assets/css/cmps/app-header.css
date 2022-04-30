@@ -1,0 +1,35 @@
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    box-shadow: 0 5px 0 var(--color-primary);
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.app-header nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.app-header nav a {
+    height: 50px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.app-header nav a.active {
+    font-weight: 700;
+}
+
+.app-header nav a:hover {
+    box-shadow: 0 5px 0 var(--color-accent);
+    background-color: #f0c5a0;
+    color: white;
+}

@@ -1,0 +1,104 @@
+.book-details {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.book-details .thumbnail {
+    position: relative;
+}
+
+.book-details img {
+    max-width: 400px;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+
+.book-details .for-sale {
+    position: absolute;
+    width: 72px;
+    object-fit: cover;
+    height: 72px;
+    left:-50px;
+}
+
+.book-details .details {
+    position: relative;
+}
+
+.book-details .header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-details .title {
+    font-size: 1.7rem;
+    line-height: 2.7rem;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+}
+
+.book-details .subtitle {
+    font-size: 1rem;
+}
+
+.book-details .price {
+    font-size: 3rem;
+    line-height: 2.7rem;
+    font-weight: 700;
+}
+
+.book-details .authors {
+    margin-bottom: 1rem;
+}
+
+.book-details h4 span {
+    font-weight: 400;
+}
+
+.book-details .desc {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.book-details .read-more {
+    font-weight: bold;
+    text-decoration: underline;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    bottom: -20px;
+    font-size: 0.9rem;
+    color: whitesmoke;
+}
+
+.book-details .switch-books {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-details .switch-books span {
+    cursor: pointer;
+}
+
+.book-details .btns {
+    display: flex;
+    gap: 10px;
+}
+
+.book-details .btns .btn-show-full:hover {
+    background-color: #8f4504;
+}
+
+.book-details .btn-close {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+
+.book-details .btn-close:hover {
+    background-color: rgb(243, 96, 70);
+    color: var(--color-back);
+}

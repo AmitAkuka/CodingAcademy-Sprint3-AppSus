@@ -1,0 +1,14 @@
+.books-display {
+    background-color: var(--color-back);
+}
+
+.books-display .page-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-list,
+.books-display .page-title {
+    max-width: 980px;
+    margin: auto;
+}
