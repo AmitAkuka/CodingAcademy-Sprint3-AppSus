@@ -3,8 +3,6 @@
     height: fit-content;
     padding-bottom: 1rem;
     padding: 0 1rem;
-    max-width: 1500px;
-    margin: auto;
 }
 
 .notes-list:not(:last-child) {

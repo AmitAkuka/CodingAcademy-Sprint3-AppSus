@@ -47,3 +47,59 @@
     text-decoration: none;
     color: inherit;
 }
+
+/* modal */
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: var(--color-primary);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    max-width: 80%;
+    color: var(--color-back);
+}
+
+
+.modal-open {
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+.books-display .red,
+.modal .red
+.book-details .red {
+    color: rgb(218, 81, 57);
+}
+
+.books-display .green,
+.modal .green
+.book-details .green {
+    color: rgb(69, 107, 69);
+}
+
+
+.books-display .btn,
+.modal .btn {
+    border: 0;
+    background-color: var(--color-secondary);
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.books-display .btn:hover,
+.modal .btn:hover {
+    background-color: var(--color-primary);
+}
+
+.book-details:not(.modal) {
+    background-color: var(--color-back);
+}

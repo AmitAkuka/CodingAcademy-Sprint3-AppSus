@@ -6,4 +6,6 @@
 .all-notes-container {
     padding: 0 1rem;
     color: rgb(65, 65, 65);
+    max-width: 1500px;
+    margin: auto;
 }

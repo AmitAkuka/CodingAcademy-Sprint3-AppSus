@@ -1,0 +1,78 @@
+.reviews-container {
+    margin-top: 2rem;
+}
+
+.existing-reviews {
+    margin-bottom: 1rem;
+}
+
+.review-list .review {
+    border: 1px solid var(--color-accent);
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.review-list .review .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.review-list .review .user-details {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.review-list .review .user-details img {
+    width: 32px;
+    margin: 0;
+}
+
+.review-list .review .review-header .read-at  {
+    font-size: 1rem;
+}
+
+.review-list .review .review-content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    min-height: 100px;
+}
+
+.review-list .review .review-content .review-desc {
+    margin-inline-start: 2.5rem;
+}
+
+.review-list .review .review-content .created-at {
+    position: absolute;
+    bottom: 0;
+}
+
+
+.review-list .review .review-submit .save-btn {
+
+}
+
+.review-list .review .review-content .delete-review {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.review-list .review .rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-list .review .star-img {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.review-list .review .rating {
+    height: fit-content;
+}

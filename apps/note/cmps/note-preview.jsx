@@ -33,7 +33,7 @@ class _NotePreview extends React.Component {
   }
 
   onDeleteNote = (id) => {
-    this.noteRef.current.classList.add('fall-down-fade')
+    this.noteRef.current.classList.add('swing-out-top-bck')
     this.props.onDeleteNote(id)
   }
 
