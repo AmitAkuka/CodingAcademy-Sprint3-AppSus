@@ -1,7 +1,7 @@
 export class NoteCanvas extends React.Component {
   state = {
     fillColor: '#000',
-    size: '20px',
+    size: 20,
     isDrawing: false,
     startPos: {},
     endPos: {},
@@ -10,10 +10,16 @@ export class NoteCanvas extends React.Component {
   }
 
   canvasRef = React.createRef()
+  colorPicker = React.createRef()
+  downLink = React.createRef()
 
   componentDidMount() {
     this.addMouseListeners()
     this.addTouchListeners()
+    window.addEventListener('resize', () => {
+      this.resizeCanvas()
+    })
+    this.resizeCanvas()
     this.setState({ ctx: this.canvasRef.current.getContext('2d') })
   }
 
@@ -33,18 +39,25 @@ export class NoteCanvas extends React.Component {
     if (!this.state.isDrawing) return
     const { fillColor, size, ctx } = this.state
     const mousePos = this.getEvPos(ev)
-    console.log(mousePos)
     ctx.fillStyle = fillColor
     ctx.beginPath()
     ctx.arc(mousePos.x, mousePos.y, size, 0, Math.PI * 2)
     ctx.closePath()
     ctx.fill()
   }
+
   startDrawing = () => {
     this.setState({ isDrawing: true })
   }
+
   stopDrawing = () => {
     this.setState({ isDrawing: false })
+  }
+
+  updateColor = ({ target }) => {
+    const fillColor = target.value
+    this.setState({ fillColor })
+    this.colorPicker.current.style.color = fillColor
   }
 
   getEvPos = (ev) => {
@@ -63,6 +76,18 @@ export class NoteCanvas extends React.Component {
     return pos
   }
 
+  resizeCanvas() {
+    this.canvasRef.current.width =
+      this.canvasRef.current.parentElement.offsetWidth
+  }
+
+  downloadCanvas = ({ target }) => {
+    console.log(target)
+    const data = this.canvasRef.current.toDataURL()
+    this.downLink.current.href = data
+    this.downLink.current.download = 'my-canvas'
+  }
+
   render() {
     const { noteHeading } = this.props
     return (
@@ -70,25 +95,34 @@ export class NoteCanvas extends React.Component {
         <h3>{noteHeading}</h3>
         <div className="tools-container">
           <div className="save-container">
-            <i className="fa fa-download fa-lg"></i>
+            <a
+              ref={this.downLink}
+              href="#"
+              onClick={this.downloadCanvas}
+              download="my-drawing"
+            >
+              <i className="fa fa-download fa-lg"></i>
+            </a>
           </div>
           <div className="draw-container">
-            <i className="fa fa-paint-brush fa-lg"></i>
+            <i className="fa fa-paint-brush fa-lg" ref={this.colorPicker}>
+              <input type="color" onChange={this.updateColor} />
+            </i>
             <i
               className="fa fa-circle sm"
-              onClick={() => this.setState({ size: '12px' })}
+              onClick={() => this.setState({ size: 8 })}
             ></i>
             <i
               className="fa fa-circle md"
-              onClick={() => this.setState({ size: '16px' })}
+              onClick={() => this.setState({ size: 12 })}
             ></i>
             <i
               className="fa fa-circle lg"
-              onClick={() => this.setState({ size: '20px' })}
+              onClick={() => this.setState({ size: 20 })}
             ></i>
           </div>
         </div>
-        <canvas width="100%" height="100%" ref={this.canvasRef}></canvas>
+        <canvas width="300px" height="350px" ref={this.canvasRef}></canvas>
       </div>
     )
   }

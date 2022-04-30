@@ -123,7 +123,10 @@ const gNotes = [
   {
     createdAt: '27.4.2022',
     id: 'iqWOZF4V',
-    info: { imgUrl: 'https://giphy.com/gifs/papermag-e5EcjjJx3dCFi' },
+    info: {
+      imgUrl:
+        'https://media3.giphy.com/media/aFTt8wvDtqKCQ/giphy.gif?cid=ecf05e47eeurqhchu8kyvk3sq9738cqjp39cz4eq33jfhubi&rid=giphy.gif&ct=g',
+    },
     isPinned: false,
     style: { backgroundColor: utilService.getRandFromArray(colors) },
     type: 'note-img',
