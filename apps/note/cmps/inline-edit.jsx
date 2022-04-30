@@ -21,7 +21,7 @@ export class InlineEdit extends React.Component {
   resizeTextBox(target) {
     if (target.scrollHeight > 33) {
       target.style.height = '5px'
-      target.style.height = target.scrollHeight + 'px'
+      target.style.height = target.scrollHeight + 16 + 'px'
     }
   }
 
