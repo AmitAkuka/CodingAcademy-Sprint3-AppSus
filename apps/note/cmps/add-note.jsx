@@ -120,7 +120,7 @@ export class AddNote extends React.Component {
             { mediaRecorder, isRecording: true },
             this.startRecording
           )
-          this.recordIcoRef.current.classList.toggle('red')
+          this.recordIcoRef.current.classList.add('red')
         })
         .catch((error) => {
           eventBusService.emit('user-msg', {
@@ -130,6 +130,7 @@ export class AddNote extends React.Component {
         })
     } else {
       this.setState({ isRecording: false }, this.stopRecording)
+      this.recordIcoRef.current.classList.remove('red')
     }
   }
 
