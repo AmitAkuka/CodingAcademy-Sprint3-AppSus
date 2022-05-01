@@ -6,7 +6,7 @@ export function EmailDetails({email,onDeleteEmail,onTransferToNote,onGoBack}) {
       <header className="email-header-container">
         <h2>{subject}</h2>
         <section className="buttons-container">
-          <button onClick={() => onGoBack()}><i className="fa fa-reply"></i></button>
+          <button onClick={(ev) => onGoBack(ev)}><i className="fa fa-reply"></i></button>
           <button onClick={() => onTransferToNote(email)}><i className="fa fa-floppy-o"></i></button>
           <button onClick={(event) => onDeleteEmail(email,event)}><i className="fa fa-trash"></i></button>
         </section>
