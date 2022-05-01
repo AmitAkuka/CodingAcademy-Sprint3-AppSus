@@ -103,6 +103,11 @@ export class EmailApp extends React.Component {
     this.props.history.push(`/Notes?${paramStr}`)
   }
 
+  onGoBack = () => {
+    this.setState({ selectedEmail: null })
+    this.props.history.push('/Emails/Inbox')
+  }
+
   render() {
     const { emails, selectedEmail, unreadedAmout, filterBy } = this.state
     // const { pathname } = this.props.location
@@ -112,7 +117,7 @@ export class EmailApp extends React.Component {
         <section className="email-container">
           <EmailFolderList unreadedAmout={unreadedAmout} onFilterEmails={this.onFilterEmails} />
           {!selectedEmail && <EmailList emails={emails} onFavoriteAdd={this.onFavoriteAdd} onDeleteEmail={this.onDeleteEmail} onSelectEmail={this.onSelectEmail} filterBy={filterBy} />}
-          {selectedEmail && <Route path={["/Emails/Inbox/:emailId", "/Emails/Starred/:emailId", "/Emails/Sent/:emailId", "/Emails/Drafts/:emailId"]}> <EmailDetails email={selectedEmail} onDeleteEmail={this.onDeleteEmail} onTransferToNote={this.onTransferToNote} /> </Route>}
+          {selectedEmail && <Route path={["/Emails/Inbox/:emailId", "/Emails/Starred/:emailId", "/Emails/Sent/:emailId", "/Emails/Drafts/:emailId"]}> <EmailDetails email={selectedEmail} onDeleteEmail={this.onDeleteEmail} onTransferToNote={this.onTransferToNote}  onGoBack={this. onGoBack}/> </Route>}
         </section>
       </section>
     </React.Fragment>

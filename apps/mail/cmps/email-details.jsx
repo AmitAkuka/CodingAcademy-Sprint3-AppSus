@@ -1,11 +1,12 @@
-export function EmailDetails({email,onDeleteEmail,onTransferToNote}) {
+
+export function EmailDetails({email,onDeleteEmail,onTransferToNote,onGoBack}) {
 
     const { subject, from, sentAt, body, userName, profilePic } = email
     return <section className="email-details-container">
       <header className="email-header-container">
         <h2>{subject}</h2>
         <section className="buttons-container">
-          <button><i className="fa fa-reply"></i></button>
+          <button onClick={() => onGoBack()}><i className="fa fa-reply"></i></button>
           <button onClick={() => onTransferToNote(email)}><i className="fa fa-floppy-o"></i></button>
           <button onClick={(event) => onDeleteEmail(email,event)}><i className="fa fa-trash"></i></button>
         </section>
