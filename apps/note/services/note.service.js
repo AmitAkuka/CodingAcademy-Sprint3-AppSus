@@ -334,7 +334,7 @@ const gNotes = [
     type: 'note-img',
     isPinned: false,
     createdAt: '30.4.2022',
-    desc: 'Place for some textyes i know, another sprint done',
+    desc: 'Yes i know, another sprint done',
     info: {
       imgUrl: 'https://media0.giphy.com/media/wdX9wTpG2oiJmfndlN/giphy.webp',
     },

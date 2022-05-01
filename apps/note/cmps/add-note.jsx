@@ -190,16 +190,19 @@ export class AddNote extends React.Component {
               onChange={this.handleChange}
               type="text"
               placeholder="Title"
+              autoComplete="off"
             />
           )}
           <div className="content-record-container">
             <input
               name="content"
               type="text"
-              placeholder="Whats's on your mind..."
+              placeholder="What's on your mind..."
               onChange={this.handleChange}
               value={newNote.content}
               ref={this.inputRef}
+              autoComplete="off"
+              required
             />
             {isAddingRecord && (
               <i

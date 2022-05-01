@@ -1,13 +1,14 @@
 .notes-list {
     column-count: 1;
-    height: fit-content;
-    padding-bottom: 1rem;
-    padding: 0 1rem;
+    break-inside: avoid;
+    gap: 1rem;
+    /* width: 100%; */
 }
 
 .notes-list:not(:last-child) {
     margin-bottom: 2rem;
 }
+
 
 @media screen and (min-width:600px) {
     .notes-list {

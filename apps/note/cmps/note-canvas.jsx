@@ -70,7 +70,7 @@ export class NoteCanvas extends React.Component {
       ev = ev.changedTouches[0]
       pos = {
         x: ev.pageX - ev.target.offsetLeft,
-        y: ev.pageY - ev.target.offsetTop * 3,
+        y: ev.pageY - ev.target.offsetParent.offsetTop,
       }
     }
     return pos
