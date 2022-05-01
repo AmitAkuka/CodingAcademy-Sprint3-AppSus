@@ -1,8 +1,8 @@
 .notes-list {
     column-count: 1;
     break-inside: avoid;
-    gap: 1rem;
-    /* width: 100%; */
+    gap: 1.5rem;
+    column-width: 300px;
 }
 
 .notes-list:not(:last-child) {
