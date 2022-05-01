@@ -7,7 +7,7 @@
     border-radius: 5px;
     bottom: -30px;
     right: 0;
-    z-index: 9999;
+    z-index: 2;
     box-shadow: 0 0 5px black;
 }
 
@@ -25,15 +25,19 @@
 .color-picker .color.red {
     background-color: tomato;
 }
+
 .color-picker .color.green {
     background-color: rgb(98, 167, 98);
 }
+
 .color-picker .color.blue {
     background-color: dodgerblue;
 }
+
 .color-picker .color.yellow {
     background-color: yellow;
 }
+
 .color-picker .color.purple {
     background-color: rgb(197, 79, 197);
 }

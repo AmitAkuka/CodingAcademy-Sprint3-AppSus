@@ -4,12 +4,6 @@
 /* SMALL */
 
 @media screen and (max-width: 740px) {
-    .sub-filter-container {
-        margin-inline-start: 70px;
-    }
-    .app-header-container .logo img {
-        width: 40px;
-    }
     .email-filter-container {
         flex-direction: column;
         gap: 15px;
@@ -73,15 +67,16 @@
     .sub-filter-container button {
         width: 75px;
     }
+    .app-about-container main {
+        flex-direction: column;
+        margin-bottom: 100px;
+    }
 }
 
 
 /* MEDIUM */
 
 @media screen and (min-width: 740px) {
-    .app-header-container .logo img {
-        width: 40px;
-    }
     .email-filter-container {
         flex-direction: column;
         gap: 15px;
@@ -92,9 +87,6 @@
     }
     .main-input-container {
         padding-inline-start: 60px;
-    }
-    .sub-filter-container {
-        margin-inline-start: 20px;
     }
     .email-container .email-details-container {
         margin-inline-end: 25px;
@@ -111,6 +103,9 @@
 /* LARGE */
 
 @media screen and (min-width: 1040px) {
+    .app-header-container .logo img {
+        width: 50px;
+    }
     .sub-filter-container {
         margin-inline-start: 0px;
     }
