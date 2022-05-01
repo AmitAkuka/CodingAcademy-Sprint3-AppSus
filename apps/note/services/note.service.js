@@ -18,12 +18,14 @@ export const notesService = {
 }
 
 const colors = [
-  'tomato',
-  'rgb(98, 167, 98)',
-  'dodgerblue',
-  'yellow',
-  'rgb(197, 79, 197)',
-  'brown',
+  '#e8eaed',
+  'ccff90',
+  '#fdcfe8',
+  '#aecbfa',
+  '#fff475',
+  '#d7aefb',
+  'e6c9a8',
+  '#f28b82',
 ]
 
 const gNotes = [
@@ -389,11 +391,12 @@ function getNoteById(notes, id) {
   return notes.find((note) => note.id === id)
 }
 
-function addNote({ type, content, audioUrl }) {
+function addNote({ type, content, audioUrl, title }) {
   const newNote = {
     id: utilService.makeId(),
     type,
     isPinned: false,
+    title,
     createdAt: new Date().toLocaleDateString(),
   }
 
@@ -405,6 +408,7 @@ function addNote({ type, content, audioUrl }) {
       newNote.info = { txt: content }
       break
     case 'note-img':
+      if (!isImage(content)) return Promise.reject('Url is not an image..')
       newNote.info = { imgUrl: content }
       break
     case 'note-video':
@@ -412,14 +416,15 @@ function addNote({ type, content, audioUrl }) {
       break
     case 'note-todo':
       newNote.info = {
-        todoHeading: content,
-        todos: [],
+        todos: content.split(',').map((todo) => ({
+          txt: todo,
+          isDone: false,
+          id: utilService.makeId(),
+        })),
       }
       break
     case 'note-canvas':
-      newNote.info = {
-        canvasHeading: content,
-      }
+      newNote.desc = content
       break
     case 'note-audio':
       newNote.info = {
@@ -427,15 +432,14 @@ function addNote({ type, content, audioUrl }) {
       }
       break
     case 'note-map':
+      newNote.desc = content
       newNote.info = {
-        mapHeading: content,
         locations: [],
         mapId: utilService.makeId(),
       }
       break
     case 'note-record':
       newNote.info = {
-        noteHeading: content,
         audioUrl,
       }
       break
@@ -451,6 +455,10 @@ function addNote({ type, content, audioUrl }) {
   const notes = _loadNotesFromStorage()
   notes.push(newNote)
   return _finishUpdating(notes)
+}
+
+function isImage(url) {
+  return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url)
 }
 
 function deleteNote(noteId) {
@@ -528,15 +536,27 @@ function addLoc(noteId, pos) {
 
 function getFilteredNotes({ txt, type }) {
   const notes = _loadNotesFromStorage()
-  const filteredNotes = notes.filter((note) => {
+  const filteredNotesByType = notes.filter((note) => {
     if (type === 'note-pinned') return note.isPinned
-    if (type !== 'note-txt' && type !== 'all') return note.type === type
-    if (type === 'note-txt')
-      return note.type === type && note.info.txt.toLowerCase().includes(txt)
+    if (type !== 'all') return note.type === type
     if (type === 'all') return true
   })
 
-  const notesToDisplay = getNotesToDisplay(filteredNotes)
+  if (!txt) return Promise.resolve(filteredNotesByType)
+
+  const filteredNotesByTxt = filteredNotesByType.filter((note) => {
+    return (
+      ('desc' in note && note.desc.toLowerCase().includes(txt)) ||
+      ('info' in note &&
+        'txt' in note.info &&
+        note.info.txt.toLowerCase().includes(txt)) ||
+      ('title' in note && note.title.toLowerCase().includes(txt)) ||
+      ('info' in note &&
+        'todos' in note.info &&
+        note.info.todos.forEach((todo) => todo.txt.toLowerCase().includes(txt)))
+    )
+  })
+  const notesToDisplay = getNotesToDisplay(filteredNotesByTxt)
   return Promise.resolve(notesToDisplay)
 }
 

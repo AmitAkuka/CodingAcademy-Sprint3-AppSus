@@ -22,28 +22,32 @@ export class ColorPicker extends React.Component {
     return (
       <div className="color-picker fade-in" ref={this.pickerRef}>
         <div
-          onClick={() => onChangeNoteColor('tomato')}
+          onClick={() => onChangeNoteColor('f28b82')}
           className="color red"
         ></div>
         <div
-          onClick={() => onChangeNoteColor('rgb(98, 167, 98)')}
+          onClick={() => onChangeNoteColor('#ccff90')}
           className="color green"
         ></div>
         <div
-          onClick={() => onChangeNoteColor('dodgerblue')}
+          onClick={() => onChangeNoteColor('#aecbfa')}
           className="color blue"
         ></div>
         <div
-          onClick={() => onChangeNoteColor('yellow')}
+          onClick={() => onChangeNoteColor('#fff475')}
           className="color yellow"
         ></div>
         <div
-          onClick={() => onChangeNoteColor('rgb(197, 79, 197)')}
+          onClick={() => onChangeNoteColor('#d7aefb')}
           className="color purple"
         ></div>
         <div
-          onClick={() => onChangeNoteColor('brown')}
+          onClick={() => onChangeNoteColor('#e6c9a8')}
           className="color brown"
+        ></div>
+        <div
+          onClick={() => onChangeNoteColor('#fdcfe8')}
+          className="color pink"
         ></div>
       </div>
     )

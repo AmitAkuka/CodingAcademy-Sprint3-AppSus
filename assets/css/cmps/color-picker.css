@@ -1,5 +1,5 @@
 .color-picker {
-    background-color: gray;
+    background-color: rgb(223, 223, 223);
     display: flex;
     gap: 10px;
     position: absolute;
@@ -22,22 +22,28 @@
     border: 1px solid white;
 }
 
-.color-picker .color.red {
-    background-color: tomato;
+.color-picker .color.gray {
+    background-color: #e8eaed;
 }
 .color-picker .color.green {
-    background-color: rgb(98, 167, 98);
+    background-color: #ccff90;
+}
+.color-picker .color.pink {
+    background-color: #fdcfe8;
 }
 .color-picker .color.blue {
-    background-color: dodgerblue;
+    background-color: #aecbfa;
 }
 .color-picker .color.yellow {
-    background-color: yellow;
+    background-color: #fff475;
 }
 .color-picker .color.purple {
-    background-color: rgb(197, 79, 197);
+    background-color: #d7aefb;
 }
 
 .color-picker .color.brown {
-    background-color: brown;
+    background-color: #e6c9a8;
+}
+.color-picker .color.red {
+    background-color: #f28b82;
 }

@@ -78,7 +78,7 @@ export class NoteCanvas extends React.Component {
 
   resizeCanvas() {
     this.canvasRef.current.width =
-      this.canvasRef.current.parentElement.offsetWidth
+      this.canvasRef.current.parentElement.offsetWidth - 20
   }
 
   downloadCanvas = ({ target }) => {
@@ -89,10 +89,8 @@ export class NoteCanvas extends React.Component {
   }
 
   render() {
-    const { noteHeading } = this.props
     return (
       <div className="canvas-container">
-        <h3>{noteHeading}</h3>
         <div className="tools-container">
           <div className="save-container">
             <a

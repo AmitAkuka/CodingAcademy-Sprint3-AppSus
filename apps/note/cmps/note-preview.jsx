@@ -89,18 +89,30 @@ class _NotePreview extends React.Component {
     this.props.history.push(`/Emails/Inbox?${searchStr}`)
   }
 
+  displayTools = () => {
+    this.noteRef.current.classList.add('show-tools')
+  }
+  hideTools = () => {
+    this.noteRef.current.classList.remove('show-tools')
+  }
+
   render() {
     const { isPainting } = this.state
     const { note, onPinNote, onCloneNote } = this.props
-    const { id, style } = note
+    const { id, style, title } = note
 
     return (
-      <div className="note" style={note.style} ref={this.noteRef}>
+      <div
+        className="note"
+        onMouseOver={this.displayTools}
+        onMouseLeave={this.hideTools}
+        style={note.style}
+        ref={this.noteRef}
+      >
         <div>
-          {note.isPinned && (
-            <img className="pin-img" src="assets/img/pin-ico.png"></img>
-          )}
+          {note.isPinned && <i class="fa fa-thumb-tack pinned-sign"></i>}
           <div className="note-content">
+            {title && <h3 className="note-title">{title}</h3>}
             <NoteContent
               note={note}
               onRemoveTodo={this.onRemoveTodo}

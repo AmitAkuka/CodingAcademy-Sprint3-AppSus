@@ -1,22 +1,40 @@
 import { MoreNotesTypes } from '../cmps/more-notes-type.jsx'
+import { eventBusService } from '../../../services/event-bus-service.js'
 
 export class AddNote extends React.Component {
   state = {
     newNote: {
       type: 'note-txt',
       content: '',
+      title: '',
     },
     isMoreTypes: false,
     isAddingRecord: false,
     isRecording: false,
     mediaRecorder: null,
+    isExpanded: false,
   }
 
   inputRef = React.createRef()
+  addNoteContainerRef = React.createRef()
 
   txtIcoRef = React.createRef()
   imgIcoRef = React.createRef()
   videoIcoRef = React.createRef()
+
+  componentDidMount() {
+    document.addEventListener('click', this.closeExpandedAddNote)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.closeExpandedAddNote)
+  }
+
+  closeExpandedAddNote = (ev) => {
+    if (!this.addNoteContainerRef.current.contains(ev.target)) {
+      this.setState({ isExpanded: false })
+    }
+  }
 
   handleChange = ({ target }) => {
     const field = target.name
@@ -39,16 +57,17 @@ export class AddNote extends React.Component {
         this.inputRef.current.placeholder = 'Give me a nice youtube link'
         break
       case 'note-todo':
-        this.inputRef.current.placeholder = 'What are those todos about??'
+        this.inputRef.current.placeholder =
+          'Give me a comma seperated list(you can add more later)'
         break
       case 'note-canvas':
-        this.inputRef.current.placeholder = 'Care to title your next drawing?'
+        this.inputRef.current.placeholder = 'What is this doodle about?'
         break
       case 'note-audio':
         this.inputRef.current.placeholder = 'What are we listening to today?'
         break
       case 'note-map':
-        this.inputRef.current.placeholder = 'Give us a title for this map'
+        this.inputRef.current.placeholder = 'Give us a desctiprion for this map'
         break
       case 'note-record':
         this.inputRef.current.placeholder = 'What are you recording about?'
@@ -79,7 +98,7 @@ export class AddNote extends React.Component {
     const { onAddNote } = this.props
     onAddNote(this.state.newNote)
     this.setState((prevState) => {
-      return { newNote: { ...prevState.newNote, content: '' } }
+      return { newNote: { ...prevState.newNote, title: '', content: '' } }
     })
   }
 
@@ -91,13 +110,23 @@ export class AddNote extends React.Component {
 
   toggleRecord = (ev) => {
     const { isRecording } = this.state
-    ev.target.classList.toggle('red')
-
     if (!isRecording) {
-      navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-        const mediaRecorder = new MediaRecorder(stream)
-        this.setState({ mediaRecorder, isRecording: true }, this.startRecording)
-      })
+      navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then((stream) => {
+          const mediaRecorder = new MediaRecorder(stream)
+          this.setState(
+            { mediaRecorder, isRecording: true },
+            this.startRecording
+          )
+          ev.target.classList.toggle('red')
+        })
+        .catch((error) => {
+          eventBusService.emit('user-msg', {
+            type: 'danger',
+            txt: 'Your microphone is disabled',
+          })
+        })
     } else {
       this.setState({ isRecording: false }, this.stopRecording)
     }
@@ -136,50 +165,79 @@ export class AddNote extends React.Component {
     this.setState({ isMoreTypes: false })
   }
 
+  expandForm = () => {
+    this.setState({ isExpanded: true })
+  }
+
   render() {
-    const { newNote, isMoreTypes, isAddingRecord } = this.state
+    const { newNote, isMoreTypes, isAddingRecord, isExpanded } = this.state
     return (
-      <section className="add-note">
-        <form className="add-note-form" onSubmit={this.onAddNote}>
-          <input
-            name="content"
-            type="text"
-            placeholder="Whats's on your mind..."
-            onChange={this.handleChange}
-            value={newNote.content}
-            ref={this.inputRef}
-          />
-          {isAddingRecord && (
-            <i
-              className="fa fa-circle fa-lg rec-ico"
-              onClick={this.toggleRecord}
-            ></i>
+      <section
+        ref={this.addNoteContainerRef}
+        className={isExpanded ? 'add-note expanded-add-note' : 'add-note'}
+      >
+        <form
+          className="add-note-form"
+          onClick={this.expandForm}
+          onSubmit={this.onAddNote}
+          id="add-note-form"
+        >
+          {isExpanded && (
+            <input
+              name="title"
+              onChange={this.handleChange}
+              type="text"
+              placeholder="Title"
+            />
           )}
+          <div className="content-record-container">
+            <input
+              name="content"
+              type="text"
+              placeholder="Whats's on your mind..."
+              onChange={this.handleChange}
+              value={newNote.content}
+              ref={this.inputRef}
+            />
+            {isAddingRecord && (
+              <i
+                className="fa fa-circle fa-lg rec-ico"
+                onClick={this.toggleRecord}
+              ></i>
+            )}
+          </div>
         </form>
-        <div className="note-type-container">
-          <i
-            onClick={(event) => this.onChangeNoteType(event, 'note-txt')}
-            className="fa fa-comment-o fa-lg active"
-            ref={this.txtIcoRef}
-            title="Text"
-          ></i>
-          <i
-            onClick={(event) => this.onChangeNoteType(event, 'note-img')}
-            className="fa fa-picture-o fa-lg"
-            ref={this.imgIcoRef}
-            title="Image"
-          ></i>
-          <i
-            onClick={(event) => this.onChangeNoteType(event, 'note-video')}
-            className="fa fa-youtube-play fa-lg"
-            ref={this.videoIcoRef}
-            title="Video"
-          ></i>
-          <i
-            className="fa fa-bars fa-lg"
-            title="More notes"
-            onClick={this.openMoreTypes}
-          ></i>
+        <div className="add-note-footer">
+          {isExpanded && (
+            <button type="submit" form="add-note-form" className="btn add-btn">
+              Add my note!
+            </button>
+          )}
+          <div className="note-type-container">
+            <i
+              onClick={(event) => this.onChangeNoteType(event, 'note-txt')}
+              className="fa fa-comment-o fa-lg active"
+              ref={this.txtIcoRef}
+              title="Text"
+            ></i>
+            <i
+              onClick={(event) => this.onChangeNoteType(event, 'note-img')}
+              className="fa fa-picture-o fa-lg"
+              ref={this.imgIcoRef}
+              title="Image"
+            ></i>
+            <i
+              onClick={(event) => this.onChangeNoteType(event, 'note-video')}
+              className="fa fa-youtube-play fa-lg"
+              ref={this.videoIcoRef}
+              title="Video"
+            ></i>
+            <i
+              className="fa fa-bars fa-lg"
+              title="More notes"
+              onClick={this.openMoreTypes}
+            ></i>
+          </div>
         </div>
         {isMoreTypes && (
           <MoreNotesTypes

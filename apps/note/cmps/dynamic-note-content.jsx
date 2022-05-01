@@ -46,7 +46,7 @@ export class NoteContent extends React.Component {
             </audio>
           )
         case 'note-canvas':
-          return <NoteCanvas noteHeading={info.canvasHeading} />
+          return <NoteCanvas />
         case 'note-map':
           return (
             <MapNote

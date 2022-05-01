@@ -42,11 +42,21 @@ export class NoteApp extends React.Component {
   }
 
   onAddNote = (note) => {
-    notesService.addNote(note).then(this.loadNotes)
-    eventBusService.emit('user-msg', {
-      type: 'success',
-      txt: 'Note added succesfuly!',
-    })
+    notesService
+      .addNote(note)
+      .then(() => {
+        this.loadNotes()
+        eventBusService.emit('user-msg', {
+          type: 'success',
+          txt: 'Note added succesfuly!',
+        })
+      })
+      .catch((error) => {
+        eventBusService.emit('user-msg', {
+          type: 'danger',
+          txt: error,
+        })
+      })
   }
 
   onDeleteNote = (noteId) => {

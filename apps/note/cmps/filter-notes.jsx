@@ -28,25 +28,28 @@ export class FilterNotes extends React.Component {
     return (
       <div className="notes-filter-container">
         <section className="main-input-container">
-        <form onSubmit={this.onSearch}>
-        <i className="fa fa-search"></i>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            name="txt"
-            placeholder="Search here..."
-            value={filterBy.txt}
-            disabled={filterBy.type !== 'note-txt'}
-          />
-          <select className="sort-filter" onChange={this.handleChange} name="type">
-            <option value="all">All</option>
-            <option value="note-txt">Text</option>
-            <option value="note-img">Image</option>
-            <option value="note-video">Video</option>
-            <option value="note-todo">Todos</option>
-            <option value="note-pinned">Pinned</option>
-          </select>
-        </form>
+          <form onSubmit={this.onSearch}>
+            <i className="fa fa-search"></i>
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="txt"
+              placeholder="Search here..."
+              value={filterBy.txt}
+            />
+            <select
+              className="sort-filter"
+              onChange={this.handleChange}
+              name="type"
+            >
+              <option value="all">All</option>
+              <option value="note-txt">Text</option>
+              <option value="note-img">Image</option>
+              <option value="note-video">Video</option>
+              <option value="note-todo">Todos</option>
+              <option value="note-pinned">Pinned</option>
+            </select>
+          </form>
         </section>
       </div>
     )
