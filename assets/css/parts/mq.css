@@ -91,13 +91,16 @@
         min-width: 160px;
     }
     .main-input-container {
-        padding-inline-start: 0;
+        padding-inline-start: 60px;
     }
     .sub-filter-container {
         margin-inline-start: 20px;
     }
     .email-container .email-details-container {
         margin-inline-end: 25px;
+    }
+    .sub-filter-container {
+        margin-inline-start: 75px;
     }
     html {
         font-size: 14px;

@@ -56,9 +56,9 @@
     transition: all 0.5s;
 }
 
-.nav-container .fa:hover {
+.nav-container a:hover {
     cursor: pointer;
-    color: darkgray;
+    color: white;
 }
 
 .nav-btns-container {
@@ -75,11 +75,17 @@
 
 .nav-menu-container .icons-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
     height: 100%;
     width: 100%;
     padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.icons-container>* {
+    min-height: 75px;
+    width: 100px;
 }
 
 .icons-container a {
@@ -101,10 +107,10 @@
 }
 
 .nav-btns-container .nav-menu-container {
-    height: 250px;
+    height: 220px;
     position: fixed;
-    width: 150px;
-    right: 10px;
+    width: 240px;
+    right: 30px;
     background: #2f2f2f;
     z-index: 1;
     border-radius: 10px;

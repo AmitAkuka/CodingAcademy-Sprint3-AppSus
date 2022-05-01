@@ -27,12 +27,11 @@
 }
 
 .success {
-    background-color: #22ed22;
+    background-color: #474747;
     border: 2px solid white;
 }
 
 .danger {
-    background-color: red;
+    background-color: rgb(198, 0, 0);
     color: black;
-    border: 2px solid black;
 }

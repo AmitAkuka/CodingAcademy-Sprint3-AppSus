@@ -30,7 +30,6 @@ export class UserMsg extends React.Component {
       if (!msg) return <React.Fragment></React.Fragment>
       return <div className={`user-msg-container ${msg.type}`}>
           <button onClick={this.onCloseMsg}>X</button>
-          {msg.type === 'danger' && <h5>Warning!</h5>}
           {msg.txt}
       </div>
   }

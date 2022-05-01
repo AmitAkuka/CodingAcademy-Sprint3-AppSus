@@ -1,6 +1,6 @@
 :root {
-    --color-back: #FCFFE7;
-    --color-primary: #CE9461;
-    --color-secondary: #DEA057;
+    --color-back: #ebebeb;
+    --color-primary: darkgray;
+    --color-secondary: black;
     --color-accent: #E0D8B0;
 }

@@ -49,7 +49,7 @@ export class EmailApp extends React.Component {
     event.stopPropagation();
     emailService.setEmailFavorite(email.id)
       .then(() => {
-        let msg = (email.isFavorite) ? {type: 'danger',txt: 'Deleted from favorites!'} : {type: 'success',txt: 'Added to favorites!'}
+        let msg = (email.isFavorite) ? {type: 'danger',txt: 'Removed from favorites!'} : {type: 'success',txt: 'Added to favorites!'}
         eventBusService.emit('user-msg', {
           type: msg.type, txt: msg.txt })
         this.loadEmails()})

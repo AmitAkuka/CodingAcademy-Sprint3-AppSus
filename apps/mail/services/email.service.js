@@ -64,17 +64,34 @@ function query({ folderListFilter, unreadReadFilter, searchStrFilter, emailParam
                 }
             } else if (folderListFilter === 'Sent') {
                 if (unreadReadFilter === 'All') {
-                    return (email.from === loggedinUser.email &&
+                    return (email.from === loggedinUser.email && !email.isDraft &&
                         (email.userName.toLowerCase().includes(searchStrFilter) ||
                             email.subject.toLowerCase().includes(searchStrFilter) ||
                             email.body.toLowerCase().includes(searchStrFilter)))
                 } else if (unreadReadFilter === 'Read') {
-                    return (email.from === loggedinUser.email && email.isReaded &&
+                    return (email.from === loggedinUser.email && !email.isDraft && email.isReaded &&
                         (email.userName.toLowerCase().includes(searchStrFilter) ||
                             email.subject.toLowerCase().includes(searchStrFilter) ||
                             email.body.toLowerCase().includes(searchStrFilter)))
                 } else if (unreadReadFilter === 'Unread') {
-                    return (email.from === loggedinUser.email && !email.isReaded &&
+                    return (email.from === loggedinUser.email && !email.isDraft && !email.isReaded &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                }
+            } else if (folderListFilter === 'Drafts') {
+                if (unreadReadFilter === 'All') {
+                    return (email.isDraft &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                } else if (unreadReadFilter === 'Read') {
+                    return (email.isDraft && email.isReaded &&
+                        (email.userName.toLowerCase().includes(searchStrFilter) ||
+                            email.subject.toLowerCase().includes(searchStrFilter) ||
+                            email.body.toLowerCase().includes(searchStrFilter)))
+                } else if (unreadReadFilter === 'Unread') {
+                    return (email.isDraft && !email.isReaded &&
                         (email.userName.toLowerCase().includes(searchStrFilter) ||
                             email.subject.toLowerCase().includes(searchStrFilter) ||
                             email.body.toLowerCase().includes(searchStrFilter)))
@@ -103,7 +120,7 @@ function query({ folderListFilter, unreadReadFilter, searchStrFilter, emailParam
     return Promise.resolve(emails)
 }
 
-function addEmail({ to, subject, body }) {
+function addEmail({ to, subject, body, isDraft = false }) {
     let emails = _loadFromStorage()
     emails.push({
         id: utilService.makeId(),
@@ -115,7 +132,8 @@ function addEmail({ to, subject, body }) {
         userName: loggedinUser.fullname,
         isFavorite: false,
         isReaded: true,
-        profilePic: 'AmitAkuka'
+        profilePic: 'AmitAkuka',
+        isDraft
     })
     _saveToLocalStorage(emails)
     return Promise.resolve()

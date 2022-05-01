@@ -58,8 +58,11 @@ class _EmailCompose extends React.Component {
 
 
   onCloseCompose() {
-    //do not remove event 
-    this.setState({ isComposeOpen: false })
+    const {to,subject,body} = this.state.mailContent
+    emailService.addEmail({ to, subject, body, isDraft:true })
+       .then(() => {
+         this.cleanCompose()
+       })
   }
 
   onDelete() {
