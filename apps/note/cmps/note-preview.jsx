@@ -110,7 +110,7 @@ class _NotePreview extends React.Component {
         ref={this.noteRef}
       >
         <div>
-          {note.isPinned && <i class="fa fa-thumb-tack pinned-sign"></i>}
+          {note.isPinned && <i className="fa fa-thumb-tack pinned-sign"></i>}
           <div className="note-content">
             {title && <h3 className="note-title">{title}</h3>}
             <NoteContent

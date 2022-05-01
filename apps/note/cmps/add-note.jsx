@@ -21,6 +21,7 @@ export class AddNote extends React.Component {
   txtIcoRef = React.createRef()
   imgIcoRef = React.createRef()
   videoIcoRef = React.createRef()
+  recordIcoRef = React.createRef()
 
   componentDidMount() {
     document.addEventListener('click', this.closeExpandedAddNote)
@@ -119,8 +120,7 @@ export class AddNote extends React.Component {
             { mediaRecorder, isRecording: true },
             this.startRecording
           )
-          // ev.target.classList.toggle('red')
-          console.log(ev.target)
+          this.recordIcoRef.current.classList.toggle('red')
         })
         .catch((error) => {
           eventBusService.emit('user-msg', {
@@ -204,6 +204,7 @@ export class AddNote extends React.Component {
               <i
                 className="fa fa-circle fa-lg rec-ico"
                 onClick={this.toggleRecord}
+                ref={this.recordIcoRef}
               ></i>
             )}
           </div>
