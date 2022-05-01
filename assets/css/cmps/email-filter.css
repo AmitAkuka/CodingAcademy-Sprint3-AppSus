@@ -49,6 +49,7 @@
 .sub-filter-container {
     box-shadow: 0px 1px 5px 0px;
     width: 300px;
+    margin-inline-start: 70px;
 }
 
 .sub-filter-container button {

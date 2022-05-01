@@ -7,7 +7,7 @@
     border-radius: 5px;
     bottom: -30px;
     right: 0;
-    z-index: 9999;
+    z-index: 2;
     box-shadow: 0 0 5px black;
 }
 
@@ -25,18 +25,22 @@
 .color-picker .color.gray {
     background-color: #e8eaed;
 }
+
 .color-picker .color.green {
     background-color: #ccff90;
 }
 .color-picker .color.pink {
     background-color: #fdcfe8;
 }
+
 .color-picker .color.blue {
     background-color: #aecbfa;
 }
+
 .color-picker .color.yellow {
     background-color: #fff475;
 }
+
 .color-picker .color.purple {
     background-color: #d7aefb;
 }

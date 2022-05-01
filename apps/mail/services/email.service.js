@@ -140,68 +140,105 @@ function addEmail({ to, subject, body, isDraft = false }) {
 }
 
 function _createEmails() {
-    const emails = [{
-            id: utilService.makeId(),
-            subject: 'Whats going on with sprint3??',
-            body: 'Its so easy! dont forget to use deep refresh when needed!',
-            sentAt: 1651256929216,
-            to: loggedinUser.email,
-            from: 'Yaron@CodingAcademy.com',
-            userName: 'Yaron Biton',
-            isFavorite: false,
-            isReaded: false,
-            profilePic: 'YaronBiton'
-        },
-        {
-            id: utilService.makeId(),
-            subject: 'Pulse Hex progress',
-            body: 'Dont worry, prec-20 will be ready soon!',
-            sentAt: 1251256929216,
-            to: loggedinUser.email,
-            from: 'RichardHeart@gmail.com',
-            userName: 'Richard Heart',
-            isFavorite: false,
-            isReaded: false,
-            profilePic: 'RichardHeart'
-        },
-        {
-            id: utilService.makeId(),
-            subject: 'Miss you baby!',
-            body: 'Would love to catch up sometimes',
-            sentAt: 1601256929216,
-            to: loggedinUser.email,
-            from: 'KimKardashian@gmail.com',
-            userName: 'Kim Kardashian',
-            isFavorite: false,
-            isReaded: false,
-            profilePic: 'KimKardashian'
-        },
-        {
-            id: utilService.makeId(),
-            subject: 'SpaceX',
-            body: 'Would you like to join?',
-            sentAt: 1551256929216,
-            to: loggedinUser.email,
-            from: 'ElonMusk@gmail.com',
-            userName: 'Elon Musk',
-            isFavorite: false,
-            isReaded: false,
-            profilePic: 'ElonMusk'
-        },
-        {
-            id: utilService.makeId(),
-            subject: 'Wake me up',
-            body: 'Please dont forget to wake me up, so i wont fall asleep',
-            sentAt: 1650006929216,
-            to: loggedinUser.email,
-            from: 'JoeBiden@gmail.com',
-            userName: 'Joe Biden',
-            isFavorite: false,
-            isReaded: false,
-            profilePic: 'JoeBiden'
-        }
+    const emails = [_createEmail('Whats going on with sprint3??', 'Its so easy! dont forget to use deep refresh when needed!',
+            1651256929216, 'Yaron@CodingAcademy.com', 'Yaron Biton', 'YaronBiton'),
+        _createEmail('Pulse Hex progress', 'Dont worry, prec-20 will be ready soon!',
+            1251256929216, 'RichardHeart@gmail.com', 'Richard Heart', 'RichardHeart'),
+        _createEmail('Miss you baby!', 'Would love to catch up sometimes',
+            1601256929216, 'KimKardashian@gmail.com', 'Kim Kardashian', 'KimKardashian'),
+        _createEmail('SpaceX', 'Would you like to join?',
+            1551256929216, 'ElonMusk@gmail.com', 'Elon Musk', 'ElonMusk'),
+        _createEmail('Wake me up', 'Please dont forget to wake me up, so i wont fall asleep',
+            1650006929216, 'JoeBiden@gmail.com', 'Joe Biden', 'JoeBiden'),
+        _createEmail('Your iCloud storage is full', `
+            Hello Amit Akuka,
+            Your iCloud storage is full. You have exceeded your storage plan and this means that your documents, contacts and device data are no longer being backed up to iCloud. Your photos and videos are also not being uploaded to iCloud Photos. iCloud Drive and iCloud-enabled apps are not being updated across your devices.
+            To keep using these iCloud services, you need to upgrade to iCloud+ or reduce the amount of storage that you are using.
+            Upgrade to iCloud+ with 50 GB for ₪3.90 per month
+            Sincerely,
+            The iCloud Team`,
+            1651400198022, 'noreply@email.apple.com', 'iCloud', 'iCloud'),
+        _createEmail(`3 new jobs for 'junior front end developer'`, `
+            Your job alert for junior front end developer
+            3 new jobs in Israel match your preferences.
+
+            Ethosia	
+            Frontend Developer
+            Ethosia · Tel Aviv, Israel (Hybrid)
+            Actively recruiting
+        
+            Toptal	
+            Front-end Developer
+            Toptal · Unknown (Remote)
+            Actively recruiting
+        
+            Ethosia	
+            Frontend Developer
+            Ethosia · Herzliyya, Tel Aviv, Israel (Hybrid)
+        
+            See all jobs
+         
+            premium
+            Amit Akuka
+            See jobs where you're a top applicant`,
+            1611400198022, 'jobalerts-noreply@linkedin.com', 'LinkedIn Job Alerts', 'LinkedIn'),
+        _createEmail('[Important] Scheduled Maintenance for Crypto.com', `
+            Dear Valued Customer,
+
+            Please be informed that we will perform system maintenance for the Crypto.com App,
+            Exchange, NFT, DeFi Wallet, and Pay starting at 08:00 HKT (00:00 UTC) on 11 April 2022.
+            It is expected to take approximately`,
+            1647940198022, 'no-reply@serviceinfo.crypto.com', 'Crypto.com Exchange', 'Cryptocom'),
+        _createEmail(`3 new jobs for 'junior front end developer'`, `
+            Your job alert for junior front end developer
+            3 new jobs in Israel match your preferences.
+
+            Ethosia	
+            Frontend Developer
+            Ethosia · Tel Aviv, Israel (Hybrid)
+            Actively recruiting
+        
+            Toptal	
+            Front-end Developer
+            Toptal · Unknown (Remote)
+            Actively recruiting
+        
+            Ethosia	
+            Frontend Developer
+            Ethosia · Herzliyya, Tel Aviv, Israel (Hybrid)
+        
+            See all jobs
+         
+            premium
+            Amit Akuka
+            See jobs where you're a top applicant`,
+            1611400198022, 'jobalerts-noreply@linkedin.com', 'LinkedIn Job Alerts', 'LinkedIn'),
+        _createEmail(`Introducing NEW personalized discounts for you!`, `
+                Hi Amit,
+                Enroll in a Udacity program today! Stay ahead of the curve and get the skills you'll need for the jobs of the future.
+                Explore programs   →
+                By claiming this discount, you've taken the first step in advancing your career with Udacity. Our programs take a learn-by-doing approach by incorporating real-world projects to prepare you for the workplace.
+                Still have questions about Udacity, Amit?
+                of Academic Advisors would be happy to answer any questions you have about our courses or personalized discounts. Feel free to schedule a ti‍‍me that works best for you. We are in office between 5:30 am to 2:30 pm PT | 12:30 pm to 9:30 pm GMT, Monday through Friday.`,
+            1645670198022, 'support@udacity.com', 'Udacity ', 'Udacity')
     ]
     return emails
+}
+
+function _createEmail(subject, body, sentAt, from, userName, profilePic) {
+    console.log('creating email!')
+    return {
+        id: utilService.makeId(),
+        subject,
+        body,
+        sentAt,
+        to: loggedinUser.email,
+        from,
+        userName,
+        isFavorite: false,
+        isReaded: false,
+        profilePic
+    }
 }
 
 function setEmailFavorite(emailId) {
@@ -264,17 +301,7 @@ function deleteEmail(emailId) {
 //     return emails
 // }
 
-// function _createEmail() {
-//     console.log('creating email!')
-//     return {
-//         id: utilService.makeId(),
-//         subject: 'Miss you!',
-//         body: 'Would love to catch up sometimes',
-//         isRead: false,
-//         sentAt: 1551133930594,
-//         to: 'momo@momo.com'
-//     }
-// }
+
 
 
 function _loadFromStorage() {

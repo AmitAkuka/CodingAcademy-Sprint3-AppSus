@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 80vh;
     justify-content: center;
 }
 
@@ -30,6 +29,7 @@
 .amit-info-container>img {
     border-radius: 325px;
     height: 250px;
+    width: 250px;
 }
 
 .avi-info-container a button,
@@ -45,8 +45,9 @@
     height: 40px;
 }
 
-.app-about-container a>button {
+.app-about-container a {
     margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .app-about-container h1 {

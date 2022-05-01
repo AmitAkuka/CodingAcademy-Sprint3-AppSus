@@ -103,8 +103,10 @@ export class EmailApp extends React.Component {
     this.props.history.push(`/Notes?${paramStr}`)
   }
 
-  onGoBack = () => {
+  onGoBack = (event) => {
+    event.stopPropagation()
     this.setState({ selectedEmail: null })
+    this.loadEmails()
     this.props.history.push('/Emails/Inbox')
   }
 
