@@ -119,7 +119,8 @@ export class AddNote extends React.Component {
             { mediaRecorder, isRecording: true },
             this.startRecording
           )
-          ev.target.classList.toggle('red')
+          // ev.target.classList.toggle('red')
+          console.log(ev.target)
         })
         .catch((error) => {
           eventBusService.emit('user-msg', {

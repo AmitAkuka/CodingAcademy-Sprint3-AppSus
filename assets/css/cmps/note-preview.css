@@ -35,7 +35,7 @@
     right: 0px;
     top: 0px;
     /* opacity: 0.5; */
-    z-index: 999;
+    z-index: 1;
 
     background-color: rgba(216, 216, 216, 0.2);
     padding: 0.1rem 0.2rem;
