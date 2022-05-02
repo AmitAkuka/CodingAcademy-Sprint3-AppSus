@@ -53,7 +53,9 @@ class _EmailCompose extends React.Component {
         eventBusService.emit('user-msg', {
           type: 'success', txt: 'Email sent successfuly!'
       })
-          this.onDelete()})
+          this.cleanCompose()
+          this.props.history.push({search: ''})
+        })
   }
 
 
