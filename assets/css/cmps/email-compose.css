@@ -83,6 +83,7 @@
     resize: none;
     font-family: system-ui;
     font-size: 1rem;
+    min-height: 192px;
 }
 
 .email-input-container,

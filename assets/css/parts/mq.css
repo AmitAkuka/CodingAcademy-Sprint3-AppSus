@@ -116,6 +116,9 @@
     .email-preview h2:first-child {
         min-width: 220px;
     }
+    .email-compose-container .compose-text {
+        min-height: 175px;
+    }
     html {
         font-size: 16px;
     }
