@@ -13,6 +13,7 @@
     animation-iteration-count: 1;
     animation-direction: normal;
     animation-fill-mode: none;
+    background-color: white;
 }
 
 .email-compose-container .compose-header {
